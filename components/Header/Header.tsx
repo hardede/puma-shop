@@ -3,17 +3,25 @@ import { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSearch, BiUser } from "react-icons/bi";
 import { SiPuma } from "react-icons/si";
+import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../hooks/redux";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { headerLink } from "../constants/header";
 import Drawer from "../Drawer/Drawer";
 import MyInput from "../UI/MyInput";
 import UserMenu from "../UserMenu/UserMenu";
+import SearchingMenu from "./SearchingMenu/SearchingMenu";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchMenuOpen, setSearchMenuOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
   const cartState = useAppSelector(selectCartState);
+
+  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
 
   return (
     <header className="absolute left-0 top-0 w-full z-10 px-10 bg-black text text-white">
@@ -35,11 +43,23 @@ const Header = () => {
           </div>
         </nav>
         <div className="flex items-center">
-          <div className="flex items-center border border-white border-opacity-20 py-2.5 px-6 mr-5">
-            <BiSearch className="text-2xl mr-3" />
-            <MyInput
-              placeholder="find"
-              className="bg-transparent placeholder:uppercase outline-none"
+          <div>
+            <div
+              className="flex items-center border border-white border-opacity-20 py-2.5 px-6 mr-5"
+              onClick={() => setSearchMenuOpen(!searchMenuOpen)}
+            >
+              <BiSearch className="text-2xl mr-3" />
+              <MyInput
+                placeholder="find..."
+                className="bg-transparent placeholder:uppercase outline-none"
+                onChange={changeInput}
+                value={searchInput}
+              />
+            </div>
+            <SearchingMenu
+              searchMenuOpen={searchMenuOpen}
+              setSearchMenuOpen={setSearchMenuOpen}
+              searchInput={searchInput}
             />
           </div>
           <div
@@ -52,9 +72,14 @@ const Header = () => {
               </span>
             )}
             <AiOutlineShoppingCart className="fill-white text-2xl cursor-pointer" />
-            {drawerOpen && (
+            <CSSTransition
+              classNames="search-show"
+              in={drawerOpen}
+              timeout={500}
+              unmountOnExit
+            >
               <Drawer onClose={() => setDrawerOpen(!drawerOpen)} />
-            )}
+            </CSSTransition>
           </div>
           <div className="px-4" onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <BiUser className="fill-white text-2xl cursor-pointer" />

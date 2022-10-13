@@ -1,20 +1,10 @@
-import Image from "next/image";
-import { useState } from "react";
-import { MdArrowForwardIos } from "react-icons/md";
 import { useAppSelector } from "../../../hooks/redux";
-import useDate from "../../../hooks/useDate";
-import {
-  selectHistory,
-  selectOrderedState,
-} from "../../../store/reducers/OrderedSlice";
+import { selectHistory } from "../../../store/reducers/OrderedSlice";
 import { History } from "../../../types/history";
-import { OrderedProduct } from "../../../types/orderProduct";
 import OrderHistoryItem from "./OrderHistoryItem/OrderHistoryItem";
 
 const OrderHistory = () => {
   const history = useAppSelector(selectHistory);
-  const { currentDate } = useDate();
-  const [openOrder, setOpenOrder] = useState(false);
 
   return (
     <div>
@@ -27,7 +17,7 @@ const OrderHistory = () => {
         ) : (
           <>
             {history.map((order: History, index: number) => (
-              <OrderHistoryItem key={order.id} order={order} index={index}/>
+              <OrderHistoryItem key={order.id} order={order} index={index} />
             ))}
           </>
         )}

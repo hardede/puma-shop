@@ -151,3 +151,56 @@
   pointer-events: all;
   position: relative;
 }
+
+.order-history-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.order-historye-nter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+.order-history-exit {
+  opacity: 1;
+}
+.order-history-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.search-show-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.search-show-enter-active {
+  opacity: 1;
+  transform: translatex(0);
+  transition: opacity 500ms, transform 1000ms;
+}
+.search-show-exit {
+  opacity: 1;
+}
+.search-show-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 500ms, transform 1000ms;
+}
+.drawer-enter {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.drawer-enter-active {
+  opacity: 1;
+  transform: translatex(0);
+  transition: opacity 500ms, transform 1000ms;
+}
+.drawer-exit {
+  opacity: 1;
+}
+.drawer-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 500ms, transform 1000ms;
+}

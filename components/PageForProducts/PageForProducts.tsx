@@ -31,7 +31,7 @@ const PageForProducts: FC<PageForProductsProps> = ({ title, category }) => {
 
   return (
     <div className="mt-20 py-2">
-      <div onClick={() => router.back()}>back to products</div>
+      <p onClick={() => router.back()}>back to products</p>
       <div className="mt-20 ">
         <div className="flex items-center mb-6">
           <h1 className="font-bold uppercase text-2xl">{title}</h1>

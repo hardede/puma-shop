@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FC, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
+import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../../../hooks/redux";
 import useDate from "../../../../hooks/useDate";
 import { selectUserState } from "../../../../store/reducers/AuthSlice";
@@ -17,7 +18,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
   const userState = useAppSelector(selectUserState);
   const [openOrder, setOpenOrder] = useState(false);
   return (
-    <div>
+    <div className="transition ease-in-out duration-1000">
       <div
         className="flex justify-between items-center not-last:border-b-2 border-[#d2a1a1] py-5 cursor-pointer"
         onClick={() => setOpenOrder(!openOrder)}
@@ -29,58 +30,74 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
         <div className="flex items-center">
           {order.quantity} products for the sum{" "}
           {order.activeCard ? order.totalPriceWithCardString : order.totalPrice}
-          <MdArrowForwardIos className="ml-1 rotate-90" />
+          {openOrder ? (
+            <MdArrowForwardIos className="ml-1 -rotate-90" />
+          ) : (
+            <MdArrowForwardIos className="ml-1 rotate-90" />
+          )}
         </div>
         <div>Ordered...</div>
       </div>
-      {order.orderedProducts.map((ordered: OrderedProduct) => (
-        <div key={ordered.id}>
-          {openOrder && (
-            <div className="flex justify-between py-3 border-b border-[#d2a1a1]">
-              <div>
-                <Image
-                  src={ordered.img}
-                  alt={ordered.alt}
-                  width={90}
-                  height={90}
-                />
-              </div>
-              <div className="pt-1">
-                <h4 className="text-xs font-semibold max-w-[190px]">
-                  {ordered.model}
-                </h4>
-                <p className="text-xs pt-3 py-1">{ordered.quantity} Item</p>
-                <div className="text-sm flex items-center">
-                  <p className="font-bold pr-1">{ordered.newPriceString}</p>
-                  {ordered.oldPrice !== 0 && (
-                    <p className="text-xs line-through decoration-2 decoration-red-500">
-                      {ordered.oldPriceString}
-                    </p>
-                  )}
+      <CSSTransition
+        classNames="order-history"
+        in={openOrder}
+        timeout={500}
+        unmountOnExit
+      >
+        <>
+          {order.orderedProducts.map((ordered: OrderedProduct) => (
+            <div key={ordered.id}>
+              <div className="flex justify-between py-3 border-b border-[#d2a1a1]">
+                <div>
+                  <Image
+                    src={ordered.img}
+                    alt={ordered.alt}
+                    width={90}
+                    height={90}
+                  />
                 </div>
+                <div className="pt-1">
+                  <h4 className="text-xs font-semibold max-w-[190px]">
+                    {ordered.model}
+                  </h4>
+                  <p className="text-xs pt-3 py-1">{ordered.quantity} Item</p>
+                  <div className="text-sm flex items-center">
+                    <p className="font-bold pr-1">{ordered.newPriceString}</p>
+                    {ordered.oldPrice !== 0 && (
+                      <p className="text-xs line-through decoration-2 decoration-red-500">
+                        {ordered.oldPriceString}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <ul className="pt-1">
+                  <li className="flex text-xs w-[180px]">
+                    <p className="opacity-50">Color:&nbsp;</p>
+                    <p className="lowercase font-medium opacity-80 truncate hover:text-clip hover:overflow-visible hover:whitespace-normal">
+                      {ordered.color}
+                    </p>
+                  </li>
+                  <li className="flex text-xs">
+                    <p className="opacity-50">Size:&nbsp;</p>
+                    <p className="font-medium opacity-80">{ordered.size}</p>
+                  </li>
+                  <li className="flex text-xs pb-2">
+                    <p className="opacity-50">Art.:&nbsp;</p>
+                    <p className="font-medium opacity-80">{ordered.atr}</p>
+                  </li>
+                  <li className="flex text-xs">Ordered</li>
+                </ul>
               </div>
-              <ul className="pt-1">
-                <li className="flex text-xs w-[180px]">
-                  <p className="opacity-50">Color:&nbsp;</p>
-                  <p className="lowercase font-medium opacity-80 truncate hover:text-clip hover:overflow-visible hover:whitespace-normal">
-                    {ordered.color}
-                  </p>
-                </li>
-                <li className="flex text-xs">
-                  <p className="opacity-50">Size:&nbsp;</p>
-                  <p className="font-medium opacity-80">{ordered.size}</p>
-                </li>
-                <li className="flex text-xs pb-2">
-                  <p className="opacity-50">Art.:&nbsp;</p>
-                  <p className="font-medium opacity-80">{ordered.atr}</p>
-                </li>
-                <li className="flex text-xs">Ordered</li>
-              </ul>
             </div>
-          )}
-        </div>
-      ))}
-      {openOrder && (
+          ))}
+        </>
+      </CSSTransition>
+      <CSSTransition
+        classNames="search-show"
+        in={openOrder}
+        timeout={500}
+        unmountOnExit
+      >
         <div className="flex py-0.5 justify-between mt-5">
           <div>
             <p>Delivery Address</p>
@@ -136,7 +153,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
             </div>
           </div>
         </div>
-      )}
+      </CSSTransition>
     </div>
   );
 };

@@ -5,8 +5,26 @@ import {
   blurData4,
 } from "../components/constants/blurDataUrl";
 import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcryptjs";
 
 const data = {
+  users: [
+    {
+      firstName: "hardede",
+      lastName: "hardede1",
+      email: "admin@gmail.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: true,
+    },
+    {
+      firstName: "hardede",
+      lastName: "hardede1",
+      email: "dimakostyuk50@gmail.com",
+      password: bcrypt.hashSync("123456"),
+      isAdmin: false,
+    },
+  ],
+
   sneakers: [
     {
       id: uuidv4(),

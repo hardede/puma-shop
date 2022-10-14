@@ -1,11 +1,10 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
 import { GrClose } from "react-icons/gr";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 import {
-  logout,
-  selectIsAuth,
-  selectUserState
+  logout
 } from "../../store/reducers/AuthSlice";
 import { userLinksTypes } from "../../types/userLinksTypes";
 import { userLinks } from "../constants/userLinks";
@@ -15,11 +14,8 @@ interface UserMenuProps {
 }
 
 const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
-  const userState = useAppSelector(selectUserState);
-  const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();
-
-  console.log("🚀 ~ file: UserMenu.tsx ~ line 15 ~ userState", userState);
+  const { status, data: session } = useSession();
 
   return (
     <div
@@ -40,7 +36,9 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
               />
             </div>
             <div className="mb-[30px]">
-              {isAuth && <div>{userState.email}</div>}
+              {status === "loading"
+                ? "Loading"
+                : session?.user && session.user.email}
             </div>
             <div>
               {userLinks.map((links: userLinksTypes) => (
@@ -55,7 +53,9 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
             </div>
           </div>
           <div className="">
-            {isAuth ? (
+            {status === "loading" ? (
+              "Loading"
+            ) : session?.user ? (
               <div>
                 <Link href="/">
                   <div

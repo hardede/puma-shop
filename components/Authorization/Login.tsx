@@ -1,9 +1,12 @@
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useAppDispatch } from "../../hooks/redux";
 import { login } from "../../store/reducers/AuthSlice";
 import { IUser } from "../../types/IUser";
+import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
 
 const Login = () => {
@@ -12,6 +15,15 @@ const Login = () => {
   const [isAuth, setIsAuth] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { redirect } = router.query;
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session?.user) {
+      // @ts-ignore: Unreachable code error
+      router.push(redirect || "/");
+    }
+  }, [router, session, redirect]);
 
   const {
     register,
@@ -19,6 +31,21 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm<IUser>({ mode: "onChange" });
+
+  const submitHandler = async ({ email, password }: any) => {
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result?.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
 
   const onClickLogin = () => {
     setIsAuth(!isAuth);
@@ -34,7 +61,7 @@ const Login = () => {
       </h3>
       <form
         className="flex flex-col mt-10"
-        onSubmit={handleSubmit(onClickLogin)}
+        onSubmit={handleSubmit(submitHandler)}
       >
         <label className="uppercase text-xs mb-1 text-[#777]">
           email address:

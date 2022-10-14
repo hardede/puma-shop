@@ -3,16 +3,24 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
   selectUserState,
-  updatePersonInfo
+  updatePersonInfo,
 } from "../../../store/reducers/AuthSlice";
 import { IUser } from "../../../types/IUser";
 import AuthorizationInput from "../../UI/AuthorizationInput";
+import { useSession } from "next-auth/react";
 
 const PersonInfo = () => {
+  const { status, data: session } = useSession();
   const userState = useAppSelector(selectUserState);
-  const [firstName, setFirstName] = useState(userState.firstName);
-  const [lastName, setLastName] = useState(userState.lastName);
-  const [email, setEmail] = useState(userState.email);
+  const [firstName, setFirstName] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.firstName
+  );
+  const [lastName, setLastName] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.lastName
+  );
+  const [email, setEmail] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.email
+  );
   const dispatch = useAppDispatch();
   const password = userState.password;
 

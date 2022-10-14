@@ -5,6 +5,7 @@ import { BiSearch, BiUser } from "react-icons/bi";
 import { SiPuma } from "react-icons/si";
 import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../hooks/redux";
+import useTotalPrice from "../../hooks/useTotalPrice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { headerLink } from "../constants/header";
 import Drawer from "../Drawer/Drawer";
@@ -18,6 +19,7 @@ const Header = () => {
   const [searchMenuOpen, setSearchMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const cartState = useAppSelector(selectCartState);
+  const { totalQuantity } = useTotalPrice();
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -68,7 +70,7 @@ const Header = () => {
           >
             {cartState.length > 0 && (
               <span className="rounded-full bg-red-600 absolute text-xs px-2 font-extrabold py-1 right-0 bottom-3">
-                {cartState.reduce((a: any, c: any) => a + c.quantity, 0)}
+                {totalQuantity}
               </span>
             )}
             <AiOutlineShoppingCart className="fill-white text-2xl cursor-pointer" />

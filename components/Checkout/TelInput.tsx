@@ -4,7 +4,6 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const TelInput = ({ useFormMethods, name, required, schema }: any) => {
-  const [state, onChange] = React.useState("");
   let validPhoneNumber = false;
   const validatePhoneNumber = (
     inputNumber: string,

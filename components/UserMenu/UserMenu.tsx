@@ -1,11 +1,8 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC } from "react";
 import { GrClose } from "react-icons/gr";
-import { useAppDispatch } from "../../hooks/redux";
-import {
-  logout
-} from "../../store/reducers/AuthSlice";
 import { userLinksTypes } from "../../types/userLinksTypes";
 import { userLinks } from "../constants/userLinks";
 
@@ -14,14 +11,12 @@ interface UserMenuProps {
 }
 
 const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
-  const dispatch = useAppDispatch();
   const { status, data: session } = useSession();
+  const router = useRouter();
+  const { redirect } = router.query;
 
   return (
-    <div
-      className="fixed left-0 top-0 w-full h-full bg-[#00000088] z-50 "
-      onClick={onClose}
-    >
+    <div onClick={onClose}>
       <div
         className="absolute w-[290px] h-[440px] top-0 right-0 bg-white py-[30px] px-6 z-50 text-black"
         onClick={e => e.stopPropagation()}
@@ -60,7 +55,7 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
                 <Link href="/">
                   <div
                     className="bg-[rgba(138,115,80)] text-white text-center py-3 hover:opacity-70 transition duration-500 cursor-pointer"
-                    onClick={() => dispatch(logout())}
+                    onClick={() => signOut()}
                   >
                     Log out
                   </div>
@@ -68,13 +63,13 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
               </div>
             ) : (
               <>
-                <Link href="/authorization">
+                <Link href={`/authorization?redirect=${redirect || "/"}`}>
                   <div className="bg-[rgba(138,115,80)] text-white text-center py-3 hover:opacity-70 transition duration-500 cursor-pointer">
                     Log in
                   </div>
                 </Link>
                 <p className="mt-3 mb-1">Don&apos;t have an account?</p>
-                <Link href="/authorization">
+                <Link href={`/authorization?redirect=${redirect || "/"}`}>
                   <div className="bg-[#787674] text-white text-center py-2 hover:opacity-70 transition duration-500 uppercase cursor-pointer">
                     registration
                   </div>

@@ -1,11 +1,10 @@
-import React from "react";
 import Login from "../../Authorization/Login";
 import Registration from "../../Authorization/Registration";
 import Layout from "../../Layout/Layout";
 
 const UserAuthorization = () => {
   return (
-    <Layout title="Woman Products">
+    <Layout title="Authorization">
       <div className="container flex justify-between max-w-[940px] m-auto mt-32">
         <Login />
         <Registration />

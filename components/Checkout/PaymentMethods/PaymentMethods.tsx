@@ -4,8 +4,8 @@ import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import {
-    cartDeleteAll,
-    selectCartState
+  cartDeleteAll,
+  selectCartState,
 } from "../../../store/reducers/CartSlice";
 import { ordered } from "../../../store/reducers/OrderedSlice";
 

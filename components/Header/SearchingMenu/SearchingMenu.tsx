@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Product } from "../../../types/product";
 import data from "../../../utils/data";
@@ -15,6 +15,9 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
   searchInput,
   setSearchMenuOpen,
 }) => {
+
+  const nodeRef = useRef(null);
+
   return (
     <>
       <CSSTransition
@@ -22,10 +25,12 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
         in={searchMenuOpen && searchInput !== ""}
         timeout={500}
         unmountOnExit
+        nodeRef={nodeRef}
       >
         <div
           className="fixed w-full h-full top-0 left-0"
           onClick={() => setSearchMenuOpen(false)}
+          ref={nodeRef}
         >
           <div
             className="w-[350px] top-20 right-32 absolute bg-white p-4 overflow-y-scroll"

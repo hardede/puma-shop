@@ -172,11 +172,11 @@
 
 .search-show-enter {
   opacity: 0;
-  transform: scale(0.9);
+  transform: translateY(200px);
 }
 .search-show-enter-active {
   opacity: 1;
-  transform: translatex(0);
+  transform: translateY(-50px);
   transition: opacity 500ms, transform 1000ms;
 }
 .search-show-exit {
@@ -189,11 +189,12 @@
 }
 .drawer-enter {
   opacity: 0;
-  transform: scale(0.6);
+  transform: translateX(400px);
+  
 }
 .drawer-enter-active {
   opacity: 1;
-  transform: translatex(0);
+  transform: translateX(-50px);
   transition: opacity 500ms, transform 1000ms;
 }
 .drawer-exit {
@@ -201,6 +202,6 @@
 }
 .drawer-exit-active {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateX(450px);
   transition: opacity 500ms, transform 1000ms;
 }

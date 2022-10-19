@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../../../hooks/redux";
@@ -17,6 +17,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
   const { currentDate } = useDate();
   const userState = useAppSelector(selectUserState);
   const [openOrder, setOpenOrder] = useState(false);
+  const nodeRef = useRef(null);
   return (
     <div className="transition ease-in-out duration-1000">
       <div
@@ -43,8 +44,9 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
         in={openOrder}
         timeout={500}
         unmountOnExit
+        nodeRef={nodeRef}
       >
-        <>
+        <div ref={nodeRef}>
           {order.orderedProducts.map((ordered: OrderedProduct) => (
             <div key={ordered.id}>
               <div className="flex justify-between py-3 border-b border-[#d2a1a1]">
@@ -90,15 +92,16 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
               </div>
             </div>
           ))}
-        </>
+        </div>
       </CSSTransition>
       <CSSTransition
         classNames="search-show"
         in={openOrder}
         timeout={500}
         unmountOnExit
+        nodeRef={nodeRef}
       >
-        <div className="flex py-0.5 justify-between mt-5">
+        <div className="flex py-0.5 justify-between mt-5" ref={nodeRef}>
           <div>
             <p>Delivery Address</p>
             <div className="text-sm text-[#666666]">

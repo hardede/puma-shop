@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import UserAccount from "../../components/screens/userAccount/UserAccount";
 
-const Account: NextPage = () => {
+export default function Account() {
   return <UserAccount />;
-};
+}
 
-export default Account;
+Account.auth = true;

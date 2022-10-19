@@ -1,30 +1,57 @@
+import axios from "axios";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "../../hooks/redux";
-import { login } from "../../store/reducers/AuthSlice";
+import { toast } from "react-toastify";
 import { IUser } from "../../types/IUser";
+import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
 
 const Registration = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const { redirect } = router.query;
+  const { data: session } = useSession();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    getValues,
   } = useForm<IUser>({ mode: "onChange" });
 
-  const onClickRegistration = () => {
-    dispatch(login({ firstName, lastName, email, password }));
-    router.push("/");
-    reset();
+  useEffect(() => {
+    if (session?.user) {
+      // @ts-ignore: Unreachable code error
+      router.push(redirect || "/");
+    }
+  }, [router, session, redirect]);
+
+  const submitHandler = async ({
+    firstName,
+    lastName,
+    email,
+    password,
+  }: any) => {
+    try {
+      await axios.post("/api/auth/signup", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result?.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
 
   return (
@@ -34,9 +61,14 @@ const Registration = () => {
       </h3>
       <form
         className="flex flex-col mt-10"
-        onSubmit={handleSubmit(onClickRegistration)}
+        onSubmit={handleSubmit(submitHandler)}
       >
-        <label className="uppercase text-xs mb-1 text-[#777]">firstName:</label>
+        <label
+          htmlFor="firstName"
+          className="uppercase text-xs mb-1 text-[#777]"
+        >
+          firstName:
+        </label>
         <AuthorizationInput
           {...register("firstName", {
             required: "firstName is require field",
@@ -45,19 +77,19 @@ const Registration = () => {
               message: "There must be at least 3 letters",
             },
           })}
-          value={firstName}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setFirstName(e.target.value)
-          }
+          id="firstName"
           placeholder="firstName"
-          type="firstName"
+          type="text"
         />
         {errors?.firstName && (
           <div className="text-red-500">
             {errors?.firstName?.message || "Error!"}
           </div>
         )}
-        <label className="uppercase text-xs mt-4  mb-1 text-[#777]">
+        <label
+          htmlFor="lastName"
+          className="uppercase text-xs mt-4  mb-1 text-[#777]"
+        >
           lastName:
         </label>
         <AuthorizationInput
@@ -68,19 +100,19 @@ const Registration = () => {
               message: "There must be at least 3 letters",
             },
           })}
-          value={lastName}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setLastName(e.target.value)
-          }
+          id="lastName"
           placeholder="lastName"
-          type="lastName"
+          type="text"
         />
         {errors?.lastName && (
           <div className="text-red-500">
             {errors?.lastName?.message || "Error!"}
           </div>
         )}
-        <label className="uppercase text-xs mt-4  mb-1 text-[#777]">
+        <label
+          htmlFor="emailReg"
+          className="uppercase text-xs mt-4  mb-1 text-[#777]"
+        >
           email address:
         </label>
         <AuthorizationInput
@@ -92,10 +124,7 @@ const Registration = () => {
               message: "Please enter valid Email",
             },
           })}
-          value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
+          id="emailReg"
           placeholder="e-mail"
           type="email"
         />
@@ -104,7 +133,10 @@ const Registration = () => {
             {errors?.email?.message || "Error!"}
           </div>
         )}
-        <label className="uppercase text-xs mt-4 mb-1 text-[#777]">
+        <label
+          htmlFor="password"
+          className="uppercase text-xs mt-4 mb-1 text-[#777]"
+        >
           password:
         </label>
         <AuthorizationInput
@@ -119,11 +151,8 @@ const Registration = () => {
               message: "There cannot be more then 15 letters in your password",
             },
           })}
+          id="password"
           type="password"
-          value={password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
           placeholder="password"
         />
         {errors?.password && (
@@ -131,6 +160,36 @@ const Registration = () => {
             {errors?.password?.message || "Error!"}
           </div>
         )}
+        <label
+          htmlFor="confirmPassword"
+          className="uppercase text-xs mt-4 mb-1 text-[#777]"
+        >
+          confirm password:
+        </label>
+        <AuthorizationInput
+          {...register("confirmPassword", {
+            required: "password is require field",
+            validate: value => value === getValues("password"),
+            minLength: {
+              value: 6,
+              message: "There must be at least 6 letters in your password",
+            },
+            maxLength: {
+              value: 15,
+              message: "There cannot be more then 15 letters in your password",
+            },
+          })}
+          id="confirmPassword"
+          type="password"
+          placeholder="password"
+        />
+        {errors.confirmPassword && (
+          <div className="text-red-500">{errors?.confirmPassword.message}</div>
+        )}
+        {errors.confirmPassword &&
+          errors.confirmPassword.type === "validate" && (
+            <div className="text-red-500">Password do not match</div>
+          )}
         <input
           type="submit"
           value="create an account"

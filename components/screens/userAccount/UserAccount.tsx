@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../../hooks/redux";
 import { logout } from "../../../store/reducers/AuthSlice";
 import UserProfile from "../../Account/UserProfile";
 import Layout from "../../Layout/Layout";
+import { useSession, signOut } from "next-auth/react";
 
 const UserAccount = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ const UserAccount = () => {
         <Link href="/">
           <div
             className=" text-center py-3 hover:opacity-70 transition duration-500 cursor-pointer underline uppercase"
-            onClick={() => dispatch(logout())}
+            onClick={() => signOut()}
           >
             Log out
           </div>

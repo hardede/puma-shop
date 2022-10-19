@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSearch, BiUser } from "react-icons/bi";
 import { SiPuma } from "react-icons/si";
@@ -20,6 +20,7 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState("");
   const cartState = useAppSelector(selectCartState);
   const { totalQuantity } = useTotalPrice();
+  const nodeRef = useRef(null);
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
@@ -75,19 +76,36 @@ const Header = () => {
             )}
             <AiOutlineShoppingCart className="fill-white text-2xl cursor-pointer" />
             <CSSTransition
-              classNames="search-show"
+              classNames="drawer"
               in={drawerOpen}
               timeout={500}
               unmountOnExit
+              nodeRef={nodeRef}
             >
-              <Drawer onClose={() => setDrawerOpen(!drawerOpen)} />
+              <div
+                className="fixed left-0 top-0 w-full h-full bg-[#00000088] z-50 "
+                ref={nodeRef}
+              >
+                <Drawer onClose={() => setDrawerOpen(!drawerOpen)} />
+              </div>
             </CSSTransition>
           </div>
           <div className="px-4" onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <BiUser className="fill-white text-2xl cursor-pointer" />
-            {userMenuOpen && (
-              <UserMenu onClose={() => setUserMenuOpen(!userMenuOpen)} />
-            )}
+            <CSSTransition
+              classNames="drawer"
+              in={userMenuOpen}
+              timeout={500}
+              unmountOnExit
+              nodeRef={nodeRef}
+            >
+              <div
+                className="fixed left-0 top-0 w-full h-full bg-[#00000088] z-50 "
+                ref={nodeRef}
+              >
+                <UserMenu onClose={() => setUserMenuOpen(!userMenuOpen)} />
+              </div>
+            </CSSTransition>
           </div>
         </div>
       </div>

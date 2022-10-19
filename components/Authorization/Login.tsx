@@ -1,19 +1,13 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../../hooks/redux";
-import { login } from "../../store/reducers/AuthSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const { redirect } = router.query;
   const { data: session } = useSession();
@@ -29,7 +23,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<IUser>({ mode: "onChange" });
 
   const submitHandler = async ({ email, password }: any) => {
@@ -47,13 +40,6 @@ const Login = () => {
     }
   };
 
-  const onClickLogin = () => {
-    setIsAuth(!isAuth);
-    dispatch(login({ email, password, isAuth }));
-    router.push("/");
-    reset();
-  };
-
   return (
     <div>
       <h3 className="text-xl font-bold after:block after:w-[185px] after:h-0.5 after:bg-[#d2a1a1] after:mt-2">
@@ -63,7 +49,7 @@ const Login = () => {
         className="flex flex-col mt-10"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <label className="uppercase text-xs mb-1 text-[#777]">
+        <label htmlFor="email" className="uppercase text-xs mb-1 text-[#777]">
           email address:
         </label>
         <AuthorizationInput
@@ -75,10 +61,7 @@ const Login = () => {
               message: "Please enter valid Email",
             },
           })}
-          value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
+          id="email"
           placeholder="e-mail"
           type="email"
         />
@@ -87,7 +70,10 @@ const Login = () => {
             {errors?.email?.message || "Error!"}
           </div>
         )}
-        <label className="uppercase text-xs mt-4 mb-1 text-[#777]">
+        <label
+          htmlFor="password"
+          className="uppercase text-xs mt-4 mb-1 text-[#777]"
+        >
           password:
         </label>
         <AuthorizationInput
@@ -102,11 +88,8 @@ const Login = () => {
               message: "There cannot be more then 15 letters in your password",
             },
           })}
+          htmlFor="password"
           type="password"
-          value={password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
           placeholder="password"
         />
         {errors?.password && (

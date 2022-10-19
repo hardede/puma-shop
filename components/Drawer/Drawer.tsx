@@ -18,7 +18,7 @@ const Drawer: FC<DrawerProps> = ({ onClose }) => {
   const { totalPrice, totalQuantity } = useTotalPrice();
   return (
     <div
-      className="fixed left-0 top-0 w-full h-full bg-[#00000088] z-50 "
+      
       onClick={onClose}
     >
       <div

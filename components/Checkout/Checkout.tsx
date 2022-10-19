@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useEffect, useState } from "react";
@@ -27,9 +28,18 @@ interface CheckoutProps extends ProductPage {
 const Checkout: FC = () => {
   const userState = useAppSelector(selectUserState);
   const cartState = useAppSelector(selectCartState);
-  const [firstName, setFirstName] = useState(userState.firstName);
-  const [lastName, setLastName] = useState(userState.lastName);
-  const [email, setEmail] = useState(userState.email);
+  const { status, data: session } = useSession();
+
+  const [firstName, setFirstName] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.firstName
+  );
+  const [lastName, setLastName] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.lastName
+  );
+
+  const [email, setEmail] = useState(
+    status === "loading" ? "Loading" : session?.user && session.user.email
+  );
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState(userState.city ? userState.city : "");
 
@@ -123,10 +133,15 @@ const Checkout: FC = () => {
                         message: "There must be at least 3 letters",
                       },
                     })}
-                    value={firstName}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setFirstName(e.target.value)
+                    // @ts-ignore: Unreachable code error
+                    value={
+                      status === "loading"
+                        ? "Loading"
+                        : session?.user && session.user.firstName
                     }
+                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    //   setFirstName(e.target.value)
+                    // }
                     placeholder="firstName"
                     type="firstName"
                   />
@@ -149,10 +164,15 @@ const Checkout: FC = () => {
                         message: "There must be at least 3 letters",
                       },
                     })}
-                    value={lastName}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setLastName(e.target.value)
+                    // @ts-ignore: Unreachable code error
+                    value={
+                      status === "loading"
+                        ? "Loading"
+                        : session?.user && session.user.lastName
                     }
+                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    //   setLastName(e.target.value)
+                    // }
                     placeholder="lastName"
                     type="lastName"
                   />
@@ -176,10 +196,15 @@ const Checkout: FC = () => {
                         message: "Please enter valid Email",
                       },
                     })}
-                    value={email}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setEmail(e.target.value)
+                    // @ts-ignore: Unreachable code error
+                    value={
+                      status === "loading"
+                        ? "Loading"
+                        : session?.user && session.user.email
                     }
+                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    //   setEmail(e.target.value)
+                    // }
                     placeholder="e-mail"
                     type="email"
                   />

@@ -6,24 +6,16 @@ import { selectCartState } from "../../../store/reducers/CartSlice";
 import { ProductPage } from "../../../types/product/productPage";
 import CartItems from "./CartItems/CartItems";
 
-interface CartProps extends ProductPage {
-  size: number;
-  quantity: number;
-  countInStock: number;
-}
-
 const Cart: FC = () => {
   const cartState = useAppSelector(selectCartState);
 
   const { totalPrice } = useTotalPrice();
 
-  console.log("🚀 ~ file: Cart.tsx ~ line 7 ~ Cart ~ orderState", cartState);
-
   return (
     <div className="flex justify-between">
       <div>
-        {cartState.map((orderCart: CartProps) => (
-          <CartItems key={orderCart.id} orderCart={orderCart} />
+        {cartState.map((orderCart: ProductPage) => (
+          <CartItems key={orderCart._id} orderCart={orderCart} />
         ))}
       </div>
       <aside className="w-[350px]">

@@ -1,10 +1,23 @@
-import { useAppSelector } from "../../../hooks/redux";
-import { selectHistory } from "../../../store/reducers/OrderedSlice";
+import { FC, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import {
+  fetchOrders,
+  selectError,
+  selectHistory1,
+  selectIsLoading,
+} from "../../../store/reducers/HistorySlice";
 import { History } from "../../../types/history";
 import OrderHistoryItem from "./OrderHistoryItem/OrderHistoryItem";
 
-const OrderHistory = () => {
-  const history = useAppSelector(selectHistory);
+const OrderHistory: FC = () => {
+  const dispatch = useAppDispatch();
+  const history1 = useAppSelector(selectHistory1);
+  const isLoading = useAppSelector(selectIsLoading);
+  const error = useAppSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, []);
 
   return (
     <div>
@@ -12,12 +25,12 @@ const OrderHistory = () => {
         Order history
       </h5>
       <div className="">
-        {history.length === 0 ? (
+        {history1.length === 0 ? (
           <div className="mt-5">You have no orders now</div>
         ) : (
           <>
-            {history.map((order: History, index: number) => (
-              <OrderHistoryItem key={order.id} order={order} index={index} />
+            {history1.map((order: History, index: number) => (
+              <OrderHistoryItem key={order._id} order={order} index={index} />
             ))}
           </>
         )}

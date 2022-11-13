@@ -1,8 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { footerAbout, footerHelp1, footerHelp2 } from "../../constants/footer";
 
-export const FooterCol1 = () => {
+export const FooterCol1: FC = () => {
   return (
     <div className="mr-40">
       <h1 className="mb-4">Help</h1>
@@ -20,7 +20,7 @@ export const FooterCol1 = () => {
   );
 };
 
-export const FooterCol2 = () => {
+export const FooterCol2: FC = () => {
   return (
     <div className="pt-10 mr-40">
       {footerHelp2.map(link => (
@@ -37,7 +37,7 @@ export const FooterCol2 = () => {
   );
 };
 
-export const FooterCol3 = () => {
+export const FooterCol3: FC = () => {
   return (
     <div className="">
       <h1 className="mb-4">About Puma</h1>

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { Product } from "../../types/product";
+import { ProductTypes } from "../../types/product";
 
 interface SearchSneakersModalProps {
-  searchProduct: Product;
+  searchProduct: ProductTypes;
 }
 
 const SearchSneakersModal: FC<SearchSneakersModalProps> = ({

@@ -3,28 +3,27 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
+import Slider from "react-slick";
 import Layout from "../../components/Layout/Layout";
 import { useAppDispatch } from "../../hooks/redux";
+import Product from "../../models/Product";
 import { cartAdd } from "../../store/reducers/CartSlice";
-import data from "../../utils/data";
+import db from "../../utils/db";
 
-const ProductScreen = () => {
+const ProductScreen = props => {
+  const { product } = props;
   const [current, setCurrent] = useState(0);
   const [showSize, setShowSize] = useState(false);
   const [productSize, setProductSize] = useState("");
   const [countInStock, setCountInStock] = useState("");
-  console.log("🚀 ~ file: [slug].js ~ line 16 ~ ProductScreen ~ countInStock", countInStock)
 
   const dispatch = useAppDispatch();
-  const { query } = useRouter();
   const router = useRouter();
-  const { slug } = query;
-  const product = data.sneakers.find(item => item.slug === slug);
   if (!product) {
-    return <h1>Product not found</h1>;
+    return <Layout title="Product not found">Product not found</Layout>;
   }
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     dispatch(cartAdd({ product, productSize, countInStock }));
   };
 
@@ -44,6 +43,43 @@ const ProductScreen = () => {
     setCountInStock(Number(qty));
   };
 
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    className: "center",
+    swipe: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <Layout title={product.model}>
       <div className="container m-auto">
@@ -52,27 +88,27 @@ const ProductScreen = () => {
         </div>
         <div className="flex w-[1050px] justify-between mx-auto">
           <div className="flex">
-            <div className="flex flex-col my-1">
-              {product.imgProductPage.map((item, index) => (
-                <div
-                  key={item.productImg}
-                  className={
-                    index === current
-                      ? "after:w-full after:bg-[#ff0000] after:h-0.5 after:block transition-all ease-in-out duration-500"
-                      : "after:hover:w-full after:hover:bg-black after:hover:h-0.5 after:hover:block transition-all ease-in-out duration-500"
-                  }
-                  onClick={() => setCurrent(index)}
-                >
-                  <Image
-                    src={item.productImg}
-                    width={70}
-                    height={70}
-                    alt={item.alt}
-                    draggable="false"
-                  />
-                </div>
-              ))}
-            </div>
+              <div className="flex flex-col my-1 max-h-[340px] overflow-hidden">
+                {product.imgProductPage.map((item, index) => (
+                  <div
+                    key={item.productImg}
+                    className={
+                      index === current
+                        ? "after:w-full after:bg-[#ff0000] after:h-0.5 after:block transition-all ease-in-out duration-500 after:mb-1.5"
+                        : "after:w-full after:bg-[#e1e1e1] after:h-0.5 after:block after:hover:w-full after:hover:bg-black after:hover:h-0.5 after:hover:block transition-all ease-in-out duration-500 after:mb-1.5"
+                    }
+                    onClick={() => setCurrent(index)}
+                  >
+                    <Image
+                      src={item.productImg}
+                      width={70}
+                      height={70}
+                      alt={item.alt}
+                      draggable="false"
+                    />
+                  </div>
+                ))}
+              </div>
             <div className="translate-y-1/2">
               <MdArrowForwardIos
                 className="rotate-180 w-9 h-9 cursor-pointer"
@@ -169,7 +205,9 @@ const ProductScreen = () => {
                           ? "flex flex-col min-w-[90px] items-center border border-[#acacac] cursor-pointer hover:font-bold opacity-30 pointer-events-none"
                           : "flex flex-col min-w-[90px] items-center border border-[#acacac] cursor-pointer hover:font-bold"
                       }
-                      onClick={() => onClickSize(item.sizeEur, item.sizeCountInStock)}
+                      onClick={() =>
+                        onClickSize(item.sizeEur, item.sizeCountInStock)
+                      }
                     >
                       <span>{item.sizeEur} EUR</span>
                       <span>({item.sizeUK} UK)</span>
@@ -214,3 +252,16 @@ const ProductScreen = () => {
 };
 
 export default ProductScreen;
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
+}

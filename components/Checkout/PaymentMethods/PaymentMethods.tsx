@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
@@ -5,15 +7,22 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import {
   cartDeleteAll,
-  selectCartState,
+  selectCartState
 } from "../../../store/reducers/CartSlice";
 import { ordered } from "../../../store/reducers/OrderedSlice";
 
 interface PaymentMethodsProps {
   isPhoneValid: boolean;
+  city: string;
+  phone: string;
 }
 
-const PaymentMethods: FC<PaymentMethodsProps> = ({ isPhoneValid }) => {
+const PaymentMethods: FC<PaymentMethodsProps> = ({
+  isPhoneValid,
+  city,
+  phone,
+}) => {
+  const { data: session } = useSession();
   const cartState = useAppSelector(selectCartState);
   const [personData, setPersonData] = useState(false);
   const [activeCard, setActiveCard] = useState(true);
@@ -41,8 +50,18 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({ isPhoneValid }) => {
     e.stopPropagation();
     setPersonData(!personData);
   };
+  const user = {
+    // @ts-ignore: Unreachable code error
+    firstName: session?.user.firstName,
+    // @ts-ignore: Unreachable code error
+    lastName: session?.user.lastName,
+    // @ts-ignore: Unreachable code error
+    email: session?.user.email,
+    city: city,
+    phone: phone,
+  };
 
-  const onClickCheckout = (e: any) => {
+  const onClickCheckout = async (e: any) => {
     e.stopPropagation();
     dispatch(
       ordered({
@@ -58,6 +77,19 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({ isPhoneValid }) => {
         cartState,
       })
     );
+    await axios.post("api/orders", {
+      totalPrice,
+      totalQuantity,
+      totalPriceOld,
+      discount,
+      discountString,
+      activeCard,
+      discountByCardString,
+      totalPriceWithCard,
+      totalPriceWithCardString,
+      orderItems: cartState,
+      shippingAddress: user,
+    });
     router.push("/account");
     dispatch(cartDeleteAll());
   };

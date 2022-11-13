@@ -93,54 +93,6 @@ async function handler(req, res) {
   res.send({
     message: "User updated",
   });
-
-  // try {
-  //   // update the database
-  //   await User.updateOne({ email: req.body.oldEmail }, req.body);
-  //   await db.disconnect();
-  //   res.status(201).json({
-  //     status: "ok",
-  //     message: "Fields updated successfully!",
-  //   });
-  // } catch (e) {
-  //   console.log(e);
-  // }
-  // try {
-  //   if (!firstName || firstName.length < 2 || typeof email !== "string")
-  //     return res.status(401).json({
-  //       status: "error",
-  //       massage:
-  //         "Firstname and should not be empty or should be at least 2 characters long!",
-  //     });
-
-  //   if (!lastName || lastName.length < 2 || typeof email !== "string")
-  //     return res.status(401).json({
-  //       status: "error",
-  //       massage:
-  //         "Lastname should not be empty or should be at least 2 characters long!",
-  //     });
-
-  //   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //   const emailExists = await User.findOne({ email });
-
-  //   if (!email || typeof email !== "string" || !email.match(emailRegex))
-  //     return res
-  //       .status(400)
-  //       .json({ status: "error", massage: "Invalid email" });
-  //   else if (emailExists)
-  //     return res
-  //       .status(400)
-  //       .json({ status: "error", massage: "Email already in use." });
-
-  //   await User.updateOne({ email: req.body.oldEmail }, req.body);
-  //   res.status(201).json({
-  //     status: "ok",
-  //     message: "Fields updated successfully!",
-  //   });
-  //   await db.disconnect();
-  // } catch (e) {
-  //   console.log(e);
-  // }
 }
 
 export default handler;

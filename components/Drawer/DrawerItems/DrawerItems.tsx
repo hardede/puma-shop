@@ -6,14 +6,10 @@ import useSumForItem from "../../../hooks/useSumForItem";
 import {
   cartRemove,
   decrementQuantity,
-  incrementQuantity,
+  incrementQuantity
 } from "../../../store/reducers/CartSlice";
 
 const DrawerItems = ({ cart }: any) => {
-  console.log(
-    "🚀 ~ file: DrawerItems.tsx ~ line 13 ~ DrawerItems ~ cart",
-    cart
-  );
   const dispatch = useAppDispatch();
 
   const { newSumPrice, oldSumPrice } = useSumForItem(

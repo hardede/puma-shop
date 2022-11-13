@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { FC } from "react";
 import useSumForItem from "../../../hooks/useSumForItem";
-import { OrderedProduct } from "../../../types/orderProduct";
+import { ProductPage } from "../../../types/product/productPage";
 
 interface CheckoutItemsProps {
-  order: OrderedProduct;
+  order: ProductPage;
 }
 
 const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
@@ -16,10 +16,10 @@ const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
 
   return (
     <div className="flex py-4 border-b border-[#d2a1a1]">
-      <div className="mr-2">
-        <Image src={order.img} alt={order.alt} width={140} height={140} />
+      <div className="mr-2 ">
+        <Image src={order.img} alt={order.alt} width={90} height={90} />
       </div>
-      <div>
+      <div className="w-[215px]">
         <h4 className="font-bold text-xs pb-4">{order.model}</h4>
         <div className="text-xs flex">
           <p className="opacity-40 ">Color:&nbsp;</p>

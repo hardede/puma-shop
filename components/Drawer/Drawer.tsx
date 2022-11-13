@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useAppSelector } from "../../hooks/redux";
 import useTotalPrice from "../../hooks/useTotalPrice";
 import { selectCartState } from "../../store/reducers/CartSlice";
+import { ProductPage } from "../../types/product/productPage";
 import DrawerItems from "./DrawerItems/DrawerItems";
 
 interface DrawerProps {
@@ -17,10 +18,7 @@ const Drawer: FC<DrawerProps> = ({ onClose }) => {
 
   const { totalPrice, totalQuantity } = useTotalPrice();
   return (
-    <div
-      
-      onClick={onClose}
-    >
+    <div onClick={onClose}>
       <div
         className="absolute w-[540px] h-screen top-0 right-0 bg-white py-[30px] px-[40px] z-50 text-black"
         onClick={e => e.stopPropagation()}
@@ -48,7 +46,7 @@ const Drawer: FC<DrawerProps> = ({ onClose }) => {
                 </h3>
               ) : (
                 <div className="max-h-[480px] scroll">
-                  {cartState.map((cart: any) => (
+                  {cartState.map((cart: ProductPage) => (
                     <DrawerItems key={uuidv4()} cart={cart} />
                   ))}
                 </div>

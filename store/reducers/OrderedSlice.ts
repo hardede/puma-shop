@@ -17,7 +17,6 @@ export const orderedSlice = createSlice({
         action.payload
       );
       state.history.push({
-        id: uuidv4(),
         quantity: action.payload.totalQuantity,
         totalPrice: action.payload.totalPrice,
         totalPriceOld: action.payload.totalPriceOld,

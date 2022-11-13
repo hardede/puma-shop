@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSearch, BiUser } from "react-icons/bi";
 import { SiPuma } from "react-icons/si";
 import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../hooks/redux";
+import useDebounce from "../../hooks/useDebounce";
 import useTotalPrice from "../../hooks/useTotalPrice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { headerLink } from "../constants/header";
@@ -16,15 +17,22 @@ import SearchingMenu from "./SearchingMenu/SearchingMenu";
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [searchMenuOpen, setSearchMenuOpen] = useState(false);
+  const [searchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState("");
   const cartState = useAppSelector(selectCartState);
   const { totalQuantity } = useTotalPrice();
   const nodeRef = useRef(null);
 
+  // const debouncedValue = useDebounce(searchInput, 300);
+
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
+
+  // useEffect(() => {
+  //   console.log("123");
+  //   searchInput
+  // }, [debouncedValue])
 
   return (
     <header className="absolute left-0 top-0 w-full z-10 px-10 bg-black text text-white">

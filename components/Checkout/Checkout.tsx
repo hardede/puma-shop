@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -6,42 +7,22 @@ import { useForm } from "react-hook-form";
 import { GiExitDoor } from "react-icons/gi";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useTotalPrice from "../../hooks/useTotalPrice";
-import {
-  logout,
-  selectUserState,
-  updatePersonInfo,
-} from "../../store/reducers/AuthSlice";
+import { logout } from "../../store/reducers/AuthSlice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { IUser } from "../../types/IUser";
 import { ProductPage } from "../../types/product/productPage";
+import { getError } from "../../utils/error";
 import CheckoutItems from "./CheckoutItems/CheckoutItems";
 import PaymentMethods from "./PaymentMethods/PaymentMethods";
 
-interface CheckoutProps extends ProductPage {
-  size: number;
-  quantity: number;
-  countInStock: number;
-}
-
 const Checkout: FC = () => {
-  const userState = useAppSelector(selectUserState);
   const cartState = useAppSelector(selectCartState);
   const { status, data: session } = useSession();
-
-  const [firstName, setFirstName] = useState(
-    status === "loading" ? "Loading" : session?.user && session.user.firstName
-  );
-  const [lastName, setLastName] = useState(
-    status === "loading" ? "Loading" : session?.user && session.user.lastName
-  );
-
-  const [email, setEmail] = useState(
-    status === "loading" ? "Loading" : session?.user && session.user.email
-  );
+  const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
-  const [city, setCity] = useState(userState.city ? userState.city : "");
 
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const dispatch = useAppDispatch();
@@ -54,16 +35,37 @@ const Checkout: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    setValue,
   } = useForm<IUser>({ mode: "onChange" });
 
   useEffect(() => {
-    cartState.length === 0 && router.push("/checkout/cart");
-  }, []);
+    // @ts-ignore: Unreachable code error
+    setValue("firstName", session?.user.firstName);
+    // @ts-ignore: Unreachable code error
+    setValue("lastName", session?.user.lastName);
+    // @ts-ignore: Unreachable code error
+    setValue("email", session?.user.email);
+    setValue("city", city);
+    // @ts-ignore: Unreachable code error
+    setValue("phone", phone);
+    // @ts-ignore: Unreachable code error
+  }, [session?.user, setValue, phone, city]);
 
-  const onClickPersonInfo = () => {
-    dispatch(updatePersonInfo({ firstName, lastName, email, phone, city }));
-    reset();
+  useEffect(() => {
+    cartState.length === 0 && router.push("/checkout/cart");
+  }, [cartState.length, router]);
+
+  const submitHandler = async ({ phone, city }: any) => {
+    try {
+      await axios.patch("/api/auth/checkout1", {
+        phone,
+        city,
+      });
+      router.push("/account");
+      toast.success("Delivery cleared");
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
 
   return (
@@ -76,9 +78,13 @@ const Checkout: FC = () => {
             </div>
             <div className="flex ml-44">
               You are logged in as&nbsp;
-              <p className="font-semibold">
-                {userState.firstName} {userState.lastName}.
-              </p>
+              {status === "loading"
+                ? "Loading"
+                : session?.user && (
+                    <div className="font-semibold">
+                      {session.user.firstName} {session.user.lastName}.
+                    </div>
+                  )}
             </div>
             <Link href="/">
               <div
@@ -90,7 +96,7 @@ const Checkout: FC = () => {
             </Link>
           </div>
           <div>
-            <form className="mt-4" onSubmit={handleSubmit(onClickPersonInfo)}>
+            <form className="mt-4" onSubmit={handleSubmit(submitHandler)}>
               <div className="flex items-center py-[41px] border-b border-[#d2a1a1]">
                 <p className="px-10 uppercase text-xl font-bold">
                   delivery method
@@ -98,7 +104,6 @@ const Checkout: FC = () => {
                 <p className="pr-5 font-semibold">Your place of residence:</p>
                 <div>
                   <input
-                    value={city}
                     {...register("city", {
                       required: "city is require field",
                       minLength: {
@@ -106,8 +111,10 @@ const Checkout: FC = () => {
                         message: "There must be at least 3 letters",
                       },
                     })}
-                    onChange={e => setCity(e.target.value)}
+                    id="city"
                     className="placeholder:uppercase w-[195px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                    onChange={e => setCity(e.target.value)}
+                    type="text"
                   />
                   {errors?.city && (
                     <div className="text-red-500 absolute">
@@ -121,101 +128,52 @@ const Checkout: FC = () => {
               </h4>
               <div className="grid grid-cols-2">
                 <div className="flex flex-col">
-                  <label className="uppercase text-xs mt-4 mb-1 text-[#777]">
+                  <label
+                    htmlFor="firstName"
+                    className="uppercase text-xs mt-4 mb-1 text-[#777]"
+                  >
                     firstName:
                   </label>
                   <input
                     className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none"
-                    {...register("firstName", {
-                      required: "firstName is require field",
-                      minLength: {
-                        value: 3,
-                        message: "There must be at least 3 letters",
-                      },
-                    })}
-                    // @ts-ignore: Unreachable code error
-                    value={
-                      status === "loading"
-                        ? "Loading"
-                        : session?.user && session.user.firstName
-                    }
-                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    //   setFirstName(e.target.value)
-                    // }
-                    placeholder="firstName"
-                    type="firstName"
+                    {...register("firstName", { disabled: true })}
+                    id="firstName"
+                    type="text"
                   />
-                  {errors?.firstName && (
-                    <div className="text-red-500">
-                      {errors?.firstName?.message || "Error!"}
-                    </div>
-                  )}
                 </div>
                 <div className="flex flex-col">
-                  <label className="uppercase text-xs mt-4  mb-1 text-[#777]">
+                  <label
+                    htmlFor="lastName"
+                    className="uppercase text-xs mt-4  mb-1 text-[#777]"
+                  >
                     lastName:
                   </label>
                   <input
                     className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none"
-                    {...register("lastName", {
-                      required: "lastName is require field",
-                      minLength: {
-                        value: 3,
-                        message: "There must be at least 3 letters",
-                      },
-                    })}
-                    // @ts-ignore: Unreachable code error
-                    value={
-                      status === "loading"
-                        ? "Loading"
-                        : session?.user && session.user.lastName
-                    }
-                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    //   setLastName(e.target.value)
-                    // }
-                    placeholder="lastName"
-                    type="lastName"
+                    {...register("lastName", { disabled: true })}
+                    id="lastName"
+                    type="text"
                   />
-                  {errors?.lastName && (
-                    <div className="text-red-500">
-                      {errors?.lastName?.message || "Error!"}
-                    </div>
-                  )}
                 </div>
                 <div className="flex flex-col">
-                  <label className="uppercase text-xs mt-4  mb-1 text-[#777]">
+                  <label
+                    htmlFor="email"
+                    className="uppercase text-xs mt-4  mb-1 text-[#777]"
+                  >
                     email address:
                   </label>
                   <input
                     className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none"
-                    {...register("email", {
-                      required: "email is require field",
-                      pattern: {
-                        value:
-                          /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-                        message: "Please enter valid Email",
-                      },
-                    })}
-                    // @ts-ignore: Unreachable code error
-                    value={
-                      status === "loading"
-                        ? "Loading"
-                        : session?.user && session.user.email
-                    }
-                    // onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    //   setEmail(e.target.value)
-                    // }
-                    placeholder="e-mail"
+                    {...register("email", { disabled: true })}
+                    id="email"
                     type="email"
                   />
-                  {errors?.email && (
-                    <div className="text-red-500">
-                      {errors?.email?.message || "Error!"}
-                    </div>
-                  )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="uppercase text-xs  mb-1 text-[#777]">
+                  <label
+                    htmlFor="phone"
+                    className="uppercase text-xs  mb-1 text-[#777]"
+                  >
                     phone:
                   </label>
                   <PhoneInput
@@ -257,7 +215,11 @@ const Checkout: FC = () => {
                 </div>
               </div>
               <div className="">
-                <PaymentMethods isPhoneValid={isPhoneValid} />
+                <PaymentMethods
+                  isPhoneValid={isPhoneValid}
+                  city={city}
+                  phone={phone}
+                />
               </div>
             </form>
           </div>
@@ -270,8 +232,8 @@ const Checkout: FC = () => {
             </Link>
           </div>
           <div className="mb-4">
-            {cartState.map((order: CheckoutProps) => (
-              <CheckoutItems key={order.id} order={order} />
+            {cartState.map((order: ProductPage) => (
+              <CheckoutItems key={order._id} order={order} />
             ))}
           </div>
           <div className="flex justify-between items-center py-0.5 text-sm text-[#181818]">

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../../types/product";
+import { ProductPage } from "../../types/product/productPage";
 import { RootState } from "../store";
 
-const initialState: Product | any = {
+const initialState: ProductPage | any = {
   productSort: [],
 };
 

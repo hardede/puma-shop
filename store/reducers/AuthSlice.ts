@@ -11,6 +11,10 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    registration(state, action) {
+      state.userState = action.payload;
+      console.log("🚀 ~ file: AuthSlice.ts ~ line 16 ~ registration ~ action.payload", action.payload)
+    },
     login(state, action) {
       state.userState = action.payload;
       state.isAuth = true;
@@ -36,7 +40,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, logout, updatePersonInfo, updatePassword } =
+export const { registration, login, logout, updatePersonInfo, updatePassword } =
   authSlice.actions;
 
 export const selectUserState = (state: RootState) => state.auth.userState;

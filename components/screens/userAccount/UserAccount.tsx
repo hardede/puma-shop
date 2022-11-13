@@ -1,13 +1,9 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { useAppDispatch } from "../../../hooks/redux";
-import { logout } from "../../../store/reducers/AuthSlice";
 import UserProfile from "../../Account/UserProfile";
 import Layout from "../../Layout/Layout";
-import { useSession, signOut } from "next-auth/react";
 
 const UserAccount = () => {
-  const dispatch = useAppDispatch();
-
   return (
     <Layout title="Woman Products">
       <div className="flex justify-between items-center mt-20 px-28 py-[26px]  bg-[#eee] w-screen">

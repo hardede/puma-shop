@@ -78,7 +78,7 @@ const UpdateProfile = () => {
                   },
                 })}
                 id="firstName"
-                type="firstName"
+                type="text"
               />
               {errors?.firstName && (
                 <div className="text-red-500">
@@ -99,7 +99,7 @@ const UpdateProfile = () => {
                   },
                 })}
                 id="lastName"
-                type="lastName"
+                type="text"
               />
               {errors?.lastName && (
                 <div className="text-red-500">
@@ -141,7 +141,7 @@ const UpdateProfile = () => {
               <AuthorizationInput
                 {...register("password", {
                   required:
-                    "To update profile date you need to enter new password or old one",
+                    "To update profile data you need to enter new password or old one",
                   minLength: {
                     value: 6,
                     message:

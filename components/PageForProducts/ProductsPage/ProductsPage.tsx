@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { Product } from "../../../types/product";
+import { ProductPage } from "../../../types/product/productPage";
 
 interface ProductsPageProps {
-  item: Product;
+  item: ProductPage;
 }
 
 const ProductsPage: FC<ProductsPageProps> = ({ item }) => {

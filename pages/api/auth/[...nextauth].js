@@ -13,6 +13,8 @@ export default NextAuth({
       if (user?._id) token._id = user._id;
       if (user?.firstName) token.firstName = user.firstName;
       if (user?.lastName) token.lastName = user.lastName;
+      if (user?.phone) token.phone = user.phone;
+      if (user?.city) token.city = user.city;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return token;
     },
@@ -20,6 +22,8 @@ export default NextAuth({
       if (token?._id) session.user._id = token._id;
       if (token?.firstName) session.user.firstName = token.firstName;
       if (token?.lastName) session.user.lastName = token.lastName;
+      if (token?.phone) session.user.phone = token.phone;
+      if (token?.city) session.user.city = token.city;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       return session;
     },

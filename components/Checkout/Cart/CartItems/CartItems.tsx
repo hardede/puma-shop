@@ -6,14 +6,14 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { useAppDispatch } from "../../../../hooks/redux";
 import useSumForItem from "../../../../hooks/useSumForItem";
 import {
-    cartRemove,
-    decrementQuantity,
-    incrementQuantity
+  cartRemove,
+  decrementQuantity,
+  incrementQuantity
 } from "../../../../store/reducers/CartSlice";
-import { OrderedProduct } from "../../../../types/orderProduct";
+import { ProductPage } from "../../../../types/product/productPage";
 
 interface CartItemsProps {
-  orderCart: OrderedProduct;
+  orderCart: ProductPage;
 }
 
 const CartItems: FC<CartItemsProps> = ({ orderCart }) => {

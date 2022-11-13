@@ -27,7 +27,6 @@ const data = {
 
   sneakers: [
     {
-      id: uuidv4(),
       slug: "sneakers-voyage-nitro-gore-tex-men-s-running-shoes",
       imgProductPage: [
         { productImg: "/sneakers/voyage_nitro.webp" },
@@ -80,7 +79,6 @@ const data = {
       sale: "",
     },
     {
-      id: uuidv4(),
       slug: "sneakers-voyage-nitro-gore-tex-men-s-running-shoes-black",
       imgProductPage: [
         { productImg: "/sneakers/voyage_nitro_black.webp" },
@@ -135,7 +133,6 @@ const data = {
       sale: "-50%",
     },
     {
-      id: uuidv4(),
       slug: "sneakers-deviate-nitro-wtr-men-s-running-shoes",
       imgProductPage: [
         { productImg: "/sneakers/deviat_nitro.webp" },
@@ -190,7 +187,6 @@ const data = {
       sale: "-50%",
     },
     {
-      id: uuidv4(),
       link: "/manPage",
       slug: "sneakers-twitch-runner-running-shoes",
       imgProductPage: [
@@ -246,7 +242,6 @@ const data = {
       sale: "-50%",
     },
     {
-      id: uuidv4(),
       link: "/manPage",
       slug: "sneakers-twitch-runner-running-shoes",
       imgProductPage: [
@@ -301,7 +296,6 @@ const data = {
       sale: "-50%",
     },
     {
-      id: uuidv4(),
       link: "/manPage",
       slug: "sneakers-twitch-runner-running-shoes",
       imgProductPage: [
@@ -359,7 +353,6 @@ const data = {
 
   sneakersMan: [
     {
-      id: uuidv4(),
       slug: "sneakers-voyage-nitro-gore-tex-men-s-running-shoes",
       imgProductPage: [
         { productImg: "/sneakers/voyage_nitro.webp" },
@@ -411,7 +404,6 @@ const data = {
       oldPriceString: "0",
     },
     {
-      id: uuidv4(),
       slug: "sneakers-voyage-nitro-gore-tex-men-s-running-shoes-black",
       imgProductPage: [
         { productImg: "/sneakers/voyage_nitro_black.webp" },
@@ -466,7 +458,6 @@ const data = {
       sale: "-54%",
     },
     {
-      id: uuidv4(),
       slug: "sneakers-deviate-nitro-wtr-men-s-running-shoes",
       imgProductPage: [
         { productImg: "/sneakers/deviat_nitro.webp" },
@@ -521,8 +512,7 @@ const data = {
       sale: "-53%",
     },
     {
-      id: uuidv4(),
-      slug: "sneakers-deviate-nitro-wtr-men-s-running-shoes",
+      slug: "sneakers-deviate-nitro-wtr-men-s-running-shoes1",
       imgProductPage: [
         { productImg: "/sneakers/deviat_nitro.webp" },
         { productImg: "/sneakers/voyage_nitro_black1.webp" },
@@ -576,7 +566,6 @@ const data = {
       sale: "-53%",
     },
     {
-      id: uuidv4(),
       slug: "sneakers-twitch-runner-running-shoes",
       imgProductPage: [
         { productImg: "/sneakers/deviat_nitro.webp" },
@@ -630,61 +619,356 @@ const data = {
       oldPriceString: "7 690,00 ₴",
       sale: "-53%",
     },
-    // {
-    //   id: uuidv4(),
-    //   slug: "sneakers-twitch-runner-running-shoes",
-    //   imgProductPage: [
-    //     { productImg: "/sneakers/deviat_nitro.webp" },
-    //     { productImg: "/sneakers/voyage_nitro_black1.webp" },
-    //     { productImg: "/sneakers/voyage_nitro_black2.webp" },
-    //     { productImg: "/sneakers/voyage_nitro_black3.webp" },
-    //     { productImg: "/sneakers/voyage_nitro_black4.webp" },
-    //     { productImg: "/sneakers/voyage_nitro_black5.webp" },
-    //   ],
-    //   img: "/sneakers/twitch_nitro.webp",
-    //   model: "Sneakers Twitch Runner Running Shoes",
-    //   color: "Peacoat-Puma White",
-    //   sizeSelection: [
-    //     {
-    //       sizeEur: 39,
-    //       sizeUK: 6,
-    //       sizeCountInStock: 6,
-    //     },
-    //     {
-    //       sizeEur: 40,
-    //       sizeUK: 6.5,
-    //       sizeCountInStock: 2,
-    //     },
-    //     {
-    //       sizeEur: 41,
-    //       sizeUK: 7.5,
-    //       sizeCountInStock: 2,
-    //     },
-    //     {
-    //       sizeEur: 42,
-    //       sizeUK: 8,
-    //       sizeCountInStock: 5,
-    //     },
-    //     {
-    //       sizeEur: 43,
-    //       sizeUK: 9,
-    //       sizeCountInStock: 1,
-    //     },
-    //     {
-    //       sizeEur: 44,
-    //       sizeUK: 9,
-    //       sizeCountInStock: 9,
-    //     },
-    //   ],
-    //   atr: "195572_01",
-    //   alt: "Sneakers Deviate Nitro Wtr Men's Running Shoes",
-    //   blur: { blurData3 },
-    //   newPrice: 3390,
-    //   oldPrice: 7690,
-    //   newPriceString: "3 390,00 ₴",
-    //   oldPriceString: "7 690,00 ₴",
-    //   sale: "-53%",
-    // },
+    {
+      slug: "sneakers-twitch-runner-running-shoes",
+      imgProductPage: [
+        { productImg: "/sneakers/deviat_nitro.webp" },
+        { productImg: "/sneakers/voyage_nitro_black1.webp" },
+        { productImg: "/sneakers/voyage_nitro_black2.webp" },
+        { productImg: "/sneakers/voyage_nitro_black3.webp" },
+        { productImg: "/sneakers/voyage_nitro_black4.webp" },
+        { productImg: "/sneakers/voyage_nitro_black5.webp" },
+      ],
+      img: "/sneakers/twitch_nitro.webp",
+      model: "Sneakers Twitch Runner Running Shoes",
+      color: "Peacoat-Puma White",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "195572_01",
+      alt: "Sneakers Deviate Nitro Wtr Men's Running Shoes",
+      blur: { blurData3 },
+      newPrice: 3390,
+      oldPrice: 7690,
+      newPriceString: "3 390,00 ₴",
+      oldPriceString: "7 690,00 ₴",
+      sale: "-53%",
+    },
+  ],
+  sneakersWoman: [
+    {
+      slug: "sneakers-pwrframe_op-1-trail",
+      imgProductPage: [
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers1.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers2.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers3.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers4.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers5.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers6.webp",
+        },
+        {
+          productImg:
+            "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers7.webp",
+        },
+      ],
+      img: "/sneakersWoman/pwrframe_op-1/pwrframe_op-1_trail_sneakers.webp",
+      model: "Sneakers Pwrframe Op-1 Trail",
+      color: "Gray Violet-Puma Black",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 0,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "386378_01",
+      alt: "pwrframe_op-1_trail_sneakers",
+      blur: { blurData1 },
+      newPrice: 5690,
+      oldPrice: 0,
+      newPriceString: "5 690,00 ₴",
+      oldPriceString: "0",
+    },
+    {
+      slug: "sneakers-slipstream-mid",
+      imgProductPage: [
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid1.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid2.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid3.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid4.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid5.webp" },
+        { productImg: "/sneakersWoman/slipstream_mid/slipstream_mid6.webp" },
+      ],
+      img: "/sneakersWoman/slipstream_mid/slipstream_mid.webp",
+      model: "Sneakers SLIPSTREAM MID",
+      color: "Puma White-Glacier Gray",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 0,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "386565_02",
+      alt: "slipstream_mid",
+      blur: { blurData2 },
+      newPrice: 4590,
+      oldPrice: 0,
+      newPriceString: "4 590,00 ₴",
+      oldPriceString: "0",
+    },
+    {
+      slug: "sneakers-orkid-retro-grade",
+      imgProductPage: [
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade.webp" },
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade1.webp" },
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade2.webp" },
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade3.webp" },
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade4.webp" },
+        { productImg: "/sneakersWoman/orkid_retro/orkid_retro_grade5.webp" },
+      ],
+      img: "/sneakersWoman/orkid_retro/orkid_retro_grade.webp",
+      model: "Sneakers Orkid Retro Grade Woman",
+      color: "Vaporous Gray-Burnt Red",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "387465_01",
+      alt: "sneakers-orkid_retro_grade",
+      blur: { blurData3 },
+      newPrice: 5190,
+      oldPrice: 9690,
+      newPriceString: "5 190,00 ₴",
+      oldPriceString: "9 690,00 ₴",
+      sale: "-55%",
+    },
+    {
+      slug: "sneakers-carina-lift-mono",
+      imgProductPage: [
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono1.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono2.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono3.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono4.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono5.webp" },
+        { productImg: "/sneakersWoman/carina_lift/carina_lift_mono6.webp" },
+      ],
+      img: "/sneakersWoman/carina_lift/carina_lift_mono.webp",
+      model: "Sneakers Carina Lift Mono Woman",
+      color: "Puma Black-Puma White",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "386405_01",
+      alt: "carina_lift_mono",
+      blur: { blurData3 },
+      newPrice: 2890,
+      oldPrice: 0,
+      newPriceString: "2 990,00 ₴",
+      oldPriceString: "0",
+    },
+    {
+      slug: "sneakers-puma-palomo-nitefox",
+      imgProductPage: [
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox.webp" },
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox1.webp" },
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox2.webp" },
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox3.webp" },
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox4.webp" },
+        { productImg: "/sneakersWoman/puma_palomo/puma_palomo_nitefox5.webp" },
+      ],
+      img: "/sneakersWoman/puma_palomo/puma_palomo_nitefox.webp",
+      model: "Puma X Palomo Nitefox Loafers",
+      color: "Puma Black",
+      sizeSelection: [
+        {
+          sizeEur: 39,
+          sizeUK: 6,
+          sizeCountInStock: 6,
+        },
+        {
+          sizeEur: 40,
+          sizeUK: 6.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 41,
+          sizeUK: 7.5,
+          sizeCountInStock: 2,
+        },
+        {
+          sizeEur: 42,
+          sizeUK: 8,
+          sizeCountInStock: 5,
+        },
+        {
+          sizeEur: 43,
+          sizeUK: 9,
+          sizeCountInStock: 1,
+        },
+        {
+          sizeEur: 44,
+          sizeUK: 9,
+          sizeCountInStock: 9,
+        },
+      ],
+      atr: "388441_01",
+      alt: "puma_palomo_nitefox",
+      blur: { blurData3 },
+      newPrice: 22990,
+      oldPrice: 0,
+      newPriceString: "22 990,00 ₴",
+      oldPriceString: "0",
+    },
   ],
 };
 

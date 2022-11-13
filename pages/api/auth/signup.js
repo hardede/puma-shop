@@ -22,9 +22,9 @@ async function handler(req, res) {
 
   await db.connect();
 
-  const existingUser = await User.findOne({ email: email });
-  if (existingUser) {
-    res.status(422).json({ message: "User exists already" });
+  const existingEmail = await User.findOne({ email: email });
+  if (existingEmail) {
+    res.status(422).json({ message: "email exists already" });
     await db.disconnect();
     return;
   }
@@ -45,6 +45,8 @@ async function handler(req, res) {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
+    city: "",
+    phone: "",
     isAdmin: user.isAdmin,
   });
 }

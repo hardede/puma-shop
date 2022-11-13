@@ -1,9 +1,17 @@
-import { OrderedProduct } from "./orderProduct";
+import { ProductPage } from "./product/productPage";
+
+export interface shippingAddress {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: number;
+  city: string;
+}
 
 export interface History {
-  id: string;
-  quantity: number;
+  _id: string;
   totalPrice: string;
+  totalQuantity: number;
   totalPriceOld: string;
   discount: number;
   discountString: string;
@@ -11,5 +19,6 @@ export interface History {
   discountByCardString: string;
   totalPriceWithCard: number;
   totalPriceWithCardString: string;
-  orderedProducts: OrderedProduct[];
+  shippingAddress: shippingAddress;
+  orderItems: ProductPage[];
 }

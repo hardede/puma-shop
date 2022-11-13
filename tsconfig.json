@@ -15,6 +15,23 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app/components/Header/Header.jsx", "components/UI/MyInput.jsx", "components/Header/Header.tsx", "components/Layout/Layout.jsx", "components/constants/social.js", "components/Footer/Footer.tsx", "components/Products/Products.d.tssx", "store/reducers/AddToCart.js", "components/Drawer/Drawer.hsx", "components/MultiRangeSlider/MultiRangeSlider.tsx", "components/screens/userAuthorization/UserAuthorization.tsx", "store/reducers/AuthSlice.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/components/Header/Header.jsx",
+    "components/UI/MyInput.jsx",
+    "components/Header/Header.tsx",
+    "components/Layout/Layout.jsx",
+    "components/constants/social.js",
+    "components/Footer/Footer.tsx",
+    "components/Products/Products.d.tssx",
+    "store/reducers/AddToCart.js",
+    "components/Drawer/Drawer.hsx",
+    "components/MultiRangeSlider/MultiRangeSlider.tsx",
+    "components/screens/userAuthorization/UserAuthorization.tsx",
+    "store/reducers/AuthSlice.ts",
+    "models/Product.js"
+  ],
   "exclude": ["node_modules"]
 }

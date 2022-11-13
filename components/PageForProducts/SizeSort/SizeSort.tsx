@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import { useAppDispatch } from "../../../hooks/redux";
 import { sortBySize } from "../../../store/reducers/ProductSlice";
-import { Product } from "../../../types/product";
 import data from "../../../utils/data";
 
 interface SizeSortProps {

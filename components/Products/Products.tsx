@@ -1,10 +1,15 @@
 import { FC } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Slider from 'react-slick/lib/slider';
+import Slider from "react-slick";
+import { ProductPage } from "../../types/product/productPage";
 import data from "../../utils/data";
 import ProductItem from "./ProductItem/ProductItem";
 
-const Products: FC = () => {
+interface ProductsProps {
+  products: ProductPage[];
+}
+
+const Products: FC<ProductsProps> = ({ products }) => {
   if (!data.sneakers) {
     return null;
   }
@@ -49,8 +54,8 @@ const Products: FC = () => {
   return (
     <div className="mb-20 flex justify-center">
       <Slider {...settings}>
-        {data.sneakers.map((sneaker) => (
-          <ProductItem key={sneaker.id} sneaker={sneaker} />
+        {products.map((sneaker: ProductPage) => (
+          <ProductItem key={sneaker._id} sneaker={sneaker} />
         ))}
       </Slider>
     </div>

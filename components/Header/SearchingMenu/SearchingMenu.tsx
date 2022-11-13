@@ -1,13 +1,13 @@
 import { FC, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { Product } from "../../../types/product";
+import { ProductTypes } from "../../../types/product";
 import data from "../../../utils/data";
 import SearchSneakersModal from "../../Modal/SearchSneakersModal";
 
 interface SearchingMenuProps {
   searchMenuOpen: boolean;
   searchInput: string;
-  setSearchMenuOpen: any;
+  setSearchMenuOpen: (value: boolean) => void;
 }
 
 const SearchingMenu: FC<SearchingMenuProps> = ({
@@ -15,7 +15,6 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
   searchInput,
   setSearchMenuOpen,
 }) => {
-
   const nodeRef = useRef(null);
 
   return (
@@ -41,9 +40,9 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
               .filter(item =>
                 item.model.toLowerCase().includes(searchInput.toLowerCase())
               )
-              .map((searchProduct: Product) => (
+              .map((searchProduct: ProductTypes) => (
                 <SearchSneakersModal
-                  key={searchProduct.id}
+                  key={searchProduct.slug}
                   searchProduct={searchProduct}
                 />
               ))}

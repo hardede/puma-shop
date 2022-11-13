@@ -9,7 +9,7 @@ import {
   sortByDescending,
   sortByDiscount,
 } from "../../store/reducers/ProductSlice";
-import { Product } from "../../types/product";
+import { ProductPage } from "../../types/product/productPage";
 import { sizeSort } from "../../types/sizeSort";
 import data from "../../utils/data";
 import { sizes } from "../constants/sizes";
@@ -20,9 +20,14 @@ import SizeSort from "./SizeSort/SizeSort";
 interface PageForProductsProps {
   title: string;
   category: string;
+  products: ProductPage[];
 }
 
-const PageForProducts: FC<PageForProductsProps> = ({ title, category }) => {
+const PageForProducts: FC<PageForProductsProps> = ({
+  title,
+  category,
+  products,
+}) => {
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
   const [sizeOpen, setSizeOpen] = useState(false);
@@ -30,11 +35,11 @@ const PageForProducts: FC<PageForProductsProps> = ({ title, category }) => {
   const router = useRouter();
 
   return (
-    <div className="mt-20 py-2">
+    <div className="mt-20 py-2" title={title}>
       <p onClick={() => router.back()}>back to products</p>
       <div className="mt-20 ">
         <div className="flex items-center mb-6">
-          <h1 className="font-bold uppercase text-2xl">{title}</h1>
+          <h1 className="font-bold uppercase text-2xl">{category}</h1>
           <span className="pl-4 opacity-50 font-bold uppercase">
             {data.sneakersMan.length} goods
           </span>
@@ -183,8 +188,8 @@ const PageForProducts: FC<PageForProductsProps> = ({ title, category }) => {
               </Link>
             </div>
             <div className="flex flex-wrap">
-              {data.sneakersMan.map((item: Product) => (
-                <ProductsPage key={item.id} item={item} />
+              {products.map((item: ProductPage) => (
+                <ProductsPage key={item._id} item={item} />
               ))}
             </div>
           </div>

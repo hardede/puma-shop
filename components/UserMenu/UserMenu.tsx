@@ -3,11 +3,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { GrClose } from "react-icons/gr";
-import { userLinksTypes } from "../../types/userLinksTypes";
 import { userLinks } from "../constants/userLinks";
 
 interface UserMenuProps {
   onClose: () => void;
+}
+
+interface Links {
+  id: string,
+  link: string,
+  href: string
 }
 
 const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
@@ -36,7 +41,7 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
                 : session?.user && session.user.email}
             </div>
             <div>
-              {userLinks.map((links: userLinksTypes) => (
+              {userLinks.map((links: Links) => (
                 <Link key={links.id} href={links.href}>
                   <a className=" after:block after:w-full after:h-0.5 after:bg-[#d2a1a1] after:mt-1">
                     <div className="mt-2 hover:bg-slate-300 hover:bg-opacity-50">

@@ -15,11 +15,6 @@ export const productSlice = createSlice({
     },
     sortByAscending(state, action) {
       const copy = action.payload.slice();
-      console.log(
-        "🚀 ~ file: ProductSlice.ts ~ line 18 ~ sortByAscending ~ action.payload",
-        action.payload
-      );
-
       state.productSort = copy.sort(
         (a: any, b: any) => a.newPrice - b.newPrice
       );
@@ -44,15 +39,11 @@ export const productSlice = createSlice({
     },
     sortBySize(state, action) {
       state.productSort = [];
-      action.payload.sneakers.map((item: any) =>
+      action.payload.products.map((item: any) =>
         item.sizeSelection.map((item1: any) => {
           if (item1.sizeEur === action.payload.size) {
             if (item1.sizeCountInStock > 0) {
               state.productSort.push(item);
-              console.log(
-                "🚀 ~ file: ProductSlice.ts ~ line 51 ~ item.sizeSelection.map ~ item",
-                state.productSort
-              );
             }
           }
         })

@@ -1,21 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
 import "rc-slider/assets/index.css";
 import React, { useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { v4 as uuidv4 } from "uuid";
 import Layout from "../../components/Layout/Layout";
 import MultiRangeSlider from "../../components/MultiRangeSlider/MultiRangeSlider";
 import SizeSort from "../../components/PageForProducts/SizeSort/SizeSort";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import Product from "../../models/Product";
 import {
   selectProductsState,
   sortByAscending,
   sortByDescending,
-  sortByDiscount,
+  sortByDiscount
 } from "../../store/reducers/ProductSlice";
-import data from "../../utils/data";
+import db from "../../utils/db";
 
 const sizes = [
   {
@@ -44,7 +45,7 @@ const sizes = [
   },
 ];
 
-const SortedScreen = ({ title, category }) => {
+const SortedScreen = ({ title, category, products }) => {
   const productSort = useAppSelector(selectProductsState);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
@@ -61,7 +62,7 @@ const SortedScreen = ({ title, category }) => {
           <div className="flex items-center mb-6">
             <h1 className="font-bold uppercase text-2xl">goods for men</h1>
             <span className="pl-4 opacity-50 font-bold uppercase">
-              {data.sneakersMan.length} goods
+              {products.length} goods
             </span>
           </div>
           <div className="flex">
@@ -120,8 +121,8 @@ const SortedScreen = ({ title, category }) => {
                     <div>
                       <MultiRangeSlider
                         min={989}
-                        max={19999}
-                        sneakers={data.sneakersMan}
+                        max={29999}
+                        sneakers={products}
                         onChange={({ min, max }) =>
                           console.log(`min = ${min}, max = ${max}`)
                         }
@@ -144,7 +145,7 @@ const SortedScreen = ({ title, category }) => {
                   {sizeOpen && (
                     <div className="flex flex-wrap">
                       {sizes.map(item => (
-                        <SizeSort key={item.id} size={item.size} />
+                        <SizeSort key={item.id} size={item.size} products={products}/>
                       ))}
                     </div>
                   )}
@@ -187,11 +188,7 @@ const SortedScreen = ({ title, category }) => {
                         </Link>
                       </div>
                     ) : (
-                      <div
-                        onClick={() =>
-                          dispatch(sortByAscending(data.sneakersMan))
-                        }
-                      >
+                      <div onClick={() => dispatch(sortByAscending(products))}>
                         Price: Ascending
                       </div>
                     )}
@@ -222,11 +219,7 @@ const SortedScreen = ({ title, category }) => {
                         </Link>
                       </div>
                     ) : (
-                      <div
-                        onClick={() =>
-                          dispatch(sortByDescending(data.sneakersMan))
-                        }
-                      >
+                      <div onClick={() => dispatch(sortByDescending(products))}>
                         Price: Descending
                       </div>
                     )}
@@ -253,11 +246,7 @@ const SortedScreen = ({ title, category }) => {
                         </Link>
                       </div>
                     ) : (
-                      <div
-                        onClick={() =>
-                          dispatch(sortByDiscount(data.sneakersMan))
-                        }
-                      >
+                      <div onClick={() => dispatch(sortByDiscount(products))}>
                         Maximum discount
                       </div>
                     )}
@@ -273,7 +262,7 @@ const SortedScreen = ({ title, category }) => {
                   <div className="flex flex-wrap">
                     {productSort.map(item => (
                       <div
-                        key={item.id}
+                        key={item._id}
                         className="max-w-[220px] min-h-[401px] relative p-2.5 hover:border hover:border-[#cccccc] mx-[2.5px] mb-5"
                       >
                         <Link href={`/product/${item.slug}`}>
@@ -331,26 +320,12 @@ const SortedScreen = ({ title, category }) => {
 
 export default SortedScreen;
 
-{
-  /* <p className="font-medium uppercase text-[#828282] mr-4">
-                sort by:
-              </p>
-              <div className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer">
-                <p>Default sort</p>
-              </div>
-              <div
-                className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer"
-                onClick={() => dispatch(sortByAscending(data.sneakersMan))}
-              >
-                <p>Price: Ascending</p>
-              </div>
-              <div className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer">
-                <p>Price: descending</p>
-              </div>
-              <div className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer">
-                <p>Maximum discount</p>
-              </div>
-              <div className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer">
-                <p>Novelties</p>
-              </div> */
+export async function getServerSideProps() {
+  await db.connect();
+  const products = await Product.find().lean();
+  return {
+    props: {
+      products: products.map(db.convertDocToObj),
+    },
+  };
 }

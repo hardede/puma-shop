@@ -7,11 +7,10 @@ import { useAppDispatch } from "../../hooks/redux";
 import {
   sortByAscending,
   sortByDescending,
-  sortByDiscount,
+  sortByDiscount
 } from "../../store/reducers/ProductSlice";
 import { ProductPage } from "../../types/product/productPage";
 import { sizeSort } from "../../types/sizeSort";
-import data from "../../utils/data";
 import { sizes } from "../constants/sizes";
 import MultiRangeSlider from "../MultiRangeSlider/MultiRangeSlider";
 import ProductsPage from "./ProductsPage/ProductsPage";
@@ -41,7 +40,7 @@ const PageForProducts: FC<PageForProductsProps> = ({
         <div className="flex items-center mb-6">
           <h1 className="font-bold uppercase text-2xl">{category}</h1>
           <span className="pl-4 opacity-50 font-bold uppercase">
-            {data.sneakersMan.length} goods
+            {products.length} goods
           </span>
         </div>
         <div className="flex">
@@ -98,8 +97,8 @@ const PageForProducts: FC<PageForProductsProps> = ({
                   <div>
                     <MultiRangeSlider
                       min={989}
-                      max={19999}
-                      sneakers={data.sneakersMan}
+                      max={29999}
+                      sneakers={products}
                       onChange={({ min, max }: any) =>
                         console.log(`min = ${min}, max = ${max}`)
                       }
@@ -122,7 +121,11 @@ const PageForProducts: FC<PageForProductsProps> = ({
                 {sizeOpen && (
                   <div className="flex flex-wrap">
                     {sizes.map((item: sizeSort) => (
-                      <SizeSort key={item.id} size={item.size} />
+                      <SizeSort
+                        key={item.id}
+                        size={item.size}
+                        products={products}
+                      />
                     ))}
                   </div>
                 )}
@@ -134,7 +137,6 @@ const PageForProducts: FC<PageForProductsProps> = ({
               <p className="font-medium uppercase text-[#828282] mr-4">
                 sort by:
               </p>
-
               <Link href={`${router.pathname}`} replace>
                 <a
                   className={
@@ -159,7 +161,7 @@ const PageForProducts: FC<PageForProductsProps> = ({
               >
                 <a
                   className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer"
-                  onClick={() => dispatch(sortByAscending(data.sneakersMan))}
+                  onClick={() => dispatch(sortByAscending(products))}
                 >
                   Price: Ascending
                 </a>
@@ -170,7 +172,7 @@ const PageForProducts: FC<PageForProductsProps> = ({
               >
                 <a
                   className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer"
-                  onClick={() => dispatch(sortByDescending(data.sneakersMan))}
+                  onClick={() => dispatch(sortByDescending(products))}
                 >
                   Price: Descending
                 </a>
@@ -181,7 +183,7 @@ const PageForProducts: FC<PageForProductsProps> = ({
               >
                 <a
                   className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer"
-                  onClick={() => dispatch(sortByDiscount(data.sneakersMan))}
+                  onClick={() => dispatch(sortByDiscount(products))}
                 >
                   Maximum discount
                 </a>

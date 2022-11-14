@@ -1,21 +1,18 @@
 import { getSession } from "next-auth/react";
-import Order from "../../../models/Order";
+import User from "../../../models/User";
 import db from "../../../utils/db";
 
 const handler = async (req, res) => {
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).send("signin required");
+    return res.status(401).send({ message: "signin required" });
   }
 
   const { user } = session;
   await db.connect();
-  const newOrder = new Order({
-    ...req.body,
-    user: user._id,
-  });
+  const userFind = await User.findById(user._id);
 
-  const order = await newOrder.save();
-  res.status(201).send(order);
+  await db.disconnect();
+  res.status(201).send(userFind);
 };
 export default handler;

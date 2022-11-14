@@ -9,7 +9,6 @@ import {
   cartDeleteAll,
   selectCartState
 } from "../../../store/reducers/CartSlice";
-import { ordered } from "../../../store/reducers/OrderedSlice";
 
 interface PaymentMethodsProps {
   isPhoneValid: boolean;
@@ -63,20 +62,6 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
 
   const onClickCheckout = async (e: any) => {
     e.stopPropagation();
-    dispatch(
-      ordered({
-        totalPrice,
-        totalQuantity,
-        totalPriceOld,
-        discount,
-        discountString,
-        activeCard,
-        discountByCardString,
-        totalPriceWithCard,
-        totalPriceWithCardString,
-        cartState,
-      })
-    );
     await axios.post("api/orders", {
       totalPrice,
       totalQuantity,

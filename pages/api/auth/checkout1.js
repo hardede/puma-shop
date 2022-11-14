@@ -17,7 +17,6 @@ async function handler(req, res) {
   const { user } = session;
 
   const { phone, city } = req.body;
-  console.log("🚀 ~ file: checkout1.js ~ line 20 ~ handler ~ req.body", req.body)
 
   if (!phone || !city ) {
     res.status(422).json({

@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
-import Slider from "react-slick";
 import Layout from "../../components/Layout/Layout";
 import { useAppDispatch } from "../../hooks/redux";
 import Product from "../../models/Product";
+import ProductWoman from "../../models/ProductWoman";
 import { cartAdd } from "../../store/reducers/CartSlice";
 import db from "../../utils/db";
 
@@ -43,43 +43,6 @@ const ProductScreen = props => {
     setCountInStock(Number(qty));
   };
 
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    className: "center",
-    swipe: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <Layout title={product.model}>
       <div className="container m-auto">
@@ -88,27 +51,27 @@ const ProductScreen = props => {
         </div>
         <div className="flex w-[1050px] justify-between mx-auto">
           <div className="flex">
-              <div className="flex flex-col my-1 max-h-[340px] overflow-hidden">
-                {product.imgProductPage.map((item, index) => (
-                  <div
-                    key={item.productImg}
-                    className={
-                      index === current
-                        ? "after:w-full after:bg-[#ff0000] after:h-0.5 after:block transition-all ease-in-out duration-500 after:mb-1.5"
-                        : "after:w-full after:bg-[#e1e1e1] after:h-0.5 after:block after:hover:w-full after:hover:bg-black after:hover:h-0.5 after:hover:block transition-all ease-in-out duration-500 after:mb-1.5"
-                    }
-                    onClick={() => setCurrent(index)}
-                  >
-                    <Image
-                      src={item.productImg}
-                      width={70}
-                      height={70}
-                      alt={item.alt}
-                      draggable="false"
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="scroll flex flex-col my-1 max-h-[350px] overflow-scroll scroll-y">
+              {product.imgProductPage.map((item, index) => (
+                <div
+                  key={item.productImg}
+                  className={
+                    index === current
+                      ? "after:w-full after:bg-[#ff0000] after:h-0.5 after:block transition-all ease-in-out duration-500 after:mb-1.5"
+                      : "after:w-full after:bg-[#e1e1e1] after:h-0.5 after:block after:hover:w-full after:hover:bg-black after:hover:h-0.5 after:hover:block transition-all ease-in-out duration-500 after:mb-1.5"
+                  }
+                  onClick={() => setCurrent(index)}
+                >
+                  <Image
+                    src={item.productImg}
+                    width={70}
+                    height={70}
+                    alt={item.alt}
+                    draggable="false"
+                  />
+                </div>
+              ))}
+            </div>
             <div className="translate-y-1/2">
               <MdArrowForwardIos
                 className="rotate-180 w-9 h-9 cursor-pointer"
@@ -259,9 +222,12 @@ export async function getServerSideProps(context) {
 
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
+  const product1 = await ProductWoman.findOne({ slug }).lean();
   return {
     props: {
-      product: product ? db.convertDocToObj(product) : null,
+      product: product
+        ? db.convertDocToObj(product)
+        : db.convertDocToObj(product1),
     },
   };
 }

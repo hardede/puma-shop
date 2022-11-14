@@ -4,18 +4,14 @@ import { RootState } from "../store";
 
 const data = `/api/orders/history`;
 
-export const fetchOrders = createAsyncThunk(
-  "orders/history",
-  async () => {
-    try {
-      const history = await axios.get(data);
-      console.log("🚀 ~ file: HistorySlice.ts ~ line 12 ~ history", history);
-      return history.data;
-    } catch (e) {
-      return "not success to load orders"
-    }
+export const fetchOrders = createAsyncThunk("orders/history", async () => {
+  try {
+    const history = await axios.get(data);
+    return history.data;
+  } catch (e) {
+    return "not success to load orders";
   }
-);
+});
 
 const initialState = {
   history: [],
@@ -43,9 +39,8 @@ export const historySlice = createSlice({
   },
 });
 
-export const selectHistory1 = (state: RootState) => state.history.history
-
-export const selectIsLoading = (state: RootState) => state.history.isLoading
-export const selectError = (state: RootState) => state.history.error
+export const selectHistory = (state: RootState) => state.history.history;
+export const selectIsLoading = (state: RootState) => state.history.isLoading;
+export const selectError = (state: RootState) => state.history.error;
 
 export default historySlice.reducer;

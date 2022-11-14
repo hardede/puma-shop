@@ -7,9 +7,10 @@ import data from "../../../utils/data";
 
 interface SizeSortProps {
   size: number;
+  products: any;
 }
 
-const SizeSort: FC<SizeSortProps> = ({ size }) => {
+const SizeSort: FC<SizeSortProps> = ({ size, products }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const sneakers = data.sneakersMan;
@@ -29,7 +30,7 @@ const SizeSort: FC<SizeSortProps> = ({ size }) => {
               ? "flex max-h-[35px] p-2 text-sm  items-center border border-[#acacac] bg-[#ffd2d2] cursor-pointer m-0.5 font-bold border-b-4 border-b-red-500"
               : "flex max-h-[35px] p-2 text-sm font-light items-center border border-[#acacac] cursor-pointer m-0.5 hover:font-bold hover:border-b-4 hover:border-b-red-500"
           }
-          onClick={() => dispatch(sortBySize({ sneakers, size }))}
+          onClick={() => dispatch(sortBySize({ products, size }))}
         >
           <span>{size}</span>
         </a>

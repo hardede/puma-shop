@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import WomanProducts from "../components/screens/womanProducts/WomanProducts";
-import Product from "../models/Product";
 import ProductWoman from "../models/ProductWoman";
 import { ProductPage } from "../types/product/productPage";
 import db from "../utils/db";
@@ -17,10 +16,10 @@ export default WomanPage;
 
 export async function getServerSideProps() {
   await db.connect();
-  const products1 = await ProductWoman.find().lean();
+  const products = await ProductWoman.find().lean();
   return {
     props: {
-      products: products1.map(db.convertDocToObj),
+      products: products.map(db.convertDocToObj),
     },
   };
 }

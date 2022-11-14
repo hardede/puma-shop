@@ -1,11 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { IUser } from "../../types/IUser";
 import { RootState } from "../store";
 
 const initialState = {
   userState: {} as IUser,
-  isAuth: false,
+  isLoading: false,
+  error: null,
 };
+
+const data = `/api/user`;
+
+export const fetchUser = createAsyncThunk("user/userFind", async () => {
+  try {
+    const userFind = await axios.get(data);
+    return userFind.data;
+  } catch (e) {
+    return "not success to load orders";
+  }
+});
 
 export const authSlice = createSlice({
   name: "auth",
@@ -13,29 +26,32 @@ export const authSlice = createSlice({
   reducers: {
     registration(state, action) {
       state.userState = action.payload;
-      console.log("🚀 ~ file: AuthSlice.ts ~ line 16 ~ registration ~ action.payload", action.payload)
     },
     login(state, action) {
       state.userState = action.payload;
-      state.isAuth = true;
     },
     logout(state) {
       state.userState = {} as IUser;
-      state.isAuth = false;
     },
     updatePersonInfo(state, action) {
       state.userState = action.payload;
-      console.log(
-        "🚀 ~ file: AuthSlice.ts ~ line 23 ~ updatePersonInfo ~ state.userState ",
-        state.userState
-      );
     },
     updatePassword(state, action) {
       state.userState = action.payload;
-      console.log(
-        "🚀 ~ file: AuthSlice.ts ~ line 29 ~ updatePassword ~ state.userState",
-        state.userState
-      );
+    },
+  },
+  extraReducers: {
+    [fetchUser.fulfilled.type]: (state, actions) => {
+      state.isLoading = false;
+      state.error = null;
+      state.userState = actions.payload;
+    },
+    [fetchUser.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [fetchUser.rejected.type]: (state, actions) => {
+      state.isLoading = false;
+      state.error = actions.payload;
     },
   },
 });
@@ -44,5 +60,4 @@ export const { registration, login, logout, updatePersonInfo, updatePassword } =
   authSlice.actions;
 
 export const selectUserState = (state: RootState) => state.auth.userState;
-export const selectIsAuth = (state: RootState) => state.auth.isAuth;
 export default authSlice.reducer;

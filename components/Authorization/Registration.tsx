@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../../hooks/redux";
-import { registration } from "../../store/reducers/AuthSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
@@ -14,7 +12,6 @@ const Registration = () => {
   const router = useRouter();
   const { redirect } = router.query;
   const { data: session } = useSession();
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -37,7 +34,6 @@ const Registration = () => {
     password,
   }: any) => {
     try {
-      dispatch(registration({ firstName, lastName, email, password }));
       await axios.post("/api/auth/signup", {
         firstName,
         lastName,

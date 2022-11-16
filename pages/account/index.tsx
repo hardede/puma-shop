@@ -1,7 +1,8 @@
 import UserAccount from "../../components/screens/userAccount/UserAccount";
 
-export default function Account() {
+const Account = () => {
   return <UserAccount />;
-}
+};
 
 Account.auth = true;
+export default Account;

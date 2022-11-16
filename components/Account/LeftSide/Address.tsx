@@ -5,9 +5,11 @@ import { fetchUser, selectUserState } from "../../../store/reducers/AuthSlice";
 const Address = () => {
   const user = useAppSelector(selectUserState);
   const dispatch = useAppDispatch();
-    useEffect(() => {
-      dispatch(fetchUser());
-    }, []);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
+
   return (
     <div>
       <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl">

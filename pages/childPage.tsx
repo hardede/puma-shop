@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import ChildProducts from "../components/screens/childProducts/ChildProducts";
 
-const ManPage: NextPage = () => {
+const ChildPage: NextPage = () => {
   return <ChildProducts />;
 };
 
-export default ManPage;
+export default ChildPage;

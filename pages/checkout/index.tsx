@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
-import React from 'react'
-import CheckoutOrders from '../../components/screens/checkoutPage/CheckoutOrders';
+import CheckoutOrders from "../../components/screens/checkoutPage/CheckoutOrders";
 
-const Checkout: NextPage = () => {
+const Checkout = () => {
   return <CheckoutOrders />;
 };
 
+Checkout.auth = true;
 export default Checkout;

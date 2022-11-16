@@ -1,9 +1,8 @@
-import { NextPage } from 'next';
-import React from 'react'
-import CartOrders from '../../../components/screens/checkoutPage/cart/CartOrders';
+import CartOrders from "../../../components/screens/checkoutPage/cart/CartOrders";
 
-const Cart: NextPage = () => {
+const Cart = () => {
   return <CartOrders />;
 };
 
-export default Cart
+Cart.auth = true;
+export default Cart;

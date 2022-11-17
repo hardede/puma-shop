@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
 import classnames from "classnames";
-import useDebounce from "../../hooks/useDebounce";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../../hooks/redux";
+import useDebounce from "../../hooks/useDebounce";
 import { sortByPriceRange } from "../../store/reducers/ProductSlice";
 
 const MultiRangeSlider = ({ min, max, sneakers, onChange }) => {
@@ -15,7 +15,7 @@ const MultiRangeSlider = ({ min, max, sneakers, onChange }) => {
   const debouncedValue = useDebounce(minVal, maxVal, 500);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const myPath = router.pathname.split("/")[1]
+  const myPath = router.pathname.split("/")[1];
 
   const getPercent = useCallback(
     value => Math.round(((value - min) / (max - min)) * 100),

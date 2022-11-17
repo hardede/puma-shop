@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC, useRef, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { CSSTransition } from "react-transition-group";
-import useDate from "../../../../hooks/useDate";
+import dateNow from "../../../../helpers/dateNow";
 import { History } from "../../../../types/history";
 
 interface OrderHistoryItemProps {
@@ -11,7 +11,7 @@ interface OrderHistoryItemProps {
 }
 
 const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
-  const { currentDate } = useDate();
+  const { currentDate } = dateNow();
   const [openOrder, setOpenOrder] = useState(false);
   const nodeRef = useRef(null);
   return (

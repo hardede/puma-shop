@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { ProductTypes } from "../../types/product";
+import { ProductPage } from "../../types/product/productPage";
 
 interface SearchSneakersModalProps {
-  searchProduct: ProductTypes;
+  searchProduct: ProductPage;
 }
 
 const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
@@ -21,7 +21,7 @@ const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
             height={50}
           />
         </div>
-        <div className="max-w-[250px]">
+        <div className="w-[250px]">
           <h5 className="text-black">{searchProduct.model}</h5>
           <div>
             <span

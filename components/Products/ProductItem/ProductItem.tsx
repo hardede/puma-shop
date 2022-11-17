@@ -33,8 +33,8 @@ const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
             <div className="relative -z-10">
               <Image
                 src={sneaker.img}
-                width="250"
-                height="250"
+                width={240}
+                height={240}
                 alt={sneaker.alt}
                 placeholder="blur"
                 blurDataURL={sneaker.blur}

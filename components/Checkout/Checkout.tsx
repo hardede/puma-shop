@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useEffect, useState } from "react";
@@ -10,7 +10,6 @@ import "react-phone-input-2/lib/style.css";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import useTotalPrice from "../../hooks/useTotalPrice";
-import { logout } from "../../store/reducers/AuthSlice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { IUser } from "../../types/IUser";
 import { ProductPage } from "../../types/product/productPage";
@@ -48,20 +47,18 @@ const Checkout: FC = () => {
     setValue("city", city);
     // @ts-ignore: Unreachable code error
     setValue("phone", phone);
-    // @ts-ignore: Unreachable code error
-  }, [session?.user, setValue, phone, city]);
+  }, [session, setValue, phone, city]);
 
   useEffect(() => {
     cartState.length === 0 && router.push("/checkout/cart");
-  }, [cartState.length, router]);
+  }, [router]);
 
   const submitHandler = async ({ phone, city }: any) => {
     try {
-      await axios.patch("/api/auth/checkout1", {
+      await axios.patch("/api/auth/checkout", {
         phone,
         city,
       });
-      router.push("/account");
       toast.success("Delivery cleared");
     } catch (err) {
       toast.error(getError(err));
@@ -89,7 +86,7 @@ const Checkout: FC = () => {
             <Link href="/">
               <div
                 className="ml-4 text-center py-3 hover:opacity-70 transition duration-500 cursor-pointer underline text-red-500"
-                onClick={() => dispatch(logout())}
+                onClick={() => signOut()}
               >
                 Log out
               </div>

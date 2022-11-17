@@ -1,4 +1,5 @@
 import Product from "../../models/Product";
+import ProductMan from "../../models/ProductMan";
 import ProductWoman from "../../models/ProductWoman";
 import User from "../../models/User";
 import data from "../../utils/data";
@@ -9,7 +10,9 @@ const handler = async (req, res) => {
   await User.deleteMany();
   await User.insertMany(data.users);
   await Product.deleteMany();
-  await Product.insertMany(data.sneakersMan);
+  await Product.insertMany(data.sneakers);
+  await ProductMan.deleteMany();
+  await ProductMan.insertMany(data.sneakersMan);
   await ProductWoman.deleteMany();
   await ProductWoman.insertMany(data.sneakersWoman);
   await db.disconnect();

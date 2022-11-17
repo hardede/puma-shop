@@ -24,21 +24,6 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    registration(state, action) {
-      state.userState = action.payload;
-    },
-    login(state, action) {
-      state.userState = action.payload;
-    },
-    logout(state) {
-      state.userState = {} as IUser;
-    },
-    updatePersonInfo(state, action) {
-      state.userState = action.payload;
-    },
-    updatePassword(state, action) {
-      state.userState = action.payload;
-    },
   },
   extraReducers: {
     [fetchUser.fulfilled.type]: (state, actions) => {
@@ -55,9 +40,6 @@ export const authSlice = createSlice({
     },
   },
 });
-
-export const { registration, login, logout, updatePersonInfo, updatePassword } =
-  authSlice.actions;
 
 export const selectUserState = (state: RootState) => state.auth.userState;
 export default authSlice.reducer;

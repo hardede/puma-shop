@@ -2,12 +2,12 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import {
   cartDeleteAll,
-  selectCartState
+  selectCartState,
 } from "../../../store/reducers/CartSlice";
 
 interface PaymentMethodsProps {
@@ -40,6 +40,10 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     totalPriceWithCardString,
   } = useTotalPrice();
 
+  useEffect(() => {
+    
+  }, [session])
+
   const onChangePaymentMethod = () => {
     setActiveCard(!activeCard);
     setActiveCash(!activeCash);
@@ -49,13 +53,11 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     e.stopPropagation();
     setPersonData(!personData);
   };
+  
   const user = {
-    // @ts-ignore: Unreachable code error
-    firstName: session?.user.firstName,
-    // @ts-ignore: Unreachable code error
-    lastName: session?.user.lastName,
-    // @ts-ignore: Unreachable code error
-    email: session?.user.email,
+    firstName: session && session?.user ? session?.user.firstName : null,
+    lastName: session && session?.user ? session?.user.lastName : null,
+    email: session && session?.user ? session?.user.email : null,
     city: city,
     phone: phone,
   };

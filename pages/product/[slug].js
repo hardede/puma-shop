@@ -6,7 +6,6 @@ import { MdArrowForwardIos } from "react-icons/md";
 import Layout from "../../components/Layout/Layout";
 import { useAppDispatch } from "../../hooks/redux";
 import Product from "../../models/Product";
-import ProductWoman from "../../models/ProductWoman";
 import { cartAdd } from "../../store/reducers/CartSlice";
 import db from "../../utils/db";
 
@@ -159,7 +158,7 @@ const ProductScreen = props => {
               >
                 {product.sizeSelection.map((item, index) => (
                   <Link
-                    key={index}
+                    key={item.sizeEur}
                     href={`/product/${product.slug}/?size=${item.sizeEur}`}
                   >
                     <a
@@ -178,27 +177,6 @@ const ProductScreen = props => {
                   </Link>
                 ))}
               </div>
-
-              {/* <select
-                value={product.quantity}
-                onChange={e => updateCartHandler}
-              >
-                <option
-                  value={product.sizeSelection.sizeCountInStock}
-                >
-                  {product.sizeSelection.sizeCountInStock}
-                </option>
-              </select> */}
-              {/* <select
-                value={product.quantity}
-                onChange={e => updateCartHandler(product, e.target.value)}
-              >
-                {[...Array(product.countInStock).keys()].map(x => (
-                  <option key={x + 1} value={x + 1}>
-                    {x + 1}
-                  </option>
-                ))}
-              </select> */}
             </div>
             <button
               className="uppercase w-full text-white bg-[#f00] font-bold py-3 hover:bg-[#c00] transition-all ease-in-out duration-300"
@@ -222,12 +200,9 @@ export async function getServerSideProps(context) {
 
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
-  const product1 = await ProductWoman.findOne({ slug }).lean();
   return {
     props: {
-      product: product
-        ? db.convertDocToObj(product)
-        : db.convertDocToObj(product1),
+      product: product ? db.convertDocToObj(product) : null,
     },
   };
 }

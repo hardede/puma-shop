@@ -1,6 +1,7 @@
 import { FC } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Slider from "react-slick";
+import useRandomSneakers from "../../hooks/useRandomSneakers";
 import { ProductPage } from "../../types/product/productPage";
 import data from "../../utils/data";
 import ProductItem from "./ProductItem/ProductItem";
@@ -10,6 +11,8 @@ interface ProductsProps {
 }
 
 const Products: FC<ProductsProps> = ({ products }) => {
+  const randomSneakers = useRandomSneakers({ products });
+
   if (!data.sneakers) {
     return null;
   }
@@ -54,7 +57,7 @@ const Products: FC<ProductsProps> = ({ products }) => {
   return (
     <div className="mb-20 flex justify-center">
       <Slider {...settings}>
-        {products.map((sneaker: ProductPage) => (
+        {randomSneakers.map((sneaker: ProductPage) => (
           <ProductItem key={sneaker._id} sneaker={sneaker} />
         ))}
       </Slider>

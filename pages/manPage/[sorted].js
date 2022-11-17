@@ -9,12 +9,12 @@ import Layout from "../../components/Layout/Layout";
 import MultiRangeSlider from "../../components/MultiRangeSlider/MultiRangeSlider";
 import SizeSort from "../../components/PageForProducts/SizeSort/SizeSort";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import Product from "../../models/Product";
+import ProductMan from "../../models/ProductMan";
 import {
   selectProductsState,
   sortByAscending,
   sortByDescending,
-  sortByDiscount
+  sortByDiscount,
 } from "../../store/reducers/ProductSlice";
 import db from "../../utils/db";
 
@@ -45,17 +45,16 @@ const sizes = [
   },
 ];
 
-const SortedScreen = ({ title, category, products }) => {
+const SortedScreen = ({ products }) => {
   const productSort = useAppSelector(selectProductsState);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
   const [sizeOpen, setSizeOpen] = useState(false);
-  const ref = useRef();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   return (
-    <Layout>
+    <Layout title="Sorted products Woman">
       <div className="container max-w-[1140px] mx-auto mt-20 py-2">
         <Link href="/">back to products</Link>
         <div className="mt-20 ">
@@ -145,7 +144,11 @@ const SortedScreen = ({ title, category, products }) => {
                   {sizeOpen && (
                     <div className="flex flex-wrap">
                       {sizes.map(item => (
-                        <SizeSort key={item.id} size={item.size} products={products}/>
+                        <SizeSort
+                          key={item.id}
+                          size={item.size}
+                          products={products}
+                        />
                       ))}
                     </div>
                   )}
@@ -322,7 +325,7 @@ export default SortedScreen;
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find().lean();
+  const products = await ProductMan.find().lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),

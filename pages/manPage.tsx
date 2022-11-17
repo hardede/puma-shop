@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import ManProducts from "../components/screens/manProducts/ManProducts";
-import Product from "../models/Product";
+import ProductMan from "../models/ProductMan";
 import { ProductPage } from "../types/product/productPage";
 import db from "../utils/db";
 
@@ -16,7 +16,7 @@ export default ManPage;
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find().lean();
+  const products = await ProductMan.find().lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),

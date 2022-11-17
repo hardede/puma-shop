@@ -1,8 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { ProductPage } from "../../types/product/productPage";
 import { RootState } from "../store";
 
+
+const data = "api/allProducts";
+
+export const fetchProducts = createAsyncThunk("api/allProducts", async () => {
+  try {
+    const product = await axios.get(data);
+    return product.data;
+  } catch (e) {
+    return "not success to load products";
+  }
+});
+
 const initialState: ProductPage | any = {
+  product: [],
+  isLoading: false,
+  error: null,
   productSort: [],
 };
 
@@ -57,6 +73,20 @@ export const productSlice = createSlice({
       );
     },
   },
+  extraReducers: {
+    [fetchProducts.fulfilled.type]: (state, actions) => {
+      state.isLoading = false;
+      state.error = null;
+      state.product = actions.payload;
+    },
+    [fetchProducts.pending.type]: state => {
+      state.isLoading = true;
+    },
+    [fetchProducts.rejected.type]: (state, actions) => {
+      state.isLoading = false;
+      state.error = actions.payload;
+    },
+  },
 });
 
 export const {
@@ -69,4 +99,5 @@ export const {
 
 export const selectProductsState = (state: RootState) =>
   state.products.productSort;
+export const selectProducts = (state: RootState) => state.products.product;
 export default productSlice.reducer;

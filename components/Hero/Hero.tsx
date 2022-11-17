@@ -7,7 +7,7 @@ const Hero = () => {
     <div className="my-[80px]">
       <div className="absolute -z-10">
         <Image
-          alt="1"
+          alt="puma-banner"
           src="/puma.webp"
           width={1700}
           height={570}

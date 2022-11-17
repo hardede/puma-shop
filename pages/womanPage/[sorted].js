@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import "rc-slider/assets/index.css";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 import Layout from "../../components/Layout/Layout";
@@ -45,17 +45,16 @@ const sizes = [
   },
 ];
 
-const SortedScreen = ({ title, category, products }) => {
+const SortedScreen = ({ products }) => {
   const productSort = useAppSelector(selectProductsState);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [priceOpen, setPriceOpen] = useState(false);
   const [sizeOpen, setSizeOpen] = useState(false);
-  const ref = useRef();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   return (
-    <Layout>
+    <Layout title="Sorted products Woman">
       <div className="container max-w-[1140px] mx-auto mt-20 py-2">
         <Link href="/">back to products</Link>
         <div className="mt-20 ">

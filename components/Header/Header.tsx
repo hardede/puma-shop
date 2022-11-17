@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { BiSearch, BiUser } from "react-icons/bi";
+import { BiUser } from "react-icons/bi";
 import { SiPuma } from "react-icons/si";
 import { CSSTransition } from "react-transition-group";
 import { useAppSelector } from "../../hooks/redux";
-import useDebounce from "../../hooks/useDebounce";
+import useScrollPosition from "../../hooks/useScrollPosition";
 import useTotalPrice from "../../hooks/useTotalPrice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { headerLink } from "../constants/header";
 import Drawer from "../Drawer/Drawer";
-import MyInput from "../UI/MyInput";
 import UserMenu from "../UserMenu/UserMenu";
 import SearchingMenu from "./SearchingMenu/SearchingMenu";
 
@@ -18,24 +17,25 @@ const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [searchMenuOpen, setSearchMenuOpen] = useState<boolean>(false);
-  const [searchInput, setSearchInput] = useState("");
+
   const cartState = useAppSelector(selectCartState);
   const { totalQuantity } = useTotalPrice();
+  const [headerSticky, setHeaderSticky] = useState(false);
+  const scrollY = useScrollPosition();
   const nodeRef = useRef(null);
 
-  // const debouncedValue = useDebounce(searchInput, 300);
-
-  const changeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-  };
-
-  // useEffect(() => {
-  //   console.log("123");
-  //   searchInput
-  // }, [debouncedValue])
+  useEffect(() => {
+    setHeaderSticky(scrollY >= 600);
+  }, [scrollY]);
 
   return (
-    <header className="absolute left-0 top-0 w-full z-10 px-10 bg-black text text-white">
+    <header
+      className={
+        headerSticky
+          ? "sticky left-0 top-0 w-full z-10 px-10 bg-black text text-white transition duration-500"
+          : "absolute left-0 top-0 w-full z-10 px-10 bg-black text text-white transition duration-500"
+      }
+    >
       <div className="flex justify-between">
         <nav className="flex justify-between items-center">
           <Link href="/">
@@ -55,22 +55,9 @@ const Header = () => {
         </nav>
         <div className="flex items-center">
           <div>
-            <div
-              className="flex items-center border border-white border-opacity-20 py-2.5 px-6 mr-5"
-              onClick={() => setSearchMenuOpen(!searchMenuOpen)}
-            >
-              <BiSearch className="text-2xl mr-3" />
-              <MyInput
-                placeholder="find..."
-                className="bg-transparent placeholder:uppercase outline-none"
-                onChange={changeInput}
-                value={searchInput}
-              />
-            </div>
             <SearchingMenu
               searchMenuOpen={searchMenuOpen}
               setSearchMenuOpen={setSearchMenuOpen}
-              searchInput={searchInput}
             />
           </div>
           <div

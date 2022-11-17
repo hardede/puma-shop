@@ -17,6 +17,7 @@ const UpdateProfile = () => {
     getValues,
     setValue,
   } = useForm<IUser>({ mode: "onChange" });
+
   useEffect(() => {
     // @ts-ignore: Unreachable code error
     setValue("firstName", session?.user.firstName);
@@ -24,8 +25,7 @@ const UpdateProfile = () => {
     setValue("lastName", session?.user.lastName);
     // @ts-ignore: Unreachable code error
     setValue("email", session?.user.email);
-    // @ts-ignore: Unreachable code error
-  }, [session?.user, setValue]);
+  }, [session, setValue]);
 
   const submitHandler = async ({
     firstName,
@@ -40,17 +40,12 @@ const UpdateProfile = () => {
         email,
         password,
       });
-      const result = await signIn("credentials", {
+      await signIn("credentials", {
         redirect: false,
         email,
         password,
       });
       toast.success("Profile updated successfully");
-      // @ts-ignore: Unreachable code error
-      if (result.error) {
-        // @ts-ignore: Unreachable code error
-        toast.error(result.error);
-      }
     } catch (err) {
       toast.error(getError(err));
     }

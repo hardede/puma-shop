@@ -27,7 +27,7 @@ function MyApp({
   );
 }
 
-function Auth({ children }: any) {
+function Auth({ children, adminOnly }: any) {
   const router = useRouter();
   const { status, data: session } = useSession({
     required: true,
@@ -37,6 +37,10 @@ function Auth({ children }: any) {
   });
   if (status === "loading") {
     return <div>Loading...</div>;
+  }
+
+  if (adminOnly && !session.user?.isAdmin) {
+    router.push("/unauthorized?message=admin login required");
   }
 
   return children;

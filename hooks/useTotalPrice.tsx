@@ -1,4 +1,5 @@
 import { selectCartState } from "../store/reducers/CartSlice";
+import { ProductPage } from "../types/product/productPage";
 import { useAppSelector } from "./redux";
 
 const useTotalPrice = () => {
@@ -14,7 +15,7 @@ const useTotalPrice = () => {
   let discount = 0;
   let discountByCard = 0;
   let totalPriceWithCard = 0;
-  cartState.forEach((item: any) => {
+  cartState.forEach((item: ProductPage) => {
     totalQuantity += item.quantity;
     sumPriceNew += +item.newPrice * item.quantity;
     sumPriceOld +=

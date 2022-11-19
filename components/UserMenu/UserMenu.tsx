@@ -50,6 +50,15 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
                   </a>
                 </Link>
               ))}
+              {session?.user?.isAdmin && (
+                <Link href="/admin/dashboard">
+                  <a className=" after:block after:w-full after:h-0.5 after:bg-[#d2a1a1] after:mt-1">
+                    <div className="mt-2 hover:bg-slate-300 hover:bg-opacity-50">
+                      Admin Dashboard
+                    </div>
+                  </a>
+                </Link>
+              )}
             </div>
           </div>
           <div className="">

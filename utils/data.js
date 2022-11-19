@@ -1,11 +1,9 @@
+import bcrypt from "bcryptjs";
 import {
   blurData1,
   blurData2,
-  blurData3,
-  blurData4,
+  blurData3
 } from "../components/constants/blurDataUrl";
-import { v4 as uuidv4 } from "uuid";
-import bcrypt from "bcryptjs";
 
 const data = {
   users: [

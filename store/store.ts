@@ -9,12 +9,14 @@ import auth from "./reducers/AuthSlice";
 import cart from "./reducers/CartSlice";
 import products from "./reducers/ProductSlice";
 import history from "./reducers/HistorySlice";
+import summary from "./reducers/AdminSlice";
 
 const rootReducer = combineReducers({
   cart,
   products,
   auth,
   history,
+  summary,
 });
 
 export const setupStore = () => {

@@ -41,7 +41,7 @@
   width: 28px !important;
   height: 49px !important;
   font-size: 0px;
-  z-index: 100;
+  z-index: 9;
 }
 
 .slick-next {
@@ -52,7 +52,7 @@
   height: 49px !important;
   font-size: 0px;
   transform: rotate(180deg) !important;
-  z-index: 100;
+  z-index: 9;
 }
 
 .range__slider {

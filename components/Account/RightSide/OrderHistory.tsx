@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import {
-  fetchOrders,
+  fetchHistory,
   selectError,
   selectHistory,
   selectIsLoading,
@@ -16,7 +16,7 @@ const OrderHistory: FC = () => {
   const error = useAppSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchOrders());
+    dispatch(fetchHistory());
   }, []);
 
   return (

@@ -3,11 +3,13 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
+import dateDeliveredAt from "../../../helpers/DateDeliveredAt";
+import datePaidAt from "../../../helpers/datePaidAt";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import {
   cartDeleteAll,
-  selectCartState,
+  selectCartState
 } from "../../../store/reducers/CartSlice";
 
 interface PaymentMethodsProps {
@@ -26,6 +28,8 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
   const [personData, setPersonData] = useState(false);
   const [activeCard, setActiveCard] = useState(true);
   const [activeCash, setActiveCash] = useState(false);
+  const { paidAt } = datePaidAt();
+  const { deliveredAt } = dateDeliveredAt();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -40,9 +44,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     totalPriceWithCardString,
   } = useTotalPrice();
 
-  useEffect(() => {
-    
-  }, [session])
+  useEffect(() => {}, [session]);
 
   const onChangePaymentMethod = () => {
     setActiveCard(!activeCard);
@@ -53,7 +55,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     e.stopPropagation();
     setPersonData(!personData);
   };
-  
+
   const user = {
     firstName: session && session?.user ? session?.user.firstName : null,
     lastName: session && session?.user ? session?.user.lastName : null,
@@ -74,6 +76,8 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
       discountByCardString,
       totalPriceWithCard,
       totalPriceWithCardString,
+      paidAt: paidAt,
+      deliveredAt: deliveredAt,
       orderItems: cartState,
       shippingAddress: user,
     });

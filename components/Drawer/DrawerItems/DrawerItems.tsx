@@ -46,7 +46,7 @@ const DrawerItems = ({ cart }: any) => {
           <p className="font-bold text-[#181818]">{cart.atr}</p>
         </div>
         <div className="flex justify-start items-center mt-3 text-lg">
-          <div className="flex mr-10 items-center">
+          <div className="flex mr-9 items-center">
             <span className="w-[60px] mr-3">{cart.quantity} Items</span>
             <div className="">
               {cart.quantity === cart.countInStock ? (

@@ -40,6 +40,8 @@ const orderSchema = new mongoose.Schema(
     discountByCardString: { type: String, required: true },
     totalPriceWithCard: { type: Number, required: true },
     totalPriceWithCardString: { type: String, required: true },
+    paidAt: { type: String, required: true },
+    deliveredAt: { type: String, required: true },
   },
   {
     timestamps: true,

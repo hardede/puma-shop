@@ -5,7 +5,7 @@ import { RootState } from "../store";
 
 const initialState = {
   userState: {} as IUser,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

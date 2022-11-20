@@ -3,7 +3,6 @@ import axios from "axios";
 import { ProductPage } from "../../types/product/productPage";
 import { RootState } from "../store";
 
-
 const data = "api/allProducts";
 
 export const fetchProducts = createAsyncThunk("api/allProducts", async () => {
@@ -17,7 +16,7 @@ export const fetchProducts = createAsyncThunk("api/allProducts", async () => {
 
 const initialState: ProductPage | any = {
   product: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
   productSort: [],
 };

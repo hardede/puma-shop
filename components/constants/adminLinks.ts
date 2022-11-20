@@ -3,22 +3,22 @@ import { v4 as uuidv4 } from "uuid";
 export const adminLinks = [
   {
     id: uuidv4(),
-    name: "Dashboard",
+    link: "Dashboard",
     href: "/admin/dashboard",
   },
   {
     id: uuidv4(),
-    name: "Orders",
+    link: "Orders",
     href: "/admin/orders",
   },
   {
     id: uuidv4(),
-    name: "Products",
+    link: "Products",
     href: "/admin/products",
   },
   {
     id: uuidv4(),
-    name: "Users",
+    link: "Users",
     href: "/admin/users",
   },
 ];

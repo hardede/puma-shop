@@ -10,6 +10,7 @@ import cart from "./reducers/CartSlice";
 import products from "./reducers/ProductSlice";
 import history from "./reducers/HistorySlice";
 import summary from "./reducers/AdminSlice";
+import orders from "./reducers/AdminOrderSlice";
 
 const rootReducer = combineReducers({
   cart,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   auth,
   history,
   summary,
+  orders,
 });
 
 export const setupStore = () => {

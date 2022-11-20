@@ -103,6 +103,8 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
               <div className="text-sm text-[#666666]">
                 {order.shippingAddress.city}
               </div>
+              <p>Estimated delivery time</p>
+              <div className="text-sm text-[#666666]">{order.deliveredAt}</div>
             </div>
             <div className="w-[200px]">
               <div className="flex justify-between items-center py-0.5 text-sm text-[#181818]">

@@ -21,4 +21,6 @@ export interface History {
   totalPriceWithCardString: string;
   shippingAddress: shippingAddress;
   orderItems: ProductPage[];
+  paidAt: string;
+  deliveredAt: string;
 }

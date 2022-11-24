@@ -7,6 +7,13 @@ import { IUser } from "../../../types/IUser";
 import { getError } from "../../../utils/error";
 import AuthorizationInput from "../../UI/AuthorizationInput";
 
+interface UpdateTypes {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 const UpdateProfile = () => {
   const { data: session } = useSession();
 
@@ -32,7 +39,7 @@ const UpdateProfile = () => {
     lastName,
     email,
     password,
-  }: any) => {
+  }: UpdateTypes) => {
     try {
       await axios.put("/api/auth/update", {
         firstName,

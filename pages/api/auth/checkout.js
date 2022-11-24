@@ -1,8 +1,6 @@
-import bcryptjs from "bcryptjs";
+import { getSession } from "next-auth/react";
 import User from "../../../models/User";
 import db from "../../../utils/db";
-import { getSession } from "next-auth/react";
-import _ from "lodash";
 
 async function handler(req, res) {
   if (req.method !== "PATCH") {
@@ -11,14 +9,14 @@ async function handler(req, res) {
 
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).send({ message: "signin required" });
+    return res.status(401).send({ message: "sign in required" });
   }
 
   const { user } = session;
 
   const { phone, city } = req.body;
 
-  if (!phone || !city ) {
+  if (!phone || !city) {
     res.status(422).json({
       message: "Validation error",
     });

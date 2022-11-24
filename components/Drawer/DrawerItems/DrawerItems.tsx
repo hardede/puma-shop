@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FC } from "react";
 import { GrClose } from "react-icons/gr";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useAppDispatch } from "../../../hooks/redux";
@@ -6,10 +7,15 @@ import useSumForItem from "../../../hooks/useSumForItem";
 import {
   cartRemove,
   decrementQuantity,
-  incrementQuantity
+  incrementQuantity,
 } from "../../../store/reducers/CartSlice";
+import { ProductPage } from "../../../types/product/productPage";
 
-const DrawerItems = ({ cart }: any) => {
+interface DrawerItemsProps {
+  cart: ProductPage;
+}
+
+const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
   const dispatch = useAppDispatch();
 
   const { newSumPrice, oldSumPrice } = useSumForItem(

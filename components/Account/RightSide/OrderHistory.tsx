@@ -17,7 +17,7 @@ const OrderHistory: FC = () => {
 
   useEffect(() => {
     dispatch(fetchHistory());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -25,13 +25,21 @@ const OrderHistory: FC = () => {
         Order history
       </h5>
       <div className="">
-        {history.length === 0 ? (
-          <div className="mt-5">You have no orders now</div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div className="alert-error">{error}</div>
         ) : (
           <>
-            {history.map((order: History, index: number) => (
-              <OrderHistoryItem key={order._id} order={order} index={index} />
-            ))}
+            {history.length === 0 ? (
+              <div className="mt-5">You have no orders now</div>
+            ) : (
+              <>
+                {history.map((order: History) => (
+                  <OrderHistoryItem key={order._id} order={order} />
+                ))}
+              </>
+            )}
           </>
         )}
       </div>

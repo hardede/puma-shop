@@ -8,6 +8,13 @@ import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
 
+interface RegisterTypes {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 const Registration = () => {
   const router = useRouter();
   const { redirect } = router.query;
@@ -32,7 +39,7 @@ const Registration = () => {
     lastName,
     email,
     password,
-  }: any) => {
+  }: RegisterTypes) => {
     try {
       await axios.post("/api/auth/signup", {
         firstName,

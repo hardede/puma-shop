@@ -7,6 +7,11 @@ import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
 import AuthorizationInput from "../UI/AuthorizationInput";
 
+interface LoginTypes {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
   const router = useRouter();
   const { redirect } = router.query;
@@ -25,7 +30,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<IUser>({ mode: "onChange" });
 
-  const submitHandler = async ({ email, password }: any) => {
+  const submitHandler = async ({ email, password }: LoginTypes) => {
     try {
       const result = await signIn("credentials", {
         redirect: false,

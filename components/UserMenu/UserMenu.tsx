@@ -10,9 +10,9 @@ interface UserMenuProps {
 }
 
 interface Links {
-  id: string,
-  link: string,
-  href: string
+  id: string;
+  link: string;
+  href: string;
 }
 
 const UserMenu: FC<UserMenuProps> = ({ onClose }) => {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { RootState } from "../store";
 
 const initialState = {
-  ordersState: {} as any,
+  ordersState: [],
   isLoading: true,
   error: null,
 };
@@ -40,6 +40,7 @@ export const ordersSlice = createSlice({
 });
 
 export const selectOrders = (state: RootState) => state.orders.ordersState;
-export const selectOrdersIsLoading = (state: RootState) => state.orders.isLoading;
+export const selectOrdersIsLoading = (state: RootState) =>
+  state.orders.isLoading;
 export const selectOrdersError = (state: RootState) => state.orders.error;
 export default ordersSlice.reducer;

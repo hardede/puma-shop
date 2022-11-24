@@ -5,12 +5,16 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
+import orders from "./reducers/Admin/AdminOrderSlice";
+import adminProducts from "./reducers/Admin/AdminProductsSlice";
+import productEdit from "./reducers/Admin/AdminEditSlice";
+import summary from "./reducers/Admin//AdminSlice";
+import orderDetails from "./reducers/Admin/AdminOrderDetailsSlice";
+import adminUsers from "./reducers/Admin/AdminUserSlice";
 import auth from "./reducers/AuthSlice";
 import cart from "./reducers/CartSlice";
-import products from "./reducers/ProductSlice";
 import history from "./reducers/HistorySlice";
-import summary from "./reducers/AdminSlice";
-import orders from "./reducers/AdminOrderSlice";
+import products from "./reducers/ProductSlice";
 
 const rootReducer = combineReducers({
   cart,
@@ -19,6 +23,10 @@ const rootReducer = combineReducers({
   history,
   summary,
   orders,
+  adminProducts,
+  productEdit,
+  orderDetails,
+  adminUsers,
 });
 
 export const setupStore = () => {

@@ -8,7 +8,7 @@ import { GiExitDoor } from "react-icons/gi";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 import useTotalPrice from "../../hooks/useTotalPrice";
 import { selectCartState } from "../../store/reducers/CartSlice";
 import { IUser } from "../../types/IUser";
@@ -17,6 +17,11 @@ import { getError } from "../../utils/error";
 import CheckoutItems from "./CheckoutItems/CheckoutItems";
 import PaymentMethods from "./PaymentMethods/PaymentMethods";
 
+interface CheckOutTypes {
+  city: string;
+  phone: string;
+}
+
 const Checkout: FC = () => {
   const cartState = useAppSelector(selectCartState);
   const { status, data: session } = useSession();
@@ -24,7 +29,6 @@ const Checkout: FC = () => {
   const [phone, setPhone] = useState("");
 
   const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const { totalPrice, totalPriceOld, discountString, discount } =
@@ -51,7 +55,7 @@ const Checkout: FC = () => {
 
   useEffect(() => {
     cartState.length === 0 && router.push("/checkout/cart");
-  }, [router]);
+  }, [router, cartState.length]);
 
   const submitHandler = async ({ phone, city }: any) => {
     try {

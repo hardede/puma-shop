@@ -5,14 +5,14 @@ import db from "../../../utils/db";
 const handler = async (req, res) => {
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).send({ message: "sign in required" });
+    return res.status(401).send("sign in required");
   }
 
-  const { user } = session;
   await db.connect();
-  const orders = await Order.find({ user: user._id });
 
+  const order = await Order.findById(req.query.id);
   await db.disconnect();
-  res.status(201).send(orders);
+  res.status(201).send(order);
 };
+
 export default handler;

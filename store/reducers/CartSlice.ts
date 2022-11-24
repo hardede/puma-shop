@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { ProductPage } from "../../types/product/productPage";
+import { RootState } from "../store";
 
 const initialState: ProductPage | any = {
   cartState: [],
@@ -14,7 +14,7 @@ export const cartSlice = createSlice({
     cartAdd(state, action) {
       const id = action.payload.product._id;
       const itemInCart = state.cartState.find(
-        (item: any) =>
+        (item: ProductPage) =>
           item.size === action.payload.productSize && item._id === id.toString()
       );
       if (itemInCart) {
@@ -36,7 +36,7 @@ export const cartSlice = createSlice({
     incrementQuantity(state, action) {
       const id = action.payload._id;
       const item = state.cartState.find(
-        (item: any) =>
+        (item: ProductPage) =>
           item.size === action.payload.size && item._id === id.toString()
       );
       item.quantity === action.payload.countInStock
@@ -48,7 +48,7 @@ export const cartSlice = createSlice({
     decrementQuantity(state, action) {
       const id = action.payload._id;
       const item = state.cartState.find(
-        (item: any) =>
+        (item: ProductPage) =>
           item.size === action.payload.size && item._id === id.toString()
       );
       if (item.quantity === 1) {
@@ -60,7 +60,7 @@ export const cartSlice = createSlice({
     cartRemove(state, action) {
       const id = action.payload._id;
       state.cartState = state.cartState.filter(
-        (item: any) =>
+        (item: ProductPage) =>
           item._id !== id.toString() || item.size !== action.payload.size
       );
       toast.success(`Product deleted from the cart`);

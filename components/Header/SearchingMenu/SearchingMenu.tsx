@@ -9,7 +9,6 @@ import {
 } from "../../../store/reducers/ProductSlice";
 import { ProductPage } from "../../../types/product/productPage";
 import SearchSneakersModal from "../../Modal/SearchSneakersModal";
-import MyInput from "../../UI/MyInput";
 
 interface SearchingMenuProps {
   searchMenuOpen: boolean;
@@ -42,7 +41,7 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
         onClick={() => setSearchMenuOpen(!searchMenuOpen)}
       >
         <BiSearch className="text-2xl mr-3" />
-        <MyInput
+        <input
           placeholder="find..."
           className="bg-transparent placeholder:uppercase outline-none"
           onChange={changeInput}
@@ -70,7 +69,7 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
               {searchInput && `Search by request: "${searchInput}"`}
             </div>
             {products
-              .filter((item: any) =>
+              .filter((item: ProductPage) =>
                 item.model.toLowerCase().includes(searchInput.toLowerCase())
               )
               .map((searchProduct: ProductPage) => (

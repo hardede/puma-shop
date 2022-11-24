@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { SummaryTypes } from "../../types/summary";
-import { RootState } from "../store";
+import { SummaryTypes } from "../../../types/summary";
+import { RootState } from "../../store";
 
 const initialState = {
   summaryState: {} as SummaryTypes,
@@ -41,6 +41,7 @@ export const summarySlice = createSlice({
 });
 
 export const selectSummary = (state: RootState) => state.summary.summaryState;
-export const selectSummaryIsLoading = (state: RootState) => state.summary.isLoading;
+export const selectSummaryIsLoading = (state: RootState) =>
+  state.summary.isLoading;
 export const selectSummaryError = (state: RootState) => state.summary.error;
 export default summarySlice.reducer;

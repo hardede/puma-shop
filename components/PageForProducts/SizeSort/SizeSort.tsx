@@ -3,17 +3,16 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import { useAppDispatch } from "../../../hooks/redux";
 import { sortBySize } from "../../../store/reducers/ProductSlice";
-import data from "../../../utils/data";
+import { ProductPage } from "../../../types/product/productPage";
 
 interface SizeSortProps {
   size: number;
-  products: any;
+  products: ProductPage[];
 }
 
 const SizeSort: FC<SizeSortProps> = ({ size, products }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const sneakers = data.sneakersMan;
   const myPath = router.pathname.split("/")[1];
 
   return (

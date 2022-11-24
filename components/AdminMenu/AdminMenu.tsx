@@ -15,7 +15,7 @@ import {
   selectSummary,
   selectSummaryError,
   selectSummaryIsLoading,
-} from "../../store/reducers/AdminSlice";
+} from "../../store/reducers/Admin/AdminSlice";
 import { ChartTypes } from "../../types/chart";
 import AdminHeader from "./AdminHeader/AdminHeader";
 
@@ -27,6 +27,11 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+interface SalesTypes {
+  _id: string;
+  totalSales: number;
+}
 
 export const options = {
   responsive: true,
@@ -48,6 +53,13 @@ const AdminMenu = () => {
   }, [dispatch]);
 
   let data = {} as ChartTypes;
+  {
+    !isLoading &&
+      console.log(
+        "🚀 ~ file: AdminMenu.tsx ~ line 51 ~ AdminMenu ~ data",
+        summary.salesData
+      );
+  }
 
   {
     !isLoading &&
@@ -55,12 +67,12 @@ const AdminMenu = () => {
         options: {
           legend: { display: true, position: "right" },
         },
-        labels: summary.salesData.map((x: any) => x._id),
+        labels: summary.salesData.map((x: SalesTypes) => x._id),
         datasets: [
           {
             label: "Sales",
             backgroundColor: "rgba(162, 222, 208, 1)",
-            data: summary.salesData.map((x: any) => x.totalSales),
+            data: summary.salesData.map((x: SalesTypes) => x.totalSales),
           },
         ],
       });

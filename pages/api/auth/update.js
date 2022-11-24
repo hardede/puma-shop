@@ -1,8 +1,8 @@
 import bcryptjs from "bcryptjs";
+import _ from "lodash";
+import { getSession } from "next-auth/react";
 import User from "../../../models/User";
 import db from "../../../utils/db";
-import { getSession } from "next-auth/react";
-import _ from "lodash";
 
 async function handler(req, res) {
   if (req.method !== "PUT") {
@@ -11,7 +11,7 @@ async function handler(req, res) {
 
   const session = await getSession({ req });
   if (!session) {
-    return res.status(401).send({ message: "signin required" });
+    return res.status(401).send({ message: "sign in required" });
   }
 
   const { user } = session;
@@ -41,7 +41,7 @@ async function handler(req, res) {
     return res.status(401).json({
       status: "error",
       massage:
-        "Firstname and should not be empty or should be at least 2 characters long!",
+        "FirstName and should not be empty or should be at least 2 characters long!",
     });
   }
 

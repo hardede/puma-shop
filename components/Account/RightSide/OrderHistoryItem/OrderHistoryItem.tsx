@@ -4,13 +4,13 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { CSSTransition } from "react-transition-group";
 import dateNow from "../../../../helpers/dateNow";
 import { History } from "../../../../types/history";
+import { ProductPage } from "../../../../types/product/productPage";
 
 interface OrderHistoryItemProps {
   order: History;
-  index: number;
 }
 
-const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
+const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order }) => {
   const { currentDate } = dateNow();
   const [openOrder, setOpenOrder] = useState(false);
   const nodeRef = useRef(null);
@@ -21,7 +21,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
         onClick={() => setOpenOrder(!openOrder)}
       >
         <div>
-          <p>P{index + 1}</p>
+          <p>P{order._id.substring(0, 10)}</p>
           <p className="text-xs">{currentDate}</p>
         </div>
         <div className="flex items-center">
@@ -44,7 +44,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order, index }) => {
       >
         <div ref={nodeRef}>
           <div>
-            {order.orderItems.map((ordered: any) => (
+            {order.orderItems.map((ordered: ProductPage) => (
               <div key={ordered._id}>
                 <div className="flex justify-between py-3 border-b border-[#d2a1a1]">
                   <div>

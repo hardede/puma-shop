@@ -3,13 +3,13 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
-import dateDeliveredAt from "../../../helpers/DateDeliveredAt";
+import dateDeliveredAt from "../../../helpers/dateDeliveredAt";
 import datePaidAt from "../../../helpers/datePaidAt";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import {
   cartDeleteAll,
-  selectCartState
+  selectCartState,
 } from "../../../store/reducers/CartSlice";
 
 interface PaymentMethodsProps {
@@ -51,7 +51,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     setActiveCash(!activeCash);
   };
 
-  const onClickPersonData = (e: any) => {
+  const onClickPersonData = (e: React.SyntheticEvent) => {
     e.stopPropagation();
     setPersonData(!personData);
   };
@@ -64,7 +64,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     phone: phone,
   };
 
-  const onClickCheckout = async (e: any) => {
+  const onClickCheckout = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
     await axios.post("api/orders", {
       totalPrice,

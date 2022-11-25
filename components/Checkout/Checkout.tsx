@@ -17,11 +17,6 @@ import { getError } from "../../utils/error";
 import CheckoutItems from "./CheckoutItems/CheckoutItems";
 import PaymentMethods from "./PaymentMethods/PaymentMethods";
 
-interface CheckOutTypes {
-  city: string;
-  phone: string;
-}
-
 const Checkout: FC = () => {
   const cartState = useAppSelector(selectCartState);
   const { status, data: session } = useSession();
@@ -49,7 +44,6 @@ const Checkout: FC = () => {
     // @ts-ignore: Unreachable code error
     setValue("email", session?.user.email);
     setValue("city", city);
-    // @ts-ignore: Unreachable code error
     setValue("phone", phone);
   }, [session, setValue, phone, city]);
 

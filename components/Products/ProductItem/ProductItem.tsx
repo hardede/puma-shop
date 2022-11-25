@@ -36,7 +36,6 @@ const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
                 width={240}
                 height={240}
                 alt={sneaker.alt}
-                placeholder="blur"
                 blurDataURL={sneaker.blur}
               />
             </div>

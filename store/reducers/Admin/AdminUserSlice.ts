@@ -11,7 +11,7 @@ const initialState: IUser | any = {
 
 const data = `/api/admin/users`;
 
-export const fetchAdminUsers = createAsyncThunk("order/id", async () => {
+export const fetchAdminUsers = createAsyncThunk("admin/users", async () => {
   try {
     const findUsers = await axios.get(data);
     return findUsers.data;

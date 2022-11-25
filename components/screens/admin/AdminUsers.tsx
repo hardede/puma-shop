@@ -3,7 +3,7 @@ import LayoutAdmin from "../../Layout/LayoutAdmin/LayoutAdmin";
 
 const AdminUsers = () => {
   return (
-    <LayoutAdmin title="Admin Products">
+    <LayoutAdmin title="Admin users">
       <AdminMenuUsers />
     </LayoutAdmin>
   );

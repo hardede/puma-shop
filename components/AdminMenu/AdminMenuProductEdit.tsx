@@ -11,16 +11,13 @@ import {
   selectEditError,
   selectEditIsLoading,
 } from "../../store/reducers/Admin/AdminEditSlice";
+import { ProductPage } from "../../types/product/productPage";
 import { getError } from "../../utils/error";
 
 const AdminMenuProductEdit = () => {
   const { query } = useRouter();
   const router = useRouter();
   const productId = query.id;
-  console.log(
-    "🚀 ~ file: AdminMenuProductEdit.tsx ~ line 10 ~ AdminMenuProductEdit ~ productId",
-    productId
-  );
   const dispatch = useAppDispatch();
   const productsEdit = useAppSelector(selectEdit);
   const isLoading = useAppSelector(selectEditIsLoading);
@@ -35,7 +32,28 @@ const AdminMenuProductEdit = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm<ProductPage>();
+
+  useEffect(() => {
+    setValue("model", productsEdit.model);
+    setValue("slug", productsEdit.slug);
+    setValue("newPrice", productsEdit.newPrice);
+    setValue("newPriceString", productsEdit.newPriceString);
+    setValue("oldPrice", productsEdit.oldPrice);
+    setValue("oldPriceString", productsEdit.oldPriceString);
+    setValue("sale", productsEdit.sale);
+    setValue("img", productsEdit.img);
+  }, [
+    productsEdit.img,
+    productsEdit.model,
+    productsEdit.newPrice,
+    productsEdit.newPriceString,
+    productsEdit.oldPrice,
+    productsEdit.oldPriceString,
+    productsEdit.sale,
+    productsEdit.slug,
+    setValue,
+  ]);
 
   const submitHandler = async ({
     model,
@@ -72,140 +90,183 @@ const AdminMenuProductEdit = () => {
       ) : error ? (
         <div className="alert-error">{error}</div>
       ) : (
-        <div></div>
-        // <form
-        //   className="mx-auto max-w-screen-md"
-        //   onSubmit={handleSubmit(submitHandler)}
-        // >
-        //   <h1 className="mb-4 text-xl">{`Edit Product ${productId}`}</h1>
-        //   <div className="mb-4">
-        //     <label htmlFor="model">Model</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="model"
-        //       autoFocus
-        //       {...register("model", {
-        //         required: "Please enter model",
-        //       })}
-        //     />
-        //     {errors?.model && (
-        //       <div className="text-red-500">
-        //         {errors?.model?.message || "Error!"}
-        //       </div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="slug">Slug</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="slug"
-        //       {...register("slug", {
-        //         required: "Please enter slug",
-        //       })}
-        //     />
-        //     {errors.slug && (
-        //       <div className="text-red-500">{errors.slug.message}</div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="newPrice">New Price</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="newPrice"
-        //       {...register("newPrice", {
-        //         required: "Please enter newPrice",
-        //       })}
-        //     />
-        //     {errors.newPrice && (
-        //       <div className="text-red-500">{errors.newPrice.message}</div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="newPriceString">new Price String</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="newPriceString"
-        //       {...register("newPriceString", {
-        //         required: "Please enter newPriceString",
-        //       })}
-        //     />
-        //     {errors.newPriceString && (
-        //       <div className="text-red-500">
-        //         {errors.newPriceString.message}
-        //       </div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="oldPrice">old Price</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="oldPrice"
-        //       {...register("oldPrice", {
-        //         required: "Please enter oldPrice",
-        //       })}
-        //     />
-        //     {errors.oldPrice && (
-        //       <div className="text-red-500">{errors.oldPrice.message}</div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="oldPriceString">old Price String</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="oldPriceString"
-        //       {...register("oldPriceString", {
-        //         required: "Please enter oldPriceString",
-        //       })}
-        //     />
-        //     {errors.oldPriceString && (
-        //       <div className="text-red-500">
-        //         {errors.oldPriceString.message}
-        //       </div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="sale">sale</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="sale"
-        //       {...register("sale", {
-        //         required: "Please enter sale",
-        //       })}
-        //     />
-        //     {errors.sale && (
-        //       <div className="text-red-500">{errors.sale.message}</div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <label htmlFor="img">Image</label>
-        //     <input
-        //       type="text"
-        //       className="w-full"
-        //       id="img"
-        //       {...register("img", {
-        //         required: "Please enter img",
-        //       })}
-        //     />
-        //     {errors.img && (
-        //       <div className="text-red-500">{errors.img.message}</div>
-        //     )}
-        //   </div>
-        //   <div className="mb-4">
-        //     <button disabled={isLoading} className="primary-button">
-        //       {isLoading ? "Loading" : "Update"}
-        //     </button>
-        //   </div>
-        //   <div className="mb-4">
-        //     <Link href={`/admin/products`}>Back</Link>
-        //   </div>
-        // </form>
+        <form
+          className="mx-auto max-w-screen-md"
+          onSubmit={handleSubmit(submitHandler)}
+        >
+          <h1 className="mb-4 text-xl">{`Edit Product ${productId}`}</h1>
+          <div className="grid grid-cols-2">
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="model"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                Model:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="model"
+                autoFocus
+                {...register("model", {
+                  required: "Please enter model",
+                })}
+              />
+              {errors?.model && (
+                <div className="text-red-500">
+                  {errors?.model?.message || "Error!"}
+                </div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="slug"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                Slug:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="slug"
+                {...register("slug", {
+                  required: "Please enter slug",
+                })}
+              />
+              {errors.slug && (
+                <div className="text-red-500">{errors.slug.message}</div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="newPrice"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                New Price:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="newPrice"
+                {...register("newPrice", {
+                  required: "Please enter newPrice",
+                })}
+              />
+              {errors.newPrice && (
+                <div className="text-red-500">{errors.newPrice.message}</div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="newPriceString"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                new Price String:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="newPriceString"
+                {...register("newPriceString", {
+                  required: "Please enter newPriceString",
+                })}
+              />
+              {errors.newPriceString && (
+                <div className="text-red-500">
+                  {errors.newPriceString.message}
+                </div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="oldPrice"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                old Price:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="oldPrice"
+                {...register("oldPrice", {
+                  required: "Please enter oldPrice",
+                })}
+              />
+              {errors.oldPrice && (
+                <div className="text-red-500">{errors.oldPrice.message}</div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="oldPriceString"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                old Price String:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="oldPriceString"
+                {...register("oldPriceString", {
+                  required: "Please enter oldPriceString",
+                })}
+              />
+              {errors.oldPriceString && (
+                <div className="text-red-500">
+                  {errors.oldPriceString.message}
+                </div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="sale"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                sale:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="sale"
+                {...register("sale", {
+                  required: "Please enter sale",
+                })}
+              />
+              {errors.sale && (
+                <div className="text-red-500">{errors.sale.message}</div>
+              )}
+            </div>
+            <div className="mb-4 flex flex-col">
+              <label
+                htmlFor="img"
+                className="uppercase text-sm mb-1 text-[#777]"
+              >
+                image:
+              </label>
+              <input
+                type="text"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                id="img"
+                {...register("img", {
+                  required: "Please enter img",
+                })}
+              />
+              {errors.img && (
+                <div className="text-red-500">{errors.img.message}</div>
+              )}
+            </div>
+          </div>
+          <div className="flex">
+            <input
+              type="submit"
+              value={isLoading ? "Loading" : "Update Product"}
+              className="w-[140px] h-[40px] mr-5 text-white bg-green-500 border-white border-2 hover:text-black hover:border-black hover:bg-opacity-50 transition-all duration-500 cursor-pointer"
+            />
+            <div className="mb-4 w-[140px] py-1.5 text-center text-white bg-orange-500 border-white border-2 hover:text-black hover:border-black hover:bg-opacity-50 transition-all duration-500">
+              <Link href={`/admin/products`}>Back</Link>
+            </div>
+          </div>
+        </form>
       )}
     </div>
   );

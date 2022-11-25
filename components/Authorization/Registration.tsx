@@ -82,6 +82,10 @@ const Registration = () => {
               value: 3,
               message: "There must be at least 3 letters",
             },
+            maxLength: {
+              value: 30,
+              message: "Maximum length is 30",
+            },
           })}
           id="firstName"
           placeholder="firstName"
@@ -104,6 +108,10 @@ const Registration = () => {
             minLength: {
               value: 3,
               message: "There must be at least 3 letters",
+            },
+            maxLength: {
+              value: 30,
+              message: "Maximum length is 30",
             },
           })}
           id="lastName"
@@ -128,6 +136,10 @@ const Registration = () => {
               value:
                 /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
               message: "Please enter valid Email",
+            },
+            maxLength: {
+              value: 40,
+              message: "Maximum length is 40",
             },
           })}
           id="emailReg"

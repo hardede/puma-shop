@@ -5,6 +5,6 @@ export interface IUser {
   password: string;
   confirmPassword: string;
   isAdmin: boolean;
-  phone?: number;
+  phone?: string;
   city?: string;
 }

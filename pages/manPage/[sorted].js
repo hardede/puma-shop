@@ -281,7 +281,6 @@ const SortedScreen = ({ products }) => {
                                 width="220"
                                 height="220"
                                 alt={item.alt}
-                                placeholder="blur"
                                 blurDataURL={item.blur}
                               />
                             </div>

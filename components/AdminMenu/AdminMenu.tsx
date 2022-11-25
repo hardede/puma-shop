@@ -53,13 +53,6 @@ const AdminMenu = () => {
   }, [dispatch]);
 
   let data = {} as ChartTypes;
-  {
-    !isLoading &&
-      console.log(
-        "🚀 ~ file: AdminMenu.tsx ~ line 51 ~ AdminMenu ~ data",
-        summary.salesData
-      );
-  }
 
   {
     !isLoading &&

@@ -1,7 +1,7 @@
-import React from 'react'
+import AdminUserEdit from "../../../components/screens/admin/AdminUsersEdit";
 
 const AdminUsersEditScreen = () => {
-  return <div>[id]</div>;
+  return <AdminUserEdit />;
 };
 
 export default AdminUsersEditScreen;

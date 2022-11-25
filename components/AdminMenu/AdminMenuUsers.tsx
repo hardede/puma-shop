@@ -8,7 +8,7 @@ import {
   fetchAdminUsers,
   selectAdminUsers,
   selectAdminUsersError,
-  selectAdminUsersIsLoading
+  selectAdminUsersIsLoading,
 } from "../../store/reducers/Admin/AdminUserSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
@@ -80,7 +80,7 @@ const AdminMenuUsers = () => {
                   </td>
                   <td className="p-2">{user.isAdmin ? "YES" : "NO"}</td>
                   <td className="p-2">
-                    <Link href={`/admin/user/${user._id}`} passHref>
+                    <Link href={`/admin/users/${user._id}`} passHref>
                       <a type="button" className="default-button">
                         Edit
                       </a>

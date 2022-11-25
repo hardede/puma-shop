@@ -8,7 +8,7 @@ import useSumForItem from "../../../../hooks/useSumForItem";
 import {
   cartRemove,
   decrementQuantity,
-  incrementQuantity
+  incrementQuantity,
 } from "../../../../store/reducers/CartSlice";
 import { ProductPage } from "../../../../types/product/productPage";
 
@@ -83,7 +83,7 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
         <div className="flex">
           <div
             className="cursor-pointer mr-5 border-b border-black"
-            onClick={() => router.back()}
+            onClick={() => router.push("/")}
           >
             Change
           </div>

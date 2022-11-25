@@ -2,8 +2,11 @@ import Link from "next/link";
 import React from "react";
 import Layout from "../Layout";
 import { adminLinks } from "../../constants/adminLinks";
+import { useRouter } from "next/router";
 
 const LayoutAdmin = ({ children, title }) => {
+  const router = useRouter()
+
   return (
     <Layout title={title}>
       <div className="container max-w-[1140px] mt-20 m-auto">
@@ -11,9 +14,9 @@ const LayoutAdmin = ({ children, title }) => {
           <div>
             <ul>
               {adminLinks.map(item => (
-                <li key={item.id}>
+                <li key={item.id} className="py-2 text-lg">
                   <Link href={item.href}>
-                    <a className={item.link === "Orders" ? "fond-bold" : ""}>
+                    <a className={item.href === router.pathname ? "text-red-600 font-bold" : ""}>
                       {item.link}
                     </a>
                   </Link>

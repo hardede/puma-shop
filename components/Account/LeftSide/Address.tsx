@@ -8,7 +8,7 @@ const Address = () => {
 
   useEffect(() => {
     dispatch(fetchUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

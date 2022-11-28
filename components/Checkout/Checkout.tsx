@@ -26,7 +26,7 @@ const Checkout: FC = () => {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const router = useRouter();
 
-  const { totalPrice, totalPriceOld, discountString, discount } =
+  const { totalPrice, totalValueString, discountString, discount } =
     useTotalPrice();
 
   const {
@@ -233,7 +233,7 @@ const Checkout: FC = () => {
           </div>
           <div className="flex justify-between items-center py-0.5 text-sm text-[#181818]">
             <h4 className="">Sum</h4>
-            <span>{totalPriceOld}</span>
+            <span>{totalValueString}</span>
           </div>
           <div
             className={

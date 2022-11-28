@@ -11,7 +11,7 @@ import {
   selectUserEdit,
   selectUserEditError,
   selectUserEditIsLoading,
-  userToEdit,
+  userToEdit
 } from "../../store/reducers/Admin/AdminUserEditSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";

@@ -20,10 +20,10 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const { newSumPrice, oldSumPrice } = useSumForItem(
+  const { sumPrice, sumPriceWithSale } = useSumForItem(
     orderCart.quantity,
-    orderCart.newPrice,
-    orderCart.oldPrice
+    orderCart.price,
+    orderCart.sale
   );
 
   return (
@@ -70,14 +70,14 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
           <div>
             <p
               className={
-                orderCart.oldPrice === 0
+                orderCart.sale === 0
                   ? "hidden"
                   : "line-through decoration-2 decoration-red-500"
               }
             >
-              {oldSumPrice}
+              {sumPrice}
             </p>
-            <p className="text-xl font-bold text-red-500">{newSumPrice}</p>
+            <p className="text-xl font-bold text-red-500">{sumPriceWithSale}</p>
           </div>
         </div>
         <div className="flex">

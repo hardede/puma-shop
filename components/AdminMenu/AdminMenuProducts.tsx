@@ -4,7 +4,7 @@ import {
   fetchAdminProducts,
   selectAdminProducts,
   selectAdminProductsError,
-  selectAdminProductsIsLoading,
+  selectAdminProductsIsLoading
 } from "../../store/reducers/Admin/AdminProductsSlice";
 import { ProductPage } from "../../types/product/productPage";
 import ProductInfo from "./ProductInfo/ProductInfo";
@@ -34,9 +34,6 @@ const AdminMenuProducts = () => {
                 <th className="px-3 text-left">ID</th>
                 <th className="p-3 text-left">NAME</th>
                 <th className="p-3 text-left">PRICE</th>
-                <th className="p-3 text-left max-w-[135px] truncate">
-                  Old Price
-                </th>
                 <th className="p-3 text-left">DISCOUNT</th>
                 <th className="p-3 text-left">COUNT</th>
                 <th className="p-3 text-left">ACTIONS</th>

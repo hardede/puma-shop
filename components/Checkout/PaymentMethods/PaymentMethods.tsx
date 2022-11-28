@@ -36,7 +36,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
   const {
     totalPrice,
     totalQuantity,
-    totalPriceOld,
+    totalValueString,
     discountString,
     discount,
     discountByCardString,
@@ -69,7 +69,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
     await axios.post("api/orders", {
       totalPrice,
       totalQuantity,
-      totalPriceOld,
+      totalValueString,
       discount,
       discountString,
       activeCard,

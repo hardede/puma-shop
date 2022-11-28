@@ -9,6 +9,23 @@ import Product from "../../models/Product";
 import { cartAdd } from "../../store/reducers/CartSlice";
 import db from "../../utils/db";
 
+const countValues = (price, sale) => {
+  let priceWithSale;
+  let priceWithSaleString;
+  let saleString;
+  {
+    sale !== 0 &&
+      ((priceWithSale = Math.round(price * (sale / 100))),
+      (priceWithSaleString = `${priceWithSale
+        .toLocaleString()
+        .concat(",00 ₴")}`),
+      (saleString = sale.toLocaleString().concat("%")));
+  }
+  let priceString = `${price.toLocaleString().concat(",00 ₴")}`;
+
+  return { priceWithSale, priceWithSaleString, price, priceString, saleString };
+};
+
 const ProductScreen = props => {
   const { product } = props;
   const [current, setCurrent] = useState(0);
@@ -42,6 +59,9 @@ const ProductScreen = props => {
     setCountInStock(Number(qty));
   };
 
+  const { priceWithSale, priceWithSaleString, priceString } =
+    countValues(product.price, product.sale);
+    
   return (
     <Layout title={product.model}>
       <div className="container m-auto">
@@ -111,22 +131,22 @@ const ProductScreen = props => {
             </h1>
             <div className="pb-2 flex justify-between items-center">
               <div>
-                <span className="font-bold text-xl mr-4">
-                  {product.newPriceString}
-                </span>
-                <span
-                  className={
-                    product.oldPrice === 0
-                      ? "line-through decoration-2 decoration-red-500 hidden"
-                      : "line-through decoration-2 decoration-red-500"
-                  }
-                >
-                  {product.oldPriceString}
-                </span>
+                {priceWithSale ? (
+                  <span className="font-bold text-xl mr-4">
+                    {priceWithSaleString}
+                  </span>
+                ) : (
+                  <span className="font-bold text-xl mr-4">{priceString}</span>
+                )}
+                {priceWithSale && (
+                  <span className="line-through decoration-2 decoration-red-500">
+                    {priceString}
+                  </span>
+                )}
               </div>
               <span className="opacity-60 text-sm">Art: {product.atr}</span>
             </div>
-            {product.sale && (
+            {product.sale !== 0 && (
               <p className="pb-8 uppercase text-[#ff0000] text-xs font-bold">
                 + 5% discount and free shipping when paying online
               </p>

@@ -44,5 +44,6 @@ export const selectOrderDetails = (state: RootState) =>
   state.orderDetails.orderDetailsState;
 export const selectOrderDetailsIsLoading = (state: RootState) =>
   state.orderDetails.isLoading;
-export const selectOrderDetailsError = (state: RootState) => state.orderDetails.error;
+export const selectOrderDetailsError = (state: RootState) =>
+  state.orderDetails.error;
 export default orderDetailsSlice.reducer;

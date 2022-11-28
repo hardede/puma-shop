@@ -31,14 +31,17 @@ export const productSlice = createSlice({
     sortByAscending(state, action) {
       const copy = action.payload.slice();
       state.productSort = copy.sort(
-        (a: any, b: any) => a.newPrice - b.newPrice
+        (a: any, b: any) =>
+          (a.sale === 0 ? a.price : a.price * (a.sale / 100)) -
+          (b.sale === 0 ? b.price : b.price * (b.sale / 100))
       );
     },
     sortByDescending(state, action) {
       const copy = action.payload.slice();
-
       state.productSort = copy.sort(
-        (a: any, b: any) => b.newPrice - a.newPrice
+        (a: any, b: any) =>
+          (b.sale === 0 ? b.price : b.price * (b.sale / 100)) -
+          (a.sale === 0 ? a.price : a.price * (a.sale / 100))
       );
     },
     sortByDiscount(state, action) {
@@ -46,11 +49,11 @@ export const productSlice = createSlice({
       const sale = [] as any;
 
       copy.map((item: any) => {
-        if (item.hasOwnProperty("sale")) {
+        if (item.sale !== 0) {
           sale.push(item);
         }
       });
-      state.productSort = sale.sort((a: any, b: any) => a.sale - b.sale);
+      state.productSort = sale.sort((a: any, b: any) => b.sale - a.sale);
     },
     sortBySize(state, action) {
       state.productSort = [];
@@ -66,9 +69,11 @@ export const productSlice = createSlice({
     },
     sortByPriceRange(state, action) {
       state.productSort = action.payload.sneakers.filter(
-        (sneaker: any) =>
-          sneaker.newPrice >= action.payload.minVal &&
-          sneaker.newPrice <= action.payload.maxVal
+        (item: any) =>
+          (item.sale === 0 ? item.price : item.price * (item.sale / 100)) >=
+            action.payload.minVal &&
+          (item.sale === 0 ? item.price : item.price * (item.sale / 100)) <=
+            action.payload.maxVal
       );
     },
   },

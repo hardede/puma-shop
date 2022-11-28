@@ -1,0 +1,20 @@
+import { FC } from "react";
+import { ProductPage } from "../../../types/product/productPage";
+import Layout from "../../Layout/Layout";
+import SortedWoman from "../../SortedProducts/SortedWoman";
+
+interface WomanProductsSortedProps {
+  products: ProductPage[];
+}
+
+const WomanProductsSorted: FC<WomanProductsSortedProps> = ({ products }) => {
+  return (
+    <Layout title="Man Products">
+      <div className="container max-w-[1140px] m-auto">
+        <SortedWoman products={products} />
+      </div>
+    </Layout>
+  );
+};
+
+export default WomanProductsSorted;

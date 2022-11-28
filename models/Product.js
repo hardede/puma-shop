@@ -3,6 +3,7 @@ const { Schema, model, models } = mongoose;
 
 const productSchema = new Schema(
   {
+    productFor: { type: String, required: true },
     slug: { type: String, required: true },
     imgProductPage: { type: Array, required: true },
     img: { type: String, required: true },
@@ -12,11 +13,8 @@ const productSchema = new Schema(
     atr: { type: String, required: true },
     alt: { type: String, required: true },
     blur: { type: mongoose.Schema.Types.Mixed },
-    newPrice: { type: Number, required: true },
-    oldPrice: { type: Number, required: false },
-    newPriceString: { type: String, required: true },
-    oldPriceString: { type: String, required: false },
-    sale: { type: String, required: false },
+    price: { type: Number, required: true },
+    sale: { type: Number, required: true },
     quantity: { type: Number, required: true, default: 0 },
     countInStock: { type: Number, required: true, default: 0 },
     size: { type: Number, required: true, default: 0 },

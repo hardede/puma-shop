@@ -18,10 +18,10 @@ interface DrawerItemsProps {
 const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
   const dispatch = useAppDispatch();
 
-  const { newSumPrice, oldSumPrice } = useSumForItem(
+  const { sumPrice, sumPriceWithSale } = useSumForItem(
     cart.quantity,
-    cart.newPrice,
-    cart.oldPrice
+    cart.price,
+    cart.sale
   );
 
   return (
@@ -73,17 +73,11 @@ const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
               )}
             </div>
           </div>
-          <span
-            className={
-              cart.oldPrice
-                ? "font-bold text-[#ae946d] pr-4"
-                : "font-bold text-black pr-4"
-            }
-          >
-            {newSumPrice}
+          <span className="font-bold text-[#ae946d] pr-4">
+            {cart.sale === 0 ? sumPrice : sumPriceWithSale}
           </span>
           <span className="font-normal text-[#555555] line-through decoration-2 decoration-[#ae946d]">
-            {cart.oldPrice ? oldSumPrice : ""}
+            {cart.sale !== 0 && sumPrice}
           </span>
         </div>
       </div>

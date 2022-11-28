@@ -35,8 +35,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
       <td className="p-3 max-w-[150px] truncate hover:text-clip hover:overflow-visible hover:whitespace-normal">
         {product.model}
       </td>
-      <td className="p-3 max-w-[135px] truncate">{product.newPriceString}</td>
-      <td className="p-3 max-w-[135px] truncate">{product.oldPriceString}</td>
+      <td className="p-3 max-w-[135px] truncate">{product.price}</td>
       <td className="p-3 max-w-[135px] truncate">{product.sale}</td>
       <td className="p-3">
         <div

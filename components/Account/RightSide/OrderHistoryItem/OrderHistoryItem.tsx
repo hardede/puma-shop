@@ -61,10 +61,16 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order }) => {
                     </h4>
                     <p className="text-xs pt-3 py-1">{ordered.quantity} Item</p>
                     <div className="text-sm flex items-center">
-                      <p className="font-bold pr-1">{ordered.newPriceString}</p>
-                      {ordered.oldPrice !== 0 && (
+                      <p className="font-bold pr-1">
+                        {ordered.sale === 0
+                          ? ordered.price.toLocaleString().concat(",00 ₴")
+                          : Math.round(ordered.price * (ordered.sale / 100))
+                              .toLocaleString()
+                              .concat(",00 ₴")}
+                      </p>
+                      {ordered.sale !== 0 && (
                         <p className="text-xs line-through decoration-2 decoration-red-500">
-                          {ordered.oldPriceString}
+                          {ordered.price.toLocaleString().concat(",00 ₴")}
                         </p>
                       )}
                     </div>
@@ -109,7 +115,7 @@ const OrderHistoryItem: FC<OrderHistoryItemProps> = ({ order }) => {
             <div className="w-[200px]">
               <div className="flex justify-between items-center py-0.5 text-sm text-[#181818]">
                 <h4 className="font-semibold">Sum:</h4>
-                <span>{order.totalPriceOld}</span>
+                <span>{order.totalValueString}</span>
               </div>
               <div
                 className={

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
+import useCountValues from "../../../hooks/useCountValues";
 import { ProductPage } from "../../../types/product/productPage";
 
 interface ProductItemProps {
@@ -9,6 +10,8 @@ interface ProductItemProps {
 
 const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
   const [show, setShow] = useState(false);
+  const { priceWithSale, priceWithSaleString, priceString, saleString } =
+    useCountValues(sneaker.price, sneaker.sale);
   return (
     <>
       <div
@@ -27,7 +30,7 @@ const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
             )}
             <div className="absolute bg-red-600 w-10 text-center items-center">
               <span className="text-white text-sm font-bold ">
-                {sneaker.sale}
+                {saleString}
               </span>
             </div>
             <div className="relative -z-10">
@@ -42,12 +45,16 @@ const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
             <div className="">
               <p className="truncate ">{sneaker.model}</p>
               <div className="flex justify-center items-center">
-                <span className="font-semibold mr-3">
-                  {sneaker.newPriceString}
-                </span>
-                {sneaker.oldPrice !== 0 && (
+                {priceWithSale ? (
+                  <span className="font-semibold mr-3">
+                    {priceWithSaleString}
+                  </span>
+                ) : (
+                  <span className="font-semibold mr-3">{priceString}</span>
+                )}
+                {priceWithSale && (
                   <span className="font-light text-sm line-through decoration-2 decoration-red-500">
-                    {sneaker.oldPriceString}
+                    {priceString}
                   </span>
                 )}
               </div>

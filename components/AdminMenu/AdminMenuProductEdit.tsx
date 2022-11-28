@@ -37,19 +37,13 @@ const AdminMenuProductEdit = () => {
   useEffect(() => {
     setValue("model", productsEdit.model);
     setValue("slug", productsEdit.slug);
-    setValue("newPrice", productsEdit.newPrice);
-    setValue("newPriceString", productsEdit.newPriceString);
-    setValue("oldPrice", productsEdit.oldPrice);
-    setValue("oldPriceString", productsEdit.oldPriceString);
+    setValue("price", productsEdit.price);
     setValue("sale", productsEdit.sale);
     setValue("img", productsEdit.img);
   }, [
     productsEdit.img,
     productsEdit.model,
-    productsEdit.newPrice,
-    productsEdit.newPriceString,
-    productsEdit.oldPrice,
-    productsEdit.oldPriceString,
+    productsEdit.price,
     productsEdit.sale,
     productsEdit.slug,
     setValue,
@@ -147,74 +141,13 @@ const AdminMenuProductEdit = () => {
               <input
                 type="text"
                 className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
-                id="newPrice"
-                {...register("newPrice", {
+                id="price"
+                {...register("price", {
                   required: "Please enter newPrice",
                 })}
               />
-              {errors.newPrice && (
-                <div className="text-red-500">{errors.newPrice.message}</div>
-              )}
-            </div>
-            <div className="mb-4 flex flex-col">
-              <label
-                htmlFor="newPriceString"
-                className="uppercase text-sm mb-1 text-[#777]"
-              >
-                new Price String:
-              </label>
-              <input
-                type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
-                id="newPriceString"
-                {...register("newPriceString", {
-                  required: "Please enter newPriceString",
-                })}
-              />
-              {errors.newPriceString && (
-                <div className="text-red-500">
-                  {errors.newPriceString.message}
-                </div>
-              )}
-            </div>
-            <div className="mb-4 flex flex-col">
-              <label
-                htmlFor="oldPrice"
-                className="uppercase text-sm mb-1 text-[#777]"
-              >
-                old Price:
-              </label>
-              <input
-                type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
-                id="oldPrice"
-                {...register("oldPrice", {
-                  required: "Please enter oldPrice",
-                })}
-              />
-              {errors.oldPrice && (
-                <div className="text-red-500">{errors.oldPrice.message}</div>
-              )}
-            </div>
-            <div className="mb-4 flex flex-col">
-              <label
-                htmlFor="oldPriceString"
-                className="uppercase text-sm mb-1 text-[#777]"
-              >
-                old Price String:
-              </label>
-              <input
-                type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
-                id="oldPriceString"
-                {...register("oldPriceString", {
-                  required: "Please enter oldPriceString",
-                })}
-              />
-              {errors.oldPriceString && (
-                <div className="text-red-500">
-                  {errors.oldPriceString.message}
-                </div>
+              {errors.price && (
+                <div className="text-red-500">{errors.price.message}</div>
               )}
             </div>
             <div className="mb-4 flex flex-col">

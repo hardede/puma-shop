@@ -8,10 +8,10 @@ interface CheckoutItemsProps {
 }
 
 const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
-  const { newSumPrice, oldSumPrice } = useSumForItem(
+  const { sumPriceWithSale, sumPrice } = useSumForItem(
     order.quantity,
-    order.newPrice,
-    order.oldPrice
+    order.price,
+    order.sale
   );
 
   return (
@@ -34,15 +34,17 @@ const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
             <span className="mr-3">{order.quantity} Item</span>
           </div>
           <div className="flex items-center">
-            <p className="text-sm font-bold text-red-500 pr-1">{newSumPrice}</p>
+            <p className="text-sm font-bold text-red-500 pr-1">
+              {sumPriceWithSale}
+            </p>
             <p
               className={
-                order.oldPrice === 0
+                order.sale === 0
                   ? "hidden"
                   : "text-[10px] line-through decoration-2 decoration-red-500"
               }
             >
-              {oldSumPrice}
+              {sumPrice}
             </p>
           </div>
         </div>

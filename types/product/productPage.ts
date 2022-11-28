@@ -10,6 +10,7 @@ export interface SizeSelection {
 
 export interface ProductPage {
   _id: string;
+  productFor: string;
   slug: string;
   imgProductPage: ImgProductPage[];
   img: string;
@@ -19,11 +20,8 @@ export interface ProductPage {
   atr: string;
   alt: string;
   blur: any;
-  newPrice: number;
-  oldPrice: number;
-  newPriceString: string;
-  oldPriceString: string;
-  sale: string;
+  price: number;
+  sale: number;
   quantity: number;
   countInStock: number;
   size: number;

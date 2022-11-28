@@ -54,7 +54,13 @@ const AdminMenuOrders = () => {
                       : "DELETED USER"}
                   </td>
                   <td className="p-5">{order.createdAt.substring(0, 10)}</td>
-                  <td className="p-5">{order.totalPrice}</td>
+                  <td className="p-5">
+                    {order.activeCard ? (
+                      <span>{order.totalPriceWithCardString}</span>
+                    ) : (
+                      <span>{order.totalPrice}</span>
+                    )}
+                  </td>
                   <td className="p-5">
                     {order.activeCard ? (
                       <div className="">Paid by Card</div>
@@ -70,7 +76,7 @@ const AdminMenuOrders = () => {
                       : `~${order.deliveredAt}`}
                   </td>
                   <td className="p-5">
-                    <Link href={`/order/${order._id}`} passHref>
+                    <Link href={`/admin/orders/${order._id}`} passHref>
                       <a>Details</a>
                     </Link>
                   </td>

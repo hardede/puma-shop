@@ -1,19 +1,15 @@
-const useSumForItem = (
-  quantity: number,
-  newPrice: number,
-  oldPrice: number
-) => {
-
-  const newSumPrice = `${(quantity * newPrice)
+const useSumForItem = (quantity: number, price: number, sale: number) => {
+  const sumPriceWithSale = `${(quantity * sale === 0
+    ? price
+    : Math.round(price * (sale / 100)) * quantity
+  )
     .toLocaleString()
     .concat(",00 ₴")}`;
-  const oldSumPrice = `${(quantity * (oldPrice ? oldPrice : 0))
-    .toLocaleString()
-    .concat(",00 ₴")}`;
+  const sumPrice = `${(quantity * price).toLocaleString().concat(",00 ₴")}`;
 
   return {
-    newSumPrice,
-    oldSumPrice,
+    sumPrice,
+    sumPriceWithSale,
   };
 };
 

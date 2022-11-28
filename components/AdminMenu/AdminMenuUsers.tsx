@@ -8,7 +8,7 @@ import {
   fetchAdminUsers,
   selectAdminUsers,
   selectAdminUsersError,
-  selectAdminUsersIsLoading,
+  selectAdminUsersIsLoading
 } from "../../store/reducers/Admin/AdminUserSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";

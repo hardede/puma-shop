@@ -5,43 +5,53 @@ import { useAppSelector } from "./redux";
 const useTotalPrice = () => {
   const cartState = useAppSelector(selectCartState);
   let totalQuantity = 0;
+  let totalValue = 0;
+  let totalValueString = "";
   let totalPrice = "";
-  let totalPriceOld = "";
+  let totalPriceWithSale = "";
   let discountString = "";
   let discountByCardString = "";
   let totalPriceWithCardString = "";
-  let sumPriceNew = 0;
-  let sumPriceOld = 0;
+  let sumPrice = 0;
+  let sumPriceWithSale = 0;
   let discount = 0;
   let discountByCard = 0;
   let totalPriceWithCard = 0;
   cartState.forEach((item: ProductPage) => {
     totalQuantity += item.quantity;
-    sumPriceNew += +item.newPrice * item.quantity;
-    sumPriceOld +=
-      +item.oldPrice === 0
-        ? +item.newPrice * item.quantity
-        : +item.oldPrice * item.quantity;
+    item.sale === 0 ? (sumPrice += item.price * item.quantity) : 0;
+    item.sale !== 0
+      ? (sumPriceWithSale +=
+          Math.round(item.price * (item.sale / 100)) * item.quantity)
+      : 0;
 
-    totalPrice = `${sumPriceNew.toLocaleString().concat(",00 ₴")}`;
-    totalPriceOld = `${sumPriceOld.toLocaleString().concat(",00 ₴")}`;
+    totalValue += item.price * item.quantity;
+    totalValueString = `${totalValue.toLocaleString().concat(",00 ₴")}`;
 
-    discount = sumPriceOld - sumPriceNew;
+    totalPrice = `${(sumPrice + sumPriceWithSale)
+      .toLocaleString()
+      .concat(",00 ₴")}`;
+    totalPriceWithSale = `${sumPriceWithSale.toLocaleString().concat(",00 ₴")}`;
+
+    discount = totalValue - (sumPrice + sumPriceWithSale);
     discountString = `${discount.toLocaleString().concat(",00 ₴")}`;
 
-    discountByCard = Math.round(sumPriceNew * 0.05);
+    discountByCard = Math.round((sumPrice + sumPriceWithSale) * 0.05);
     discountByCardString = `${discountByCard.toLocaleString().concat(",00 ₴")}`;
 
-    totalPriceWithCard = Math.round(sumPriceNew - discountByCard);
+    totalPriceWithCard = Math.round(
+      sumPrice + sumPriceWithSale - discountByCard
+    );
     totalPriceWithCardString = `${totalPriceWithCard
       .toLocaleString()
       .concat(",00 ₴")}`;
   });
   return {
-    sumPriceNew,
-    sumPriceOld,
+    sumPrice,
+    sumPriceWithSale,
+    totalValueString,
     totalPrice,
-    totalPriceOld,
+    totalPriceWithSale,
     totalQuantity,
     discountString,
     discount,

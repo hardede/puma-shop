@@ -8,4 +8,5 @@ const OrderDetailsScreen = () => {
   );
 };
 
+OrderDetailsScreen.auth = { adminOnly: true };
 export default OrderDetailsScreen;

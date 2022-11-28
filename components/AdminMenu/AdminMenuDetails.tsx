@@ -39,7 +39,7 @@ const AdminMenuDetails = () => {
         <>
           <div
             key={ordersDetails._id}
-            className="transition ease-in-out duration-1000"
+            className="w-[800px] transition ease-in-out duration-1000"
           >
             <div
               className="flex justify-between items-center not-last:border-b-2 border-[#d2a1a1] py-5 cursor-pointer"
@@ -91,11 +91,17 @@ const AdminMenuDetails = () => {
                           </p>
                           <div className="text-sm flex items-center">
                             <p className="font-bold pr-1">
-                              {ordered.newPriceString}
+                              {ordered.sale === 0
+                                ? ordered.price.toLocaleString().concat(",00 ₴")
+                                : Math.round(
+                                    ordered.price * (ordered.sale / 100)
+                                  )
+                                    .toLocaleString()
+                                    .concat(",00 ₴")}
                             </p>
-                            {ordered.oldPrice !== 0 && (
+                            {ordered.sale !== 0 && (
                               <p className="text-xs line-through decoration-2 decoration-red-500">
-                                {ordered.oldPriceString}
+                                {ordered.price.toLocaleString().concat(",00 ₴")}
                               </p>
                             )}
                           </div>

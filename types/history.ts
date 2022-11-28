@@ -12,7 +12,7 @@ export interface History {
   _id: string;
   totalPrice: string;
   totalQuantity: number;
-  totalPriceOld: string;
+  totalValueString: string;
   discount: number;
   discountString: string;
   activeCard: boolean;

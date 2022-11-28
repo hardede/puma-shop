@@ -1,7 +1,5 @@
 import { getSession } from "next-auth/react";
 import Product from "../../../../models/Product";
-import ProductMan from "../../../../models/ProductMan";
-import ProductWoman from "../../../../models/ProductWoman";
 import db from "../../../../utils/db";
 
 const handler = async (req, res) => {
@@ -33,10 +31,7 @@ const putHandler = async (req, res) => {
   if (product) {
     product.model = req.body.model;
     product.slug = req.body.slug;
-    product.newPrice = req.body.newPrice;
-    product.newPriceString = req.body.newPriceString;
-    product.oldPrice = req.body.oldPrice;
-    product.oldPriceString = req.body.oldPriceString;
+    product.price = req.body.price;
     product.sale = req.body.sale;
     product.img = req.body.img;
     product.sizeSelection.sizeEur = req.body.sizeSelection.sizeEur;

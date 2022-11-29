@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import useCountValues from "../../hooks/useCountValues";
 import { ProductPage } from "../../types/product/productPage";
 
 interface SearchSneakersModalProps {
@@ -10,6 +11,10 @@ interface SearchSneakersModalProps {
 const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
   searchProduct,
 }) => {
+  const { priceWithSaleString, priceString } = useCountValues(
+    searchProduct.price,
+    searchProduct.sale
+  );
   return (
     <Link href={`/product/${searchProduct.slug}`}>
       <div className="flex justify-between items-center cursor-pointer">
@@ -26,15 +31,15 @@ const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
           <div>
             <span
               className={
-                searchProduct.oldPrice
+                searchProduct.sale !== 0
                   ? "font-bold text-red-500 pr-2 text-sm"
                   : "font-bold text-black pr-2 text-sm"
               }
             >
-              {searchProduct.newPriceString}
+              {searchProduct.sale === 0 ? priceString : priceWithSaleString}
             </span>
             <span className="font-normal text-xs text-[#555555] line-through decoration-1 decoration-[#555555]">
-              {searchProduct.oldPrice ? searchProduct.oldPriceString : ""}
+              {searchProduct.sale !== 0 ? priceString : ""}
             </span>
           </div>
         </div>

@@ -152,7 +152,7 @@ const AdminMenuDetails = () => {
                   <div className="w-[200px]">
                     <div className="flex justify-between items-center py-0.5 text-sm text-[#181818]">
                       <h4 className="font-semibold">Sum:</h4>
-                      <span>{ordersDetails.totalPriceOld}</span>
+                      <span>{ordersDetails.totalValueString}</span>
                     </div>
                     <div
                       className={

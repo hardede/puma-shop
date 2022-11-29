@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
 import { ProductPage } from "../../../types/product/productPage";
@@ -17,6 +18,7 @@ interface sizeSelectionTypes {
 
 const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
   const [showSizes, setShowSizes] = useState(false);
+  const router = useRouter();
 
   const deleteHandler = async (productId: string) => {
     if (!window.confirm("Are you sure?")) {
@@ -25,6 +27,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
     try {
       await axios.delete(`/api/admin/products/${productId}`);
       toast.success("Product deleted successfully");
+      router.reload();
     } catch (err) {
       toast.error(getError(err));
     }

@@ -96,7 +96,7 @@ const SortedFilters: FC<SortedFiltersProps> = ({ products }) => {
           {router.asPath === `/womanPage/product_list_order=discount` ? (
             <div className="flex">
               <p className="px-3 border-r border-white">Maximum discount</p>
-              <Link href="/manPage">
+              <Link href="/womanPage">
                 <div>
                   <AiOutlineClose className="fill-white text-2xl cursor-pointer  ml-1 hover:bg-white hover:fill-black" />
                 </div>

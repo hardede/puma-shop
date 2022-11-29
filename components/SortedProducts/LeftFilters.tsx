@@ -69,9 +69,7 @@ const LeftFilters: FC<LeftFiltersProps> = ({ products }) => {
                 min={989}
                 max={29999}
                 sneakers={products}
-                onChange={({ min, max }: any) =>
-                  console.log(`min = ${min}, max = ${max}`)
-                }
+                onChange={({ min, max }: any) => `min = ${min}, max = ${max}`}
               />
             </div>
           )}

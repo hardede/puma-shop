@@ -21,7 +21,7 @@ export const fetchData123 = createAsyncThunk(
 );
 
 export const productEditSlice = createSlice({
-  name: "productEdit",
+  name: "adminProductEdit",
   initialState,
   reducers: {},
   extraReducers: {
@@ -41,8 +41,8 @@ export const productEditSlice = createSlice({
 });
 
 export const selectEdit = (state: RootState) =>
-  state.productEdit.productEditState;
+  state.adminProductEdit.productEditState;
 export const selectEditIsLoading = (state: RootState) =>
-  state.productEdit.isLoading;
-export const selectEditError = (state: RootState) => state.productEdit.error;
+  state.adminProductEdit.isLoading;
+export const selectEditError = (state: RootState) => state.adminProductEdit.error;
 export default productEditSlice.reducer;

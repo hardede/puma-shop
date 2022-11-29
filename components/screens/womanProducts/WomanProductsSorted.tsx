@@ -9,8 +9,8 @@ interface WomanProductsSortedProps {
 
 const WomanProductsSorted: FC<WomanProductsSortedProps> = ({ products }) => {
   return (
-    <Layout title="Man Products">
-      <div className="container max-w-[1140px] m-auto">
+    <Layout title="Woman sorted products">
+      <div className="container max-w-[1140px] mt-20 py-2 m-auto">
         <SortedWoman products={products} />
       </div>
     </Layout>

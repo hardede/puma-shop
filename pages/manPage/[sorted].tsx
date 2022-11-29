@@ -1,9 +1,15 @@
 import "rc-slider/assets/index.css";
+import { FC } from "react";
 import ManProductsSorted from "../../components/screens/manProducts/ManProductsSorted";
 import Product from "../../models/Product";
+import { ProductPage } from "../../types/product/productPage";
 import db from "../../utils/db";
 
-const SortedScreen = ({ products }: any) => {
+interface SortedScreenProps {
+  products: ProductPage[];
+}
+
+const SortedScreen: FC<SortedScreenProps> = ({ products }) => {
   return <ManProductsSorted products={products} />;
 };
 

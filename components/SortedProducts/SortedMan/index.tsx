@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useAppSelector } from "../../../hooks/redux";
 import { selectProductsState } from "../../../store/reducers/ProductSlice";
 import { ProductPage } from "../../../types/product/productPage";
@@ -13,10 +14,17 @@ interface SortedManProps {
 
 const SortedMan: FC<SortedManProps> = ({ products }) => {
   const productSort = useAppSelector(selectProductsState);
+  const router = useRouter();
 
   return (
     <>
-      <Link href="/">back to products</Link>
+      <div
+        onClick={() => router.back()}
+        className="flex items-center cursor-pointer"
+      >
+        <AiOutlineArrowLeft className="w-10 h-7" />
+        <p className="uppercase text-sm">back</p>
+      </div>
       <div className="mt-20 ">
         <div className="flex items-center mb-6">
           <h1 className="font-bold uppercase text-2xl">goods for men</h1>

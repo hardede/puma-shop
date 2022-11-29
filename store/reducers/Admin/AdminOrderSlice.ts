@@ -20,7 +20,7 @@ export const fetchAdminOrders = createAsyncThunk("admin/orders", async () => {
 });
 
 export const ordersSlice = createSlice({
-  name: "orders",
+  name: "adminOrders",
   initialState,
   reducers: {},
   extraReducers: {
@@ -39,8 +39,7 @@ export const ordersSlice = createSlice({
   },
 });
 
-export const selectOrders = (state: RootState) => state.orders.ordersState;
-export const selectOrdersIsLoading = (state: RootState) =>
-  state.orders.isLoading;
-export const selectOrdersError = (state: RootState) => state.orders.error;
+export const selectOrders = (state: RootState) => state.adminOrders.ordersState;
+export const selectOrdersIsLoading = (state: RootState) => state.adminOrders.isLoading;
+export const selectOrdersError = (state: RootState) => state.adminOrders.error;
 export default ordersSlice.reducer;

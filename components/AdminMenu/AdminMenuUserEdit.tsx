@@ -11,7 +11,7 @@ import {
   selectUserEdit,
   selectUserEditError,
   selectUserEditIsLoading,
-  userToEdit
+  userToEdit,
 } from "../../store/reducers/Admin/AdminUserEditSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
@@ -39,15 +39,12 @@ const AdminMenuUserEdit = () => {
   } = useForm<IUser>();
 
   useEffect(() => {
-    dispatch(userToEdit(userId));
     setValue("firstName", userToEditState.firstName);
     setValue("lastName", userToEditState.lastName);
     setValue("email", userToEditState.email);
     setValue("city", userToEditState.city);
     setValue("phone", phone);
   }, [
-    dispatch,
-    userId,
     phone,
     userToEditState.city,
     userToEditState.firstName,

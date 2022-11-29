@@ -1,7 +1,7 @@
 const useSumForItem = (quantity: number, price: number, sale: number) => {
   const sumPriceWithSale = `${(quantity * sale === 0
     ? price
-    : Math.round(price * (sale / 100)) * quantity
+    : Math.round(price * (1 - sale / 100)) * quantity
   )
     .toLocaleString()
     .concat(",00 ₴")}`;

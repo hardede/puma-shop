@@ -22,7 +22,7 @@ const useTotalPrice = () => {
     item.sale === 0 ? (sumPrice += item.price * item.quantity) : 0;
     item.sale !== 0
       ? (sumPriceWithSale +=
-          Math.round(item.price * (item.sale / 100)) * item.quantity)
+          Math.round(item.price * (1 - item.sale / 100)) * item.quantity)
       : 0;
 
     totalValue += item.price * item.quantity;

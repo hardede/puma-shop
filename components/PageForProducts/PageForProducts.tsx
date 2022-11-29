@@ -2,12 +2,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import "rc-slider/assets/index.css";
 import { FC, useState } from "react";
-import { AiOutlineClose, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineClose,
+  AiOutlineMinus,
+  AiOutlinePlus,
+} from "react-icons/ai";
 import { useAppDispatch } from "../../hooks/redux";
 import {
   sortByAscending,
   sortByDescending,
-  sortByDiscount
+  sortByDiscount,
 } from "../../store/reducers/ProductSlice";
 import { ProductPage } from "../../types/product/productPage";
 import { sizeSort } from "../../types/sizeSort";
@@ -35,7 +40,10 @@ const PageForProducts: FC<PageForProductsProps> = ({
 
   return (
     <div className="mt-20 py-2" title={title}>
-      <p onClick={() => router.back()}>back to products</p>
+      <div onClick={() => router.back()} className="flex items-center cursor-pointer">
+        <AiOutlineArrowLeft  className="w-10 h-7"/> 
+        <p className="uppercase text-sm">back</p>
+      </div>
       <div className="mt-20 ">
         <div className="flex items-center mb-6">
           <h1 className="font-bold uppercase text-2xl">{category}</h1>
@@ -100,7 +108,7 @@ const PageForProducts: FC<PageForProductsProps> = ({
                       max={29999}
                       sneakers={products}
                       onChange={({ min, max }: any) =>
-                        console.log(`min = ${min}, max = ${max}`)
+                        `min = ${min}, max = ${max}`
                       }
                     />
                   </div>

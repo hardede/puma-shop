@@ -49,24 +49,12 @@ const AdminMenuProductEdit = () => {
     setValue,
   ]);
 
-  const submitHandler = async ({
-    model,
-    slug,
-    newPrice,
-    newPriceString,
-    oldPrice,
-    oldPriceString,
-    sale,
-    img,
-  }: any) => {
+  const submitHandler = async ({ model, slug, price, sale, img }: any) => {
     try {
       await axios.put(`/api/admin/products/${productId}`, {
         model,
         slug,
-        newPrice,
-        newPriceString,
-        oldPrice,
-        oldPriceString,
+        price,
         sale,
         img,
       });

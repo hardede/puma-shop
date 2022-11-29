@@ -9,8 +9,8 @@ interface ProductsPageProps {
 }
 
 const ProductsPage: FC<ProductsPageProps> = ({ item }) => {
-   const { priceWithSale, priceWithSaleString, priceString, saleString } =
-     useCountValues(item.price, item.sale);
+  const { priceWithSale, priceWithSaleString, priceString, saleString } =
+    useCountValues(item.price, item.sale);
   return (
     <>
       <div className="max-w-[220px] min-h-[401px] relative p-2.5 hover:border hover:border-[#cccccc] mx-[2.5px] mb-5">

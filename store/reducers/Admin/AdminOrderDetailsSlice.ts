@@ -21,7 +21,7 @@ export const fetchOrderDetails = createAsyncThunk(
 );
 
 export const orderDetailsSlice = createSlice({
-  name: "orderDetails",
+  name: "adminOrderDetails",
   initialState,
   reducers: {},
   extraReducers: {
@@ -41,9 +41,9 @@ export const orderDetailsSlice = createSlice({
 });
 
 export const selectOrderDetails = (state: RootState) =>
-  state.orderDetails.orderDetailsState;
+  state.adminOrderDetails.orderDetailsState;
 export const selectOrderDetailsIsLoading = (state: RootState) =>
-  state.orderDetails.isLoading;
+  state.adminOrderDetails.isLoading;
 export const selectOrderDetailsError = (state: RootState) =>
-  state.orderDetails.error;
+  state.adminOrderDetails.error;
 export default orderDetailsSlice.reducer;

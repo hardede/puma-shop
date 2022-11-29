@@ -34,9 +34,9 @@ const putHandler = async (req, res) => {
     product.price = req.body.price;
     product.sale = req.body.sale;
     product.img = req.body.img;
-    product.sizeSelection.sizeEur = req.body.sizeSelection.sizeEur;
-    product.sizeSelection.sizeUK = req.body.sizeSelection.sizeUK;
-    product.sizeSelection.countInStock = req.body.sizeSelection.countInStock;
+    // product.sizeSelection.sizeEur = req.body.sizeSelection.sizeEur;
+    // product.sizeSelection.sizeUK = req.body.sizeSelection.sizeUK;
+    // product.sizeSelection.countInStock = req.body.sizeSelection.countInStock;
     await product.save();
     await db.disconnect();
     res.send({ message: "Product updated successfully" });

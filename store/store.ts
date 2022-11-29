@@ -5,13 +5,13 @@ import {
   ThunkAction,
 } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import summary from "./reducers/Admin//AdminSlice";
-import productEdit from "./reducers/Admin/AdminEditSlice";
-import orderDetails from "./reducers/Admin/AdminOrderDetailsSlice";
-import orders from "./reducers/Admin/AdminOrderSlice";
+import adminProductEdit from "./reducers/Admin/AdminEditSlice";
 import adminProducts from "./reducers/Admin/AdminProductsSlice";
+import adminOrderDetails from "./reducers/Admin/AdminOrderDetailsSlice";
+import adminOrders from "./reducers/Admin/AdminOrderSlice";
 import adminUsersEdit from "./reducers/Admin/AdminUserEditSlice";
 import adminUsers from "./reducers/Admin/AdminUserSlice";
+import summary from "./reducers/Admin/AdminSlice";
 import auth from "./reducers/AuthSlice";
 import cart from "./reducers/CartSlice";
 import history from "./reducers/HistorySlice";
@@ -23,10 +23,10 @@ const rootReducer = combineReducers({
   auth,
   history,
   summary,
-  orders,
   adminProducts,
-  productEdit,
-  orderDetails,
+  adminProductEdit,
+  adminOrders,
+  adminOrderDetails,
   adminUsers,
   adminUsersEdit,
 });

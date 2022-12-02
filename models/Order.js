@@ -1,16 +1,32 @@
 import mongoose from "mongoose";
 
+export const imgSchema = new mongoose.Schema(
+  {
+    productImg: { type: String, require: true },
+  },
+  { _id: false }
+);
+
+export const sizeSchema = new mongoose.Schema(
+  {
+    sizeEur: { type: Number, require: true },
+    sizeUK: { type: Number, require: true },
+    sizeCountInStock: { type: Number, require: true },
+  },
+  { _id: false }
+);
+
 const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     orderItems: [
       {
         slug: { type: String, required: true },
-        imgProductPage: { type: Array, required: true },
+        imgProductPage: [imgSchema],
         img: { type: String, required: true },
         model: { type: String, required: true },
         color: { type: String, required: true },
-        sizeSelection: { type: Array, required: true },
+        sizeSelection: [sizeSchema],
         atr: { type: String, required: true },
         alt: { type: String, required: true },
         blur: { type: mongoose.Schema.Types.Mixed },

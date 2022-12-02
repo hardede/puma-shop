@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+import { GetServerSideProps, NextPage } from "next";
 import { FC } from "react";
 import IndividualProductPage from "../../components/screens/IndivProductPage/IndividualProductPage";
 import Product from "../../models/Product";
@@ -14,15 +16,20 @@ const ProductScreen: FC<ProductScreenProps> = ({ product }) => {
 
 export default ProductScreen;
 
-export async function getServerSideProps(context: any) {
-  const { params } = context;
-  const { slug } = params;
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  try {
+    const { params } = context;
+    const { slug } = params;
 
-  await db.connect();
-  const product = await Product.findOne({ slug }).lean();
-  return {
-    props: {
-      product: product ? db.convertDocToObj(product) : null,
-    },
-  };
-}
+    await db.connect();
+    const model = mongoose.models.Product;
+    const product = await model.findOne({ slug }).lean();
+    return {
+      props: {
+        product: product ? db.convertDocToObj(product) : null,
+      },
+    };
+  } catch (e) {
+    console.error(e);
+  }
+};

@@ -1,4 +1,5 @@
-import type { NextPage } from "next";
+import mongoose from "mongoose";
+import type { GetServerSideProps, NextPage } from "next";
 import Layout from "../components/Layout/Layout";
 import HomePage from "../components/screens/Home";
 import Product from "../models/Product";
@@ -19,12 +20,13 @@ const Home: NextPage<HomeProps> = ({ products }) => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   await db.connect();
-  const products = await Product.find().lean();
+  const model = mongoose.models.Product
+  const products = await model.find().lean();
   return {
     props: {
       products: products.map(db.convertDocToObj),
     },
   };
-}
+};

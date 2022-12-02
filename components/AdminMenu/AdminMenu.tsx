@@ -5,7 +5,7 @@ import {
   Legend,
   LinearScale,
   Title,
-  Tooltip,
+  Tooltip
 } from "chart.js";
 import { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
@@ -14,7 +14,7 @@ import {
   fetchSummary,
   selectSummary,
   selectSummaryError,
-  selectSummaryIsLoading,
+  selectSummaryIsLoading
 } from "../../store/reducers/Admin/AdminSlice";
 import { ChartTypes } from "../../types/chart";
 import AdminHeader from "./AdminHeader/AdminHeader";
@@ -75,7 +75,9 @@ const AdminMenu = () => {
     <div className="md:col-span-3">
       <h1 className="mb-4 text-xl">Admin Dashboard</h1>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="block border-4 border-red-500 rounded-full border-dashed w-28 h-28 mx-auto mt-20 text-center pt-10 text-red-500 animate-rotateLoader">
+          Loading...
+        </div>
       ) : error ? (
         <div className="alert-error">{error}</div>
       ) : (

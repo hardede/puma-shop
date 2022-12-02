@@ -19,7 +19,7 @@ export interface ProductPage {
   sizeSelection: SizeSelection[];
   atr: string;
   alt: string;
-  blur: any;
+  blur?: any;
   price: number;
   sale: number;
   quantity: number;

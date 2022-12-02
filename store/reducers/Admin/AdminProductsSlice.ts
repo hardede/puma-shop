@@ -1,9 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ProductPage } from "../../../types/product/productPage";
 import { RootState } from "../../store";
 
-const initialState = {
-  productsState: [] as any,
+interface StateProps {
+  productsState: ProductPage[] | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
+  productsState: [],
   isLoading: true,
   error: null,
 };

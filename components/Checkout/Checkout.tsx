@@ -77,7 +77,7 @@ const Checkout: FC = () => {
                 ? "Loading"
                 : session?.user && (
                     <div className="font-semibold">
-                      {session.user.firstName} {session.user.lastName}.
+                      {session?.user.firstName} {session?.user.lastName}.
                     </div>
                   )}
             </div>

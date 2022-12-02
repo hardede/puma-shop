@@ -1,19 +1,18 @@
 import { Session } from "next-auth";
 import { SessionProvider, useSession } from "next-auth/react";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { wrapper } from "../store/store";
 import "../styles/globals.css";
 
-export interface CustomAppProps extends AppProps {
-  Component: any;
-  pageProps: { auth?: boolean; session?: Session };
-}
+// export interface CustomAppProps extends AppProps {
+//   pageProps: { auth?: boolean; session?: Session };
+// }
 
 function MyApp({
   Component,
-  pageProps: { session, auth, ...pageProps },
-}: CustomAppProps) {
+  pageProps: { auth, session, ...pageProps },
+}: any) {
   return (
     <SessionProvider session={session}>
       {Component.auth ? (
@@ -25,7 +24,7 @@ function MyApp({
       )}
     </SessionProvider>
   );
-}
+};
 
 function Auth({ children, adminOnly }: any) {
   const router = useRouter();
@@ -36,7 +35,11 @@ function Auth({ children, adminOnly }: any) {
     },
   });
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="block border-4 border-red-500 rounded-full border-dashed w-28 h-28 mx-auto mt-20 text-center pt-10 text-red-500 animate-rotateLoader">
+        Loading...
+      </div>
+    );
   }
 
   if (adminOnly && !session.user?.isAdmin) {
@@ -44,6 +47,6 @@ function Auth({ children, adminOnly }: any) {
   }
 
   return children;
-}
+};
 
 export default wrapper.withRedux(MyApp);

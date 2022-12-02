@@ -41,11 +41,11 @@ const AdminMenuProductEdit = () => {
     setValue("sale", productsEdit.sale);
     setValue("img", productsEdit.img);
   }, [
-    productsEdit.img,
     productsEdit.model,
+    productsEdit.slug,
     productsEdit.price,
     productsEdit.sale,
-    productsEdit.slug,
+    productsEdit.img,
     setValue,
   ]);
 
@@ -68,7 +68,9 @@ const AdminMenuProductEdit = () => {
   return (
     <div className="md:col-span-3">
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="block border-4 border-red-500 rounded-full border-dashed w-28 h-28 mx-auto mt-20 text-center pt-10 text-red-500 animate-rotateLoader">
+          Loading...
+        </div>
       ) : error ? (
         <div className="alert-error">{error}</div>
       ) : (

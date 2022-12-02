@@ -3,7 +3,13 @@ import axios from "axios";
 import { IUser } from "../../../types/IUser";
 import { RootState } from "../../store";
 
-const initialState: IUser | any = {
+interface StateProps {
+  adminUsers: IUser | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
   adminUsers: [],
   isLoading: true,
   error: null,

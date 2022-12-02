@@ -3,7 +3,13 @@ import axios from "axios";
 import { IUser } from "../../types/IUser";
 import { RootState } from "../store";
 
-const initialState = {
+interface StateProps {
+  userState: IUser | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
   userState: {} as IUser,
   isLoading: true,
   error: null,

@@ -14,7 +14,13 @@ export const fetchHistory = createAsyncThunk("orders/history", async () => {
   }
 });
 
-const initialState: History | any = {
+interface StateProps {
+  history: History | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
   history: [],
   isLoading: true,
   error: null,

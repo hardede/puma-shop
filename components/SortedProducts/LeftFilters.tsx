@@ -7,7 +7,7 @@ import SizeSort from "../PageForProducts/SizeSort/SizeSort";
 
 interface LeftFiltersProps {
   products: ProductPage[];
-}
+};
 
 const LeftFilters: FC<LeftFiltersProps> = ({ products }) => {
   const [categoryOpen, setCategoryOpen] = useState(false);

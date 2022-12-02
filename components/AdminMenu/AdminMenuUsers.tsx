@@ -8,7 +8,7 @@ import {
   fetchAdminUsers,
   selectAdminUsers,
   selectAdminUsersError,
-  selectAdminUsersIsLoading
+  selectAdminUsersIsLoading,
 } from "../../store/reducers/Admin/AdminUserSlice";
 import { IUser } from "../../types/IUser";
 import { getError } from "../../utils/error";
@@ -45,7 +45,9 @@ const AdminMenuUsers = () => {
     <div className="overflow-x-auto md:col-span-3">
       <h1 className="mb-4 text-xl">Users</h1>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="block border-4 border-red-500 rounded-full border-dashed w-28 h-28 mx-auto mt-20 text-center pt-10 text-red-500 animate-rotateLoader">
+          Loading...
+        </div>
       ) : error ? (
         <div className="alert-error">{error}</div>
       ) : (

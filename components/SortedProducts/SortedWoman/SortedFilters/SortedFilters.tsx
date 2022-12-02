@@ -12,7 +12,7 @@ import { ProductPage } from "../../../../types/product/productPage";
 
 interface SortedFiltersProps {
   products: ProductPage[];
-}
+};
 
 const SortedFilters: FC<SortedFiltersProps> = ({ products }) => {
   const router = useRouter();

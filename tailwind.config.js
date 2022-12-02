@@ -14,6 +14,21 @@ module.exports = {
       spacing: {
         mySpacing: "50% - 50px",
       },
+      keyframes: {
+        rotateLoader: {
+          "0%": {
+            opacity: 0.5,
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "rotate(1turn)",
+          },
+        },
+      },
+      animation: {
+        rotateLoader: "rotateLoader 2.5s infinite",
+      },
     },
   },
   plugins: [

@@ -3,8 +3,14 @@ import axios from "axios";
 import { SummaryTypes } from "../../../types/summary";
 import { RootState } from "../../store";
 
-const initialState = {
-  summaryState: {} as SummaryTypes,
+interface StateProps {
+  summaryState: SummaryTypes | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
+  summaryState: {},
   isLoading: true,
   error: null,
 };

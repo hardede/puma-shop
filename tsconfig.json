@@ -22,6 +22,9 @@
     "**/*.tsx",
     "app/components/Header/Header.jsx",
     "components/Header/Header.tsx",
+    "models/Product.js",
+    "models/Order.js",
+    "models/User.js",
     "components/Layout/Layout.jsx",
     "components/constants/social.js",
     "components/Footer/Footer.tsx",
@@ -30,9 +33,11 @@
     "components/Drawer/Drawer.hsx",
     "components/MultiRangeSlider/MultiRangeSlider.tsx",
     "components/screens/userAuthorization/UserAuthorization.tsx",
-    "store/reducers/AuthSlice.ts",
+    "store/reducers/AuthSlice.tx",
     "pages/api/admin/orders.js",
-    "pages/product/[slug].js",
+    "pages/manPage/[sorted].tsx",
+    "pages/_app.jsx",
+    "pages/product/[slug].tsx",
     "pages/api/admin/products/index.js",
     "pages/api/admin/orders.js",
     "pages/api/auth/[...nextauth].js",
@@ -45,7 +50,13 @@
     "pages/api/orders/history.js",
     "pages/api/orders/index.js",
     "pages/api/admin/products/index.js",
-    "models/Product.js"
+    "models/Product.js",
+    "pages/manPage/[sorted].tsx",
+    "pages/index.tsx",
+    "pages/manPage.tsx",
+    "pages/womanPage.tsx",
+    "pages/womanPage/[sorted].tsx",
+    "custom.d.ts"
   ],
   "exclude": ["node_modules"]
 }

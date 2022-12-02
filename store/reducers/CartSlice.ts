@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import { ProductPage } from "../../types/product/productPage";
 import { RootState } from "../store";
 
-const initialState: ProductPage | any = {
+interface StateProps {
+  cartState: ProductPage[] | any;
+} 
+
+const initialState: StateProps = {
   cartState: [],
 };
 

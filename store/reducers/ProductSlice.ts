@@ -14,7 +14,14 @@ export const fetchProducts = createAsyncThunk("api/allProducts", async () => {
   }
 });
 
-const initialState: ProductPage | any = {
+interface StateProps {
+  product: ProductPage | any;
+  productSort: ProductPage | any;
+  isLoading: boolean;
+  error: null | string;
+}
+
+const initialState: StateProps = {
   product: [],
   isLoading: true,
   error: null,

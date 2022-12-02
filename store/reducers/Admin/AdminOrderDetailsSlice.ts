@@ -1,9 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { History } from "../../../types/history";
 import { RootState } from "../../store";
 
-const initialState = {
-  orderDetailsState: [] as any,
+interface StateProps {
+  orderDetailsState: History[] | any;
+  isLoading: boolean;
+  error: null | string;
+} 
+
+const initialState: StateProps = {
+  orderDetailsState: [],
   isLoading: true,
   error: null,
 };

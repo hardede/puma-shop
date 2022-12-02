@@ -10,7 +10,7 @@ import SortedFilters from "./SortedFilters/SortedFilters";
 
 interface SortedWomanProps {
   products: ProductPage[];
-}
+};
 
 const SortedWoman: FC<SortedWomanProps> = ({ products }) => {
   const productSort = useAppSelector(selectProductsState);

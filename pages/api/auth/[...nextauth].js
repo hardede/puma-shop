@@ -9,21 +9,18 @@ export default NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
-      if (account) {
-        token.accessToken = account.access_token;
-        token._id = profile._id;
-        token.firstName = profile.firstName;
-        token.lastName = profile.lastName;
-        token.isAdmin = profile.isAdmin;
-      }
+    async jwt({ token, user }) {
+      if (user?._id) token._id = user._id;
+      if (user?.firstName) token.firstName = user.firstName;
+      if (user?.lastName) token.lastName = user.lastName;
+      if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return token;
     },
-    async session({ session, token, user }) {
-      session.user._id = token._id;
-      session.user.firstName = token.firstName;
-      session.user.lastName = token.lastName;
-      session.user.isAdmin = token.isAdmin;
+    async session({ session, token }) {
+      if (token?._id) session.user._id = token._id;
+      if (token?.firstName) session.user.firstName = token.firstName;
+      if (token?.lastName) session.user.lastName = token.lastName;
+      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
       return session;
     },
   },

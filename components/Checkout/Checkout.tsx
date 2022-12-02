@@ -77,7 +77,6 @@ const Checkout: FC = () => {
                 ? "Loading"
                 : session?.user && (
                     <div className="font-semibold">
-                      {/* @ts-ignore: Unreachable code error */}
                       {session?.user.firstName} {session?.user.lastName}.
                     </div>
                   )}

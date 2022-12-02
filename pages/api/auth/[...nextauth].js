@@ -17,10 +17,10 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token?._id) session.user._id = token._id;
-      if (token?.firstName) session.user.firstName = token.firstName;
-      if (token?.lastName) session.user.lastName = token.lastName;
-      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
+      session.user._id = token._id;
+      session.user.firstName = token.firstName;
+      session.user.lastName = token.lastName;
+      session.user.isAdmin = token.isAdmin;
       return session;
     },
   },

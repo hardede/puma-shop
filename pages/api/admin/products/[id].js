@@ -29,14 +29,13 @@ const putHandler = async (req, res) => {
   await db.connect();
   const product = await Product.findById(req.query.id);
   if (product) {
+    product.productFor = req.body.productFor;
     product.model = req.body.model;
     product.slug = req.body.slug;
     product.price = req.body.price;
     product.sale = req.body.sale;
     product.img = req.body.img;
-    // product.sizeSelection.sizeEur = req.body.sizeSelection.sizeEur;
-    // product.sizeSelection.sizeUK = req.body.sizeSelection.sizeUK;
-    // product.sizeSelection.countInStock = req.body.sizeSelection.countInStock;
+    product.sizeSelection = req.body.sizeSelection;
     await product.save();
     await db.disconnect();
     res.send({ message: "Product updated successfully" });

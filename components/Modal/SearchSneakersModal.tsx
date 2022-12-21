@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import useCountValues from "../../hooks/useCountValues";
+import useWindowSize from "../../hooks/useWindowSize";
 import { ProductPage } from "../../types/product/productPage";
 
 interface SearchSneakersModalProps {
@@ -11,22 +12,37 @@ interface SearchSneakersModalProps {
 const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
   searchProduct,
 }) => {
+  const [imageSize, setImageSize] = useState(false)
+   const size = useWindowSize();
   const { priceWithSaleString, priceString } = useCountValues(
     searchProduct.price,
     searchProduct.sale
   );
+  useEffect(() => {
+    setImageSize(size.width <= 767);
+  }, [size]);
+
   return (
     <Link href={`/product/${searchProduct.slug}`}>
-      <div className="flex justify-between items-center cursor-pointer">
+      <div className="my-2 flex items-center cursor-pointer">
         <div>
-          <Image
-            src={searchProduct.img}
-            alt={searchProduct.alt}
-            width={50}
-            height={50}
-          />
+          {imageSize ? (
+            <Image
+              src={searchProduct.img}
+              alt={searchProduct.alt}
+              width={100}
+              height={100}
+            />
+          ) : (
+            <Image
+              src={searchProduct.img}
+              alt={searchProduct.alt}
+              width={50}
+              height={50}
+            />
+          )}
         </div>
-        <div className="w-[250px]">
+        <div className="ml-10 xs:ml-4">
           <h5 className="text-black">{searchProduct.model}</h5>
           <div>
             <span

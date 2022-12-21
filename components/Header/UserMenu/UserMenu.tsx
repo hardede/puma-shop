@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { GrClose } from "react-icons/gr";
-import { userLinks } from "../constants/userLinks";
+import { userLinks } from "../../constants/userLinks";
 
 interface UserMenuProps {
   onClose: () => void;

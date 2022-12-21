@@ -28,24 +28,24 @@ const Products: FC<ProductsProps> = ({ products }) => {
     swipe: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1140,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+          slidesToScroll: 1,
+
+          // dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 949,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToScroll: 1,
+          infinite: true,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 639,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,

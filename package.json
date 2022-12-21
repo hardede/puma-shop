@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.0.1",
     "classnames": "^2.3.1",
+    "cloudinary": "^1.32.0",
     "lodash": "^4.17.21",
     "mongoose": "^6.7.5",
     "next": "^12.2.5",

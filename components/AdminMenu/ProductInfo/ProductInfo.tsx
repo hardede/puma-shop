@@ -39,7 +39,7 @@ const ProductInfo: FC<ProductInfoProps> = ({ product }) => {
         {product.model}
       </td>
       <td className="p-3 max-w-[135px] truncate">{product.price}</td>
-      <td className="p-3 max-w-[135px] truncate">{product.sale}</td>
+      <td className="p-3 max-w-[80px] truncate">{product.sale}</td>
       <td className="p-3">
         <div
           className="cursor-pointer"

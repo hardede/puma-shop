@@ -10,7 +10,7 @@ interface ManProductsSortedProps {
 const ManProductsSorted: FC<ManProductsSortedProps> = ({ products }) => {
   return (
     <Layout title="Man sorted products">
-      <div className="container max-w-[1140px] mt-20 py-2 m-auto">
+      <div className="container max-w-[1200px] mt-20 py-2 m-auto px-[30px] sm:px-2.5">
         <SortedMan products={products} />
       </div>
     </Layout>

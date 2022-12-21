@@ -4,13 +4,13 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useAppSelector } from "../../../hooks/redux";
 import { selectProductsState } from "../../../store/reducers/ProductSlice";
 import { ProductPage } from "../../../types/product/productPage";
-import LeftFilters from "../LeftFilters";
+import LeftFilters from "../LeftFilters/LeftFilters";
 import SortedItems from "../SortedItems/SortedItems";
 import SortedFilters from "./SortedFilters/SortedFilters";
 
 interface SortedManProps {
   products: ProductPage[];
-};
+}
 
 const SortedMan: FC<SortedManProps> = ({ products }) => {
   const productSort = useAppSelector(selectProductsState);
@@ -32,23 +32,23 @@ const SortedMan: FC<SortedManProps> = ({ products }) => {
             {products.length} goods
           </span>
         </div>
-        <div className="flex">
-          <LeftFilters products={products} />
-          <div className="w-full">
-            <SortedFilters products={products} />
-            <div>
-              {productSort.length === 0 ? (
-                <div className="text-center font-bold text-xl text-red-500">
-                  No products found for the given parameter
-                </div>
-              ) : (
-                <div className="flex flex-wrap">
-                  {productSort.map((item: ProductPage) => (
-                    <SortedItems key={item._id} item={item} />
-                  ))}
-                </div>
-              )}
-            </div>
+        <div className="grid grid-cols-[220px_auto] gap-5 md:grid-cols-2">
+          <div className="row-span-2 md:row-span-1">
+            <LeftFilters products={products} />
+          </div>
+          <SortedFilters products={products} />
+          <div className="md:col-span-2">
+            {productSort.length === 0 ? (
+              <div className="text-center font-bold text-xl text-red-500">
+                No products found for the given parameter
+              </div>
+            ) : (
+              <div className="flex flex-wrap">
+                {productSort.map((item: ProductPage) => (
+                  <SortedItems key={item._id} item={item} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

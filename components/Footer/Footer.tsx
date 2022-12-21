@@ -13,16 +13,14 @@ const Footer: FC = () => {
             <SiPuma className="w-10 h-10 fill-white" />
           </a>
         </Link>
-        <div className="flex">
-          <div className="flex flex-auto text-white mt-8">
-            <FooterCol1 />
-            <FooterCol2 />
-            <FooterCol3 />
-          </div>
-          <div className="mr-20 text-white flex items-center">
+        <div className="grid grid-cols-5 gap-5 text-white mt-8 mdd:grid-cols-2 xs:grid-cols-1">
+          <FooterCol1 />
+          <FooterCol2 />
+          <FooterCol3 />
+          <div className=" text-white flex justify-end mr-20 items-center col-span-2 mdd:col-span-1 mdd:mr-0 mdd:justify-start">
             {socialsData.map(social => (
               <Link href={social.href} key={social.id}>
-                <a className="p-0.5 block mr-10 scale-[200%] bg-red-500 rounded-full opacity-70 hover:opacity-100 text-white hover:translate-y-1 hover:translate-x-1">
+                <a className="w-10 h-10 p-0.5 mr-5 block bg-red-500 rounded-full opacity-70 hover:opacity-100 text-white hover:translate-y-1 hover:translate-x-1">
                   {social.imgUrl}
                 </a>
               </Link>

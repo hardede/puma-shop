@@ -10,7 +10,7 @@ interface IndividualProps {
 const IndividualProductPage: FC<IndividualProps> = ({ product }) => {
   return (
     <Layout title="Man sorted products">
-      <div className="container max-w-[1140px] py-2 mt-20 m-auto">
+      <div className="container max-w-[12000px] py-2 mt-20 m-auto px-[30px] sm:px-2.5">
         <IndividualPage product={product} />
       </div>
     </Layout>

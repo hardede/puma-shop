@@ -65,21 +65,22 @@ const ImgSlider: FC<ImgSliderProps> = ({ product, saleString }) => {
             }
           >
             {product.sale !== 0 && (
-              <div className="absolute z-50 right-0 bg-red-600 w-20 py-2 text-center items-center">
+              <div className="absolute right-0 bg-red-600 w-20 py-2 text-center items-center">
                 <span className="text-white text-xl font-bold">
                   {saleString}
                 </span>
               </div>
             )}
-
-            <Image
-              src={item.productImg}
-              width={459}
-              height={459}
-              objectFit="contain"
-              draggable="false"
-              alt={item.productImg}
-            />
+            <div className="relative -z-10">
+              <Image
+                src={item.productImg}
+                width={459}
+                height={459}
+                objectFit="contain"
+                draggable="false"
+                alt={item.productImg}
+              />
+            </div>
           </div>
         ))}
       </div>

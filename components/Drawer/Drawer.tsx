@@ -20,7 +20,7 @@ const Drawer: FC<DrawerProps> = ({ onClose }) => {
   return (
     <div onClick={onClose}>
       <div
-        className="absolute w-[540px] h-screen top-0 right-0 bg-white py-[30px] px-[40px] z-50 text-black"
+        className="absolute w-[540px] h-screen top-0 right-0 bg-white py-[30px] px-[40px] z-[100] text-black sm:p-5 sm:w-screen"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex flex-col justify-between h-full">
@@ -45,7 +45,7 @@ const Drawer: FC<DrawerProps> = ({ onClose }) => {
                   Your basket is empty
                 </h3>
               ) : (
-                <div className="max-h-[480px] scroll">
+                <div className="max-h-[480px] scroll ">
                   {cartState.map((cart: ProductPage) => (
                     <DrawerItems key={uuidv4()} cart={cart} />
                   ))}

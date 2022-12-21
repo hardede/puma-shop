@@ -4,7 +4,7 @@ import { footerAbout, footerHelp1, footerHelp2 } from "../../constants/footer";
 
 export const FooterCol1: FC = () => {
   return (
-    <div className="mr-40">
+    <div className="">
       <h1 className="mb-4">Help</h1>
       {footerHelp1.map(link => (
         <div
@@ -22,7 +22,8 @@ export const FooterCol1: FC = () => {
 
 export const FooterCol2: FC = () => {
   return (
-    <div className="pt-10 mr-40">
+    <div className="">
+      <h1 className="mb-4">Other</h1>
       {footerHelp2.map(link => (
         <div
           key={link.id}

@@ -9,9 +9,26 @@ const handler = async (req, res) => {
   }
   if (req.method === "GET") {
     return getHandler(req, res);
+  } else if (req.method === "POST") {
+    return postHandler(req, res);
   } else {
     return res.status(400).send({ message: "Method not allowed" });
   }
+};
+
+const postHandler = async (req, res) => {
+  await db.connect();
+  const newProduct = new Product({
+    model: "sample model",
+    slug: "sample-name-" + Math.random(),
+    image: "/images/shirt1.jpg",
+    price: 0,
+    productFor: "sample category",
+  });
+
+  const product = await newProduct.save();
+  await db.disconnect();
+  res.send({ message: "Product created successfully", product });
 };
 
 const getHandler = async (req, res) => {

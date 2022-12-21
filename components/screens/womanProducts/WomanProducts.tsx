@@ -10,7 +10,7 @@ interface WomanProductsProps {
 const WomanProducts: FC<WomanProductsProps> = ({ products }) => {
   return (
     <Layout title="Woman Products">
-      <div className="container max-w-[1140px] m-auto">
+      <div className="container max-w-[1200px] m-auto px-[30px] sm:px-2.5">
         <PageForProducts
           title="sneakers Woman"
           category="goods for woman"

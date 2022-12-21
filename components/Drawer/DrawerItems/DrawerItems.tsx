@@ -25,13 +25,13 @@ const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
   );
 
   return (
-    <div className="flex  py-4 border-b border-[#979797] first:pt-0">
-      <div>
+    <div className="flex py-4 border-b border-[#979797] first:pt-0">
+      <div className="sm:min-w-[80px] sm:min-h-[80px]">
         <Image src={cart.img} alt={cart.alt} width={80} height={80} />
       </div>
-      <div className="w-[350px] ml-4">
+      <div className="w-[350px] ml-4 sm:w-screen">
         <div className="flex justify-between">
-          <h2 className="max-w-[300px] text-lg font-medium mb-2">
+          <h2 className="max-w-[300px] text-lg font-medium mb-2 xs:text-base xs:font-medium ">
             {cart.model}
           </h2>
           <GrClose
@@ -41,19 +41,21 @@ const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
         </div>
         <div className="flex text-sm">
           <h4 className="pr-1 text-[#979797]">Color:</h4>
-          <p className="font-bold text-[#181818]">{cart.color}</p>
+          <p className="font-bold text-[#181818 xs:font-normal">{cart.color}</p>
         </div>
         <div className="flex text-sm">
           <h4 className="pr-1 text-[#979797]">Size:</h4>
-          <p className="font-bold text-[#181818]">{cart.size} EUR</p>
+          <p className="font-bold text-[#181818] xs:font-normal">
+            {cart.size} EUR
+          </p>
         </div>
         <div className="flex text-sm">
           <h4 className="pr-1 text-[#979797]">Art.:</h4>
-          <p className="font-bold text-[#181818]">{cart.atr}</p>
+          <p className="font-bold text-[#181818] xs:font-normal">{cart.atr}</p>
         </div>
-        <div className="flex justify-start items-center mt-3 text-lg">
-          <div className="flex mr-9 items-center">
-            <span className="w-[60px] mr-3">{cart.quantity} Items</span>
+        <div className="flex justify-start items-center mt-3 text-lg xs:text-base">
+          <div className="flex mr-9 items-center xs:mr-2">
+            <span className="w-[60px] mr-3 xs:mr-1">{cart.quantity} Items</span>
             <div className="">
               {cart.quantity === cart.countInStock ? (
                 <MdArrowForwardIos className="-rotate-90 cursor-pointer opacity-30" />
@@ -73,12 +75,14 @@ const DrawerItems: FC<DrawerItemsProps> = ({ cart }) => {
               )}
             </div>
           </div>
-          <span className="font-bold text-[#ae946d] pr-4">
-            {cart.sale === 0 ? sumPrice : sumPriceWithSale}
-          </span>
-          <span className="font-normal text-[#555555] line-through decoration-2 decoration-[#ae946d]">
-            {cart.sale !== 0 && sumPrice}
-          </span>
+          <div className="xs:flex xs:flex-col">
+            <span className="font-bold text-[#ae946d] pr-4 xs:font-normal xs:pr-0">
+              {cart.sale === 0 ? sumPrice : sumPriceWithSale}
+            </span>
+            <span className="font-normal text-[#555555] line-through decoration-2 decoration-[#ae946d] ">
+              {cart.sale !== 0 && sumPrice}
+            </span>
+          </div>
         </div>
       </div>
     </div>

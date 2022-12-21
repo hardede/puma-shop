@@ -37,13 +37,13 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
   return (
     <>
       <div
-        className="flex items-center border border-white border-opacity-20 py-2.5 px-6 mr-5"
+        className="flex items-center border border-white border-opacity-20 py-2.5 px-6 mr-5 md:mr-0 xs:px-2"
         onClick={() => setSearchMenuOpen(!searchMenuOpen)}
       >
-        <BiSearch className="text-2xl mr-3" />
+        <BiSearch className="text-2xl mr-3 md:text-3xl" />
         <input
           placeholder="find..."
-          className="bg-transparent placeholder:uppercase outline-none"
+          className="bg-transparent placeholder:uppercase outline-none md:border md:w-full md:px-4 md:py-2"
           onChange={changeInput}
           value={searchInput}
         />
@@ -61,7 +61,7 @@ const SearchingMenu: FC<SearchingMenuProps> = ({
           ref={nodeRef}
         >
           <div
-            className="w-[350px] max-h-[400px] top-20 right-32 absolute bg-white p-4 overflow-y-scroll"
+            className="w-[350px] max-h-[400px] top-20 right-32 absolute bg-white p-4 overflow-y-scroll md:w-screen md:top-44 md:right-0 md:max-h-[200px]"
             onClick={e => e.stopPropagation()}
           >
             <div className="text-black">Goods</div>

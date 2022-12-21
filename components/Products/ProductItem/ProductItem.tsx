@@ -15,14 +15,14 @@ const ProductItem: FC<ProductItemProps> = ({ sneaker }) => {
   return (
     <>
       <div
-        className="max-w-[250px] h-[317px] relative"
+        className="max-w-[250px] h-[317px] mx-auto relative md:max-w-[200px] md:h-[267px]  "
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
       >
         <Link href={`/product/${sneaker.slug}`}>
           <a draggable="false">
             {show && (
-              <div className="absolute right-[83px] top-[134px] ">
+              <div className="absolute right-[83px] top-[134px] md:right-[55px] md:top-[85px]">
                 <div className=" bg-black z-100 text-white border border-black uppercase font-bold px-6 py-1.5 hover:bg-[#9F9F9F] hover:text-black transition-all ease-in-out duration-500">
                   buy
                 </div>

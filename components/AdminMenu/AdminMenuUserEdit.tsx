@@ -89,7 +89,7 @@ const AdminMenuUserEdit = () => {
           onSubmit={handleSubmit(submitHandler)}
         >
           <h1 className="mb-4 text-xl">{`Edit User ${userId}`}</h1>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 md:grid-cols-1">
             <div className="mb-4 flex flex-col">
               <label
                 htmlFor="firstName"
@@ -99,7 +99,7 @@ const AdminMenuUserEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="firstName"
                 autoFocus
                 {...register("firstName", {
@@ -129,7 +129,7 @@ const AdminMenuUserEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="lastName"
                 {...register("lastName", {
                   required: "Please enter lastName",
@@ -156,7 +156,7 @@ const AdminMenuUserEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-2 md:w-full"
                 id="email"
                 {...register("email", {
                   required: "Please enter email",
@@ -184,7 +184,7 @@ const AdminMenuUserEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="city"
                 {...register("city", {
                   required: "Please enter city",

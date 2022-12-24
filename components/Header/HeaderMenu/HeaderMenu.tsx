@@ -7,10 +7,10 @@ import useTotalPrice from "../../../hooks/useTotalPrice";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { selectCartState } from "../../../store/reducers/CartSlice";
 import Drawer from "../../Drawer/Drawer";
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
-import SearchingMenu from "../SearchingMenu/SearchingMenu";
-import UserMenu from "../UserMenu/UserMenu";
-import SearchModal from "./SearchModal/SearchModal";
+import SearchingMenu from "../../Modal/SearchingMenu/SearchingMenu";
+import UserMenu from "../../Modal/UserMenu/UserMenu";
+import BurgerMenu from "../../Modal/BurgerMenu/BurgerMenu";
+import SearchModal from "../../Modal/SearchingMenu/SearchModal/SearchModal";
 
 interface HeaderMenuProps {
   burgerMenuOpen: boolean;
@@ -91,7 +91,7 @@ const HeaderMenu: FC<HeaderMenuProps> = ({
 
       <div className="p-2 relative" onClick={() => setDrawerOpen(!drawerOpen)}>
         {cartState.length > 0 && (
-          <span className="rounded-full bg-red-600 absolute text-xs px-2 font-extrabold py-1 right-0 bottom-3">
+          <span className="rounded-full bg-red-600 absolute text-xs px-2 font-extrabold py-1 right-0 bottom-6">
             {totalQuantity}
           </span>
         )}

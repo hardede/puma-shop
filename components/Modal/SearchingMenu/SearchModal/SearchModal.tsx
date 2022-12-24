@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import SearchingMenu from "../../SearchingMenu/SearchingMenu";
+import { FC } from "react";
+import SearchingMenu from "../SearchingMenu";
 
 interface SearchModalProps {
   searchMenuOpen: boolean;
@@ -10,7 +10,7 @@ interface SearchModalProps {
 const SearchModal: FC<SearchModalProps> = ({
   searchMenuOpen,
   setSearchMenuOpen,
-  onClose
+  onClose,
 }) => {
   return (
     <div onClick={onClose}>

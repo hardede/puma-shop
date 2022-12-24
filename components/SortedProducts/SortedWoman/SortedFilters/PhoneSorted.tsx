@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "../../../../hooks/redux";
 import {

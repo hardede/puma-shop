@@ -9,19 +9,12 @@ const Hero = () => {
         <Image
           alt="puma-banner"
           src="/puma.webp"
-          width={1700}
-          height={570}
           layout="fill"
           objectFit="cover"
           objectPosition="center"
           quality={100}
           placeholder="blur"
           blurDataURL={hero}
-          // priority
-          // layout="fill"
-          // sizes="(max-width: 767) 40vh,
-          //           (min-width: 28em) 45vw,
-          //           100vw"
         />
       </div>
       <div className="relative flex flex-col justify-center h-[500px] text-white px-[120px] items-start lg:h-[380px] mdd:px-10 md:h-[300px] sm:px-4 sm:h-[250px] xs:h-[200px]">

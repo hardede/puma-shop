@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { FC } from "react";
+import { FC } from "react";
 import { SiPuma } from "react-icons/si";
 import { socialsData } from "../constants/social";
 import { FooterCol1, FooterCol2, FooterCol3 } from "./FooterCol/FooterCol1";

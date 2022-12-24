@@ -5,7 +5,7 @@ import PageForProducts from "../../PageForProducts/PageForProducts";
 
 interface WomanProductsProps {
   products: ProductPage[];
-};
+}
 
 const WomanProducts: FC<WomanProductsProps> = ({ products }) => {
   return (

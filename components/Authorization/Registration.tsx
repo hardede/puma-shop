@@ -61,7 +61,7 @@ const Registration = () => {
   };
 
   return (
-    <div>
+    <div className="md:mt-10">
       <h3 className="text-xl font-bold after:block after:w-[185px] after:h-0.5 after:bg-[#d2a1a1] after:mt-2">
         Registration
       </h3>

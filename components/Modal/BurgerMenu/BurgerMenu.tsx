@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { headerLink } from "../../../constants/header";
+import { headerLink } from "../../constants/header";
 
 interface BurgerMenuProps {
   onClose: () => void;

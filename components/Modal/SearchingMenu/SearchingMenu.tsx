@@ -5,10 +5,10 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import useDebounce from "../../../hooks/useDebounce";
 import {
   fetchProducts,
-  selectProducts
+  selectProducts,
 } from "../../../store/reducers/ProductSlice";
 import { ProductPage } from "../../../types/product/productPage";
-import SearchSneakersModal from "../../Modal/SearchSneakersModal";
+import SearchSneakersModal from "../SearchSneakersModal";
 
 interface SearchingMenuProps {
   searchMenuOpen: boolean;

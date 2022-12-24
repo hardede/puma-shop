@@ -1,10 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useAppDispatch } from "../../hooks/redux";
 import useCountValues from "../../hooks/useCountValues";
+import useWindowSize from "../../hooks/useWindowSize";
 import { cartAdd } from "../../store/reducers/CartSlice";
 import { ProductPage, SizeSelection } from "../../types/product/productPage";
 import ImgSlider from "./ImgSlider/ImgSlider";
@@ -15,6 +17,7 @@ interface IndividualPageProps {
 
 const IndividualPage: FC<IndividualPageProps> = ({ product }) => {
   const [showSize, setShowSize] = useState(false);
+  const [phonePage, setPhonePage] = useState(false);
   const [productSize, setProductSize] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
   const { priceWithSale, priceWithSaleString, priceString, saleString } =
@@ -22,6 +25,12 @@ const IndividualPage: FC<IndividualPageProps> = ({ product }) => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const size = useWindowSize();
+
+  useEffect(() => {
+    setPhonePage(size.width <= 768);
+  }, [size]);
+
   if (!product) {
     return <div title="Product not found">Product not found</div>;
   }
@@ -44,18 +53,22 @@ const IndividualPage: FC<IndividualPageProps> = ({ product }) => {
         <AiOutlineArrowLeft className="w-10 h-7" />
         <p className="uppercase text-sm">back</p>
       </div>
-      <div className="flex mt-20 justify-between mx-auto">
+      <div className="flex mt-20 justify-between mx-auto md:justify-center">
         <ImgSlider product={product} saleString={saleString} />
-        <div className="w-[380px]">
-          <h1 className="font-bold text-2xl uppercase pb-8">{product.model}</h1>
+        <div className="w-[380px] md:w-auto">
+          <h1 className="font-bold text-2xl uppercase pb-8 md:text-xl">
+            {product.model}
+          </h1>
           <div className="pb-2 flex justify-between items-center">
             <div>
               {priceWithSale ? (
-                <span className="font-bold text-xl mr-4">
+                <span className="font-bold text-xl mr-4 xs:mr-2 xs:text-lg xs:font-semibold">
                   {priceWithSaleString}
                 </span>
               ) : (
-                <span className="font-bold text-xl mr-4">{priceString}</span>
+                <span className="font-bold text-xl mr-4 xs:mr-2 xs:text-lg xs:font-semibold">
+                  {priceString}
+                </span>
               )}
               {priceWithSale && (
                 <span className="line-through decoration-2 decoration-red-500">
@@ -70,6 +83,27 @@ const IndividualPage: FC<IndividualPageProps> = ({ product }) => {
               + 5% discount and free shipping when paying online
             </p>
           )}
+          {phonePage ? (
+            <div className="relative">
+              {product.sale !== 0 && (
+                <div className="absolute right-0 bg-red-600 w-20 py-2 text-center items-center md:w-14">
+                  <span className="text-white text-xl font-bold md:text-base">
+                    {saleString}
+                  </span>
+                </div>
+              )}
+              <div className="w-full relative -z-10">
+                <Image
+                  src={product.img}
+                  width={540}
+                  height={540}
+                  objectFit="contain"
+                  draggable="false"
+                  alt={product.alt}
+                />
+              </div>
+            </div>
+          ) : null}
           <p className="mb-2">Color: {product.color}</p>
           <div className="mb-4">
             <div

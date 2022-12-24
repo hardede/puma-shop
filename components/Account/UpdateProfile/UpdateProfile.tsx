@@ -60,9 +60,9 @@ const UpdateProfile = () => {
   return (
     <div>
       <form className="mt-10" onSubmit={handleSubmit(submitHandler)}>
-        <div className="flex justify-between">
+        <div className="flex justify-between md:block">
           <div className="flex flex-col">
-            <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl">
+            <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl xl:after:w-[450px] lg:after:w-[340px] md:after:w-full">
               Personal information
             </h5>
             <div className="flex flex-col mt-10">
@@ -133,10 +133,10 @@ const UpdateProfile = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px]  after:h-0.5 text-xl">
+            <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px]  after:h-0.5 text-xl xl:after:w-[450px] lg:after:w-[340px] md:hidden">
               Password
             </h5>
-            <div className="flex flex-col mt-10">
+            <div className="flex flex-col mt-10 md:mt-4">
               <label className="uppercase text-xs mb-1 text-[#777]">
                 password:
               </label>
@@ -202,7 +202,7 @@ const UpdateProfile = () => {
         <input
           type="submit"
           value="save"
-          className="mt-4 w-[250px] bg-black font-bold uppercase text-xl text-white py-2.5 hover:opacity-60 transition duration-500 cursor-pointer"
+          className="mt-4 w-[250px] bg-black font-bold uppercase text-xl text-white py-2.5 hover:opacity-60 transition duration-500 cursor-pointer md:w-full"
         />
       </form>
     </div>

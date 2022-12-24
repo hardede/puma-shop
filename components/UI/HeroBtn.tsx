@@ -2,8 +2,8 @@ import Link from "next/link";
 import { FC } from "react";
 
 interface HeroBtnProps {
-  link: string
-  title: string
+  link: string;
+  title: string;
 }
 
 const HeroBtn: FC<HeroBtnProps> = ({ link, title }) => {

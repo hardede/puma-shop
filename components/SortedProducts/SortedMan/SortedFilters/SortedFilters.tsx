@@ -31,7 +31,7 @@ const SortedFilters: FC<SortedFiltersProps> = ({ products }) => {
       {phonePage ? (
         <PhoneSorted products={products} />
       ) : (
-        <div className="flex items-center border-b-2 border-black pb-5 mb-5">
+        <div className="flex flex-wrap items-center border-b-2 border-black pb-5 mb-5">
           <p className="font-medium uppercase text-[#828282] mr-4">sort by:</p>
           <Link href={`/manPage`}>
             <a className="p-1 mr-2 border border-[#ccc] hover:bg-black hover:text-white cursor-pointer">

@@ -86,11 +86,11 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
   };
   return (
     <>
-      <h4 className="mt-8 px-10 py-[41px] uppercase text-lg font-bold border-y border-[#d2a1a1]">
+      <h4 className="mt-8 px-10 py-[41px] uppercase text-lg font-bold border-y border-[#d2a1a1] xs:px-4 xs:py-5">
         payment method
       </h4>
-      <div className="border-b [#d2a1a1] border-[#d2a1a1] pb-[41px]">
-        <div className="flex px-10 pt-10">
+      <div className="border-b [#d2a1a1] border-[#d2a1a1] pb-[41px] xs:pb-4">
+        <div className="flex px-10 pt-10 xs:pt-4 xs:px-4">
           <input
             type="radio"
             checked={activeCard}
@@ -102,7 +102,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
           </p>
         </div>
         <div
-          className={activeCard ? " px-10" : "hidden"}
+          className={activeCard ? " px-10 xs:px-4" : "hidden"}
           onClick={onChangePaymentMethod}
         >
           <div className="flex">
@@ -141,13 +141,13 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
             disabled={!isPhoneValid}
             type="submit"
             value="checkout"
-            className=" px-10 py-2 bg-red-500 text-white text-xl uppercase"
+            className="px-10 py-2 bg-red-500 text-white text-xl uppercase"
             onClick={onClickCheckout}
           />
         </div>
       </div>
-      <div className="border-b [#d2a1a1] border-[#d2a1a1] pb-[41px]">
-        <div className="flex px-10 pt-6">
+      <div className="border-b [#d2a1a1] border-[#d2a1a1] pb-[41px] xs:pb-4">
+        <div className="flex px-10 pt-6 xs:px-4 xs:pt-4">
           <input
             type="radio"
             checked={activeCash}
@@ -158,7 +158,7 @@ const PaymentMethods: FC<PaymentMethodsProps> = ({
           </p>
         </div>
         <div
-          className={activeCash ? " px-10 " : "hidden"}
+          className={activeCash ? " px-10 xs:px-4" : "hidden"}
           onClick={onChangePaymentMethod}
         >
           <div className="flex">

@@ -8,7 +8,7 @@ const UserProfile = () => {
       <div className="mt-10">
         <UpdateProfile />
       </div>
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex justify-between md:block">
         <Address />
         <OrderHistory />
       </div>

@@ -12,7 +12,7 @@ const Address = () => {
 
   return (
     <div>
-      <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl">
+      <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl xl:after:w-[450px] lg:after:w-[340px] md:after:w-full">
         Address
       </h5>
       <p className="mt-5 font-medium">

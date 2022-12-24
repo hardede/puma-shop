@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -13,7 +13,6 @@ import {
 } from "../../store/reducers/Admin/AdminEditSlice";
 import { ProductPage } from "../../types/product/productPage";
 import { getError } from "../../utils/error";
-import SizeSelectInput from "./SizeSelectInput/SizeSelectInput";
 
 const AdminMenuProductEdit = () => {
   const { query } = useRouter();
@@ -23,12 +22,6 @@ const AdminMenuProductEdit = () => {
   const productsEdit = useAppSelector(selectEdit);
   const isLoading = useAppSelector(selectEditIsLoading);
   const error = useAppSelector(selectEditError);
-  const [sizeCount, setSizeCount] = useState([]);
-  const [showSizes, setShowSizes] = useState(false);
-  console.log(
-    "🚀 ~ file: AdminMenuProductEdit.tsx:27 ~ AdminMenuProductEdit ~ sizeCount",
-    sizeCount
-  );
 
   useEffect(() => {
     dispatch(fetchData123(productId));
@@ -60,30 +53,6 @@ const AdminMenuProductEdit = () => {
     productsEdit.sizeSelection,
   ]);
 
-  // const uploadHandler = async (e: any, imageField: any = "image") => {
-  //   const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
-  //   try {
-  //     dispatch({ type: "UPLOAD_REQUEST" });
-  //     const {
-  //       data: { signature, timestamp },
-  //     } = await axios("/api/admin/cloudinary-sign");
-
-  //     const file = e.target.files[0];
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     formData.append("signature", signature);
-  //     formData.append("timestamp", timestamp);
-  //     formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
-  //     const { data } = await axios.post(url, formData);
-  //     dispatch({ type: "UPLOAD_SUCCESS" });
-  //     setValue(imageField, data.secure_url);
-  //     toast.success("File uploaded successfully");
-  //   } catch (err) {
-  //     dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
-  //     toast.error(getError(err));
-  //   }
-  // };
-
   const submitHandler = async ({
     productFor,
     model,
@@ -93,10 +62,6 @@ const AdminMenuProductEdit = () => {
     img,
     sizeSelection,
   }: any) => {
-    console.log(
-      "🚀 ~ file: AdminMenuProductEdit.tsx:91 ~ AdminMenuProductEdit ~ sizeSelection",
-      sizeSelection
-    );
     try {
       await axios.put(`/api/admin/products/${productId}`, {
         productFor,
@@ -128,7 +93,7 @@ const AdminMenuProductEdit = () => {
           onSubmit={handleSubmit(submitHandler)}
         >
           <h1 className="mb-4 text-xl">{`Edit Product ${productId}`}</h1>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 md:grid-cols-1">
             <div className="mb-4 flex flex-col">
               <label
                 htmlFor="productFor"
@@ -138,7 +103,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <select
                 {...register("productFor")}
-                className="appearance-none w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="appearance-none w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
               >
                 {["man", "woman"].map(value => (
                   <option key={value} value={value}>
@@ -156,7 +121,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="model"
                 autoFocus
                 {...register("model", {
@@ -178,7 +143,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="slug"
                 {...register("slug", {
                   required: "Please enter slug",
@@ -197,7 +162,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="price"
                 {...register("price", {
                   required: "Please enter newPrice",
@@ -216,7 +181,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="sale"
                 {...register("sale", {
                   required: "Please enter sale",
@@ -235,7 +200,7 @@ const AdminMenuProductEdit = () => {
               </label>
               <input
                 type="text"
-                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20"
+                className="placeholder:uppercase w-[300px] px-4 py-2.5 border-2 focus:border-black outline-none mr-20 md:w-full"
                 id="img"
                 {...register("img", {
                   required: "Please enter img",
@@ -245,17 +210,6 @@ const AdminMenuProductEdit = () => {
                 <div className="text-red-500">{errors.img.message}</div>
               )}
             </div>
-            {/* <div className="mb-4">
-              <label htmlFor="imageFile">Upload image</label>
-              <input
-                type="file"
-                className="w-full"
-                id="imageFile"
-                onChange={uploadHandler}
-              />
-
-              {loadingUpload && <div>Uploading....</div>}
-            </div> */}
           </div>
           <div className="flex">
             <input

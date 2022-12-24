@@ -15,11 +15,11 @@ const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
   );
 
   return (
-    <div className="flex py-4 border-b border-[#d2a1a1]">
+    <div className="flex py-4 border-b border-[#d2a1a1] lg:min-w-[285px] xs:min-w-full xs:justify-around">
       <div className="mr-2 ">
         <Image src={order.img} alt={order.alt} width={90} height={90} />
       </div>
-      <div className="w-[215px]">
+      <div className="w-[215px] lg:min-w-[225px]">
         <h4 className="font-bold text-xs pb-4">{order.model}</h4>
         <div className="text-xs flex">
           <p className="opacity-40 ">Color:&nbsp;</p>
@@ -41,7 +41,7 @@ const CheckoutItems: FC<CheckoutItemsProps> = ({ order }) => {
               className={
                 order.sale === 0
                   ? "hidden"
-                  : "text-[10px] line-through decoration-2 decoration-red-500"
+                  : "text-[10px] line-through decoration-2 decoration-red-500 xs:text-xs"
               }
             >
               {sumPrice}

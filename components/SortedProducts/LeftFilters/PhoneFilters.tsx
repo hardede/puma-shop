@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { ProductPage } from "../../../types/product/productPage";
 import { sizes } from "../../constants/sizes";
@@ -28,9 +28,9 @@ const PhoneFilters: FC<PhoneFiltersProps> = ({ products }) => {
           className={filterOpen ? "" : "hidden"}
           onClick={e => e.stopPropagation()}
         >
-          <div className="before:bg-[#dedede] mb-2">
+          <div className="before:bg-[#dedede] my-2">
             <div
-              className="flex justify-between items-center py-4"
+              className="flex justify-between items-center py-2"
               onClick={() => setCategoryOpen(!categoryOpen)}
             >
               <h3 className="uppercase font-bold text-[#2f2f2f]">

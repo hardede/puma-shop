@@ -10,11 +10,11 @@ const CartOrders = () => {
 
   return (
     <Layout title="Cart">
-      <div className="flex justify-between  mt-20 px-28 py-[26px]  bg-[#eee] w-screen">
+      <div className="flex justify-between  mt-20 px-28 py-[26px]  bg-[#eee] w-screen md:px-14 xs:px-5">
         <div className="flex items-center">
-          <h4 className="text-2xl uppercase mr-1">Cart</h4>
+          <h4 className="text-2xl uppercase mr-1 xs:text-xl">Cart</h4>
           {cartState.length > 0 ? (
-            <span className="text-2xl">
+            <span className="text-2xl xs:text-xl">
               ({cartState.reduce((a: any, c: any) => a + c.quantity, 0)})
             </span>
           ) : (
@@ -28,11 +28,11 @@ const CartOrders = () => {
           </div>
         </Link>
       </div>
-      <div className="container max-w-[1140px] mt-20 m-auto">
+      <div className="container max-w-[1200px] mt-20 m-auto px-[30px] sm:px-2.5 xs:mt-10">
         {cartState.length > 0 ? (
           <Cart />
         ) : (
-          <div className="uppercase font-serif text-3xl text-center">
+          <div className="uppercase font-serif text-3xl text-center xs:text-xl">
             Your basket is empty
           </div>
         )}

@@ -29,7 +29,7 @@ const SortedFilters: FC<SortedFiltersProps> = ({ products }) => {
   return (
     <>
       {phonePage ? (
-        <PhoneSorted products={products}/>
+        <PhoneSorted products={products} />
       ) : (
         <div className="flex flex-wrap items-center border-b-2 border-black pb-5 mb-5">
           <p className="font-medium uppercase text-[#828282] mr-4">sort by:</p>

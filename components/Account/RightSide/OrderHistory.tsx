@@ -20,8 +20,8 @@ const OrderHistory: FC = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl">
+    <div className="md:mt-10">
+      <h5 className="after:mt-3 after:block after:bg-[#d2a1a1] after:w-[520px] after:h-0.5 text-xl xl:after:w-[450px] lg:after:w-full">
         Order history
       </h5>
       <div className="">
@@ -32,7 +32,7 @@ const OrderHistory: FC = () => {
         ) : (
           <>
             {history.length === 0 ? (
-              <div className="mt-5">You have no orders now</div>
+              <div className="mt-5 font-medium">You have no orders now</div>
             ) : (
               <>
                 {history.map((order: History) => (

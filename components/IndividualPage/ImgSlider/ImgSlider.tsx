@@ -26,8 +26,8 @@ const ImgSlider: FC<ImgSliderProps> = ({ product, saleString }) => {
   };
 
   return (
-    <div className="flex">
-      <div className="scroll flex flex-col my-1 max-h-[350px] overflow-scroll scroll-y">
+    <div className="flex md:hidden">
+      <div className="scroll flex flex-col my-1 max-h-[350px] overflow-scroll scroll-y md:hidden">
         {product.imgProductPage.map((item: ImgProductPage, index: number) => (
           <div
             key={item.productImg}
@@ -48,13 +48,13 @@ const ImgSlider: FC<ImgSliderProps> = ({ product, saleString }) => {
           </div>
         ))}
       </div>
-      <div className="translate-y-1/2">
+      <div className="translate-y-1/2 md:hidden">
         <MdArrowForwardIos
           className="rotate-180 w-9 h-9 cursor-pointer"
           onClick={() => onClickPrev(current)}
         />
       </div>
-      <div className="">
+      <div className="md:mr-5">
         {product.imgProductPage.map((item: ImgProductPage, index: number) => (
           <div
             key={item.productImg}
@@ -65,8 +65,8 @@ const ImgSlider: FC<ImgSliderProps> = ({ product, saleString }) => {
             }
           >
             {product.sale !== 0 && (
-              <div className="absolute right-0 bg-red-600 w-20 py-2 text-center items-center">
-                <span className="text-white text-xl font-bold">
+              <div className="absolute right-0 bg-red-600 w-20 py-2 text-center items-center md:w-14">
+                <span className="text-white text-xl font-bold md:text-base">
                   {saleString}
                 </span>
               </div>
@@ -84,7 +84,7 @@ const ImgSlider: FC<ImgSliderProps> = ({ product, saleString }) => {
           </div>
         ))}
       </div>
-      <div className="translate-y-1/2">
+      <div className="translate-y-1/2 md:hidden">
         <MdArrowForwardIos
           className="w-9 h-9 cursor-pointer"
           onClick={() => onClickNext(current)}

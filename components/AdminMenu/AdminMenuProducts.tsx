@@ -20,7 +20,7 @@ const AdminMenuProducts = () => {
   }, [dispatch]);
 
   return (
-    <div className="overflow-x-auto md:col-span-3">
+    <div className="overflow-x-auto">
       <h1 className="mb-4 text-xl">Products</h1>
       {isLoading ? (
         <div className="block border-4 border-red-500 rounded-full border-dashed w-28 h-28 mx-auto mt-20 text-center pt-10 text-red-500 animate-rotateLoader">

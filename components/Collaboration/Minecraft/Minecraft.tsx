@@ -10,8 +10,6 @@ const Minecraft = () => {
         <Image
           alt="1"
           src="/puma_x_minecraft.webp"
-          width={1700}
-          height={570}
           layout="fill"
           objectFit="cover"
           objectPosition="center"

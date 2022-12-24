@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { FC } from "react";
+import { FC } from "react";
 import { footerAbout, footerHelp1, footerHelp2 } from "../../constants/footer";
 
 export const FooterCol1: FC = () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { ProductPage } from "../../types/product/productPage";
 import { RootState } from "../store";
 
-const data = "api/allProducts";
+const data = "/api/allProducts";
 
 export const fetchProducts = createAsyncThunk("api/allProducts", async () => {
   try {

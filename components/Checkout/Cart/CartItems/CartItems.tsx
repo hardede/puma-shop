@@ -27,13 +27,14 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
   );
 
   return (
-    <div className="flex not-last:border-b border-[#d2a1a1] not-first:pt-10 pb-10">
-      <div className="mr-8">
+    <div className="flex not-last:border-b border-[#d2a1a1] not-first:pt-10 pb-10 xs:block">
+      <div className="mr-8 xs:text-center xs:w-full">
         <Image
           src={orderCart.img}
           alt={orderCart.alt}
           width={140}
           height={140}
+          objectFit="contain"
         />
         <div className="flex items-center justify-center">
           <AiOutlineCheckCircle className="text-green-500 mr-2" />
@@ -42,11 +43,17 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
       </div>
       <div>
         <h4 className="font-light text-xl pb-4">{orderCart.model}</h4>
-        <p className="text-[#aaa] text-sm">Color: {orderCart.color}</p>
-        <p className="text-[#aaa] text-sm">Size: {orderCart.size}</p>
-        <p className="text-[#aaa] text-sm">Art: {orderCart.atr}</p>
-        <div className="flex items-center py-2">
-          <div className="flex mr-10 items-center">
+        <p className="text-[#aaa] text-sm xs:text-[#828282]">
+          Color: {orderCart.color}
+        </p>
+        <p className="text-[#aaa] text-sm xs:text-[#828282]">
+          Size: {orderCart.size}
+        </p>
+        <p className="text-[#aaa] text-sm xs:text-[#828282]">
+          Art: {orderCart.atr}
+        </p>
+        <div className="flex items-center py-2 xs:block">
+          <div className="flex mr-10 items-center xs:mb-2">
             <span className="mr-3">{orderCart.quantity} Item</span>
             <div className="">
               {orderCart.quantity === orderCart.countInStock ? (
@@ -67,20 +74,16 @@ const CartItems: FC<CartItemsProps> = ({ orderCart }) => {
               )}
             </div>
           </div>
-          <div>
-            <p
-              className={
-                orderCart.sale === 0
-                  ? "hidden"
-                  : "line-through decoration-2 decoration-red-500"
-              }
-            >
-              {sumPrice}
+          <div className="xs:flex xs:justify-between xs:items-center">
+            <p className="line-through decoration-2 decoration-red-500">
+              {orderCart.sale !== 0 && sumPrice}
             </p>
-            <p className="text-xl font-bold text-red-500">{sumPriceWithSale}</p>
+            <p className="text-xl font-bold text-red-500">
+              {orderCart.sale === 0 ? sumPrice : sumPriceWithSale}
+            </p>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex xs:justify-between">
           <div
             className="cursor-pointer mr-5 border-b border-black"
             onClick={() => router.push("/")}

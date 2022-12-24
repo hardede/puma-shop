@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../../../hooks/redux";
 import {
   sortByAscending,
   sortByDescending,
-  sortByDiscount
+  sortByDiscount,
 } from "../../../../store/reducers/ProductSlice";
 import { ProductPage } from "../../../../types/product/productPage";
 

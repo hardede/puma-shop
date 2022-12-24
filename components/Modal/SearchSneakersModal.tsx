@@ -12,8 +12,8 @@ interface SearchSneakersModalProps {
 const SearchSneakersModal: FC<SearchSneakersModalProps> = ({
   searchProduct,
 }) => {
-  const [imageSize, setImageSize] = useState(false)
-   const size = useWindowSize();
+  const [imageSize, setImageSize] = useState(false);
+  const size = useWindowSize();
   const { priceWithSaleString, priceString } = useCountValues(
     searchProduct.price,
     searchProduct.sale

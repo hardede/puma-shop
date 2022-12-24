@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useAppSelector } from "../../../hooks/redux";
 import useTotalPrice from "../../../hooks/useTotalPrice";
 import { selectCartState } from "../../../store/reducers/CartSlice";
@@ -12,13 +13,13 @@ const Cart: FC = () => {
   const { totalPrice } = useTotalPrice();
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between md:block">
       <div>
         {cartState.map((orderCart: ProductPage) => (
-          <CartItems key={orderCart._id} orderCart={orderCart} />
+          <CartItems key={uuidv4()} orderCart={orderCart} />
         ))}
       </div>
-      <aside className="w-[350px]">
+      <aside className="w-[350px] float-right xs:float-left xs:w-full">
         <h4 className="mb-3 text-xl font-bold">Order details</h4>
         <div className="flex justify-between items-center py-3 border-b border-[#d2a1a1] text-xs text-[#181818]">
           <h4 className="uppercase">Sum</h4>

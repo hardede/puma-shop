@@ -12,8 +12,8 @@ import { selectCartState } from "../../store/reducers/CartSlice";
 import { headerLink } from "../constants/header";
 import Drawer from "../Drawer/Drawer";
 import HeaderMenu from "./HeaderMenu/HeaderMenu";
-import SearchingMenu from "./SearchingMenu/SearchingMenu";
-import UserMenu from "./UserMenu/UserMenu";
+import UserMenu from "../Modal/UserMenu/UserMenu";
+import SearchingMenu from "../Modal/SearchingMenu/SearchingMenu";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);

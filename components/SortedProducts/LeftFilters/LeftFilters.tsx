@@ -32,7 +32,7 @@ const LeftFilters: FC<LeftFiltersProps> = ({ products }) => {
           <div className="md:w-full">
             <div className="before:bg-[#dedede] before:w-full before:h-0.5 before:block mb-4">
               <div
-                className="flex justify-between items-center py-4"
+                className="flex justify-between items-center py-2 my-2"
                 onClick={() => setCategoryOpen(!categoryOpen)}
               >
                 <h3 className="uppercase font-bold text-[#2f2f2f]">
